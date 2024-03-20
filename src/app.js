@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express()
 
- const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080
 //config view 
 configViewEngine(app,__dirname)
 
