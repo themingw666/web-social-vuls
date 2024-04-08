@@ -1,6 +1,16 @@
-FROM node:18-alpine
-WORKDIR /app
+
+FROM node:20
+
+RUN mkdir /usr/app
+
+WORKDIR /usr/app
+
 COPY . .
-RUN yarn install --production
-CMD ["node", "src/app.js"]
+
+RUN npm install
+
+RUN chmod 755 scripts/entrypoint.sh
+
 EXPOSE 3000
+
+ENTRYPOINT ["./scripts/entrypoint.sh"]
