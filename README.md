@@ -1,25 +1,14 @@
-# Project_pentest
 
-!! Change your Postgresql user and password in .env file before run!!
+## Installation
 
-### Create database:
-
-```sh
-node .\src\config\createdb.js
+### Step 1
+```
+git clone git@github.com:pentest-khoa-02/Group1.git
 ```
 
-### Fake data:
-
-```sh
-npm run dev
+### Step 2
+Running
+```
+docker-compose up --build
 ```
 
-Go to: http://localhost:3000/fakedata
-
-### View data:
-
-```sh
-npx prisma studio
-```
-
-<br />Thank you for watching!!
