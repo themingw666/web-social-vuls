@@ -4,7 +4,7 @@ const getFakedata = (req,res) =>
  {
     main()
     .then(data => {
-      res.render('fakedata')
+      res.render('fakedata', { layout: false })
    })
     
  }
