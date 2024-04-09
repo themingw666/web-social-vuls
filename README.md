@@ -12,3 +12,6 @@ Running
 docker-compose up --build
 ```
 
+### Step 3
+Go to: localhost:3000/fakedata
+
