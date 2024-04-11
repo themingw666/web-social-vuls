@@ -5,7 +5,9 @@ import 'dotenv/config'
 import bodyParser from "body-parser"
 import { fileURLToPath } from 'url';
 import { get404page } from './middleware/404.js';
+import { userAuth } from './middleware/userAuth.js';
 import path from "path"
+import bcrypt from "bcryptjs/dist/bcrypt.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,7 +17,8 @@ const port = process.env.PORT || 3000
 //config view 
 configViewEngine(app,__dirname)
 
-
+//authen middleware
+app.use(userAuth)
 //route
 app.use("/",Route)
 
@@ -25,5 +28,5 @@ app.use(get404page)
 
 //bind 
 app.listen(port,()=>{
-    console.log(`server is listening on http://localhost:${port}`)
+    console.log(`server 1 is listening on http://localhost:${port}`)
 })

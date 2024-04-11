@@ -24,6 +24,7 @@ model User_info {
   university String
   live       String
   job        String
+  role       Int
   userid     Int    @unique
   user       User   @relation(fields: [userid], references: [id])
 }

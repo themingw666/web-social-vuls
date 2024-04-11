@@ -70,9 +70,13 @@
               <input id="rememberme" name="rememberme" type="checkbox">
               <label for="rememberme" class="font-normal">Remember me</label>
             </div>
+            
+          
             <a href="#" class="text-blue-700">Forgot password </a>
           </div>
-
+         <% if (typeof(error) != "undefined") {%>
+          <p class="" style="color:red"><%= error.message%></p>
+          <% } %>
           <!-- submit button -->
           <div>
             <button type="submit" class="button bg-primary text-white w-full">Sign in</button>
