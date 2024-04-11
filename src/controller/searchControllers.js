@@ -18,8 +18,13 @@ const search = async (req,res) => {
 
 const search = async (req, res) => {
     const obj = req.query
-    const findUser = await db.Client.query(`SELECT firstname, lastname, university, live, job FROM public."User_info"  where lastname = '${obj.name}'`, (err, result) => {
-        if(err) console.error('Error!')
+    const onlyLettersPattern = /^[A-Za-z]+$/;
+    if(!obj.name.match(onlyLettersPattern)){
+        return res.status(400).json({ err: "No special characters and numbers, please!"})
+    }
+    const query = `SELECT firstname, lastname, university, live, job FROM public."User_info"  where lastname = '${obj.name}' or university = '${obj.name}'`
+    const findUser = await db.Client.query(query, (err, result) => {
+        if(err) console.error("Error!")
         else{
             console.log(result.rows)
             let arrUser = result.rows
@@ -30,7 +35,6 @@ const search = async (req, res) => {
             res.render('search', {userinfo: arrUser})
         }
     })
-    
 }
 
 export default {search}
