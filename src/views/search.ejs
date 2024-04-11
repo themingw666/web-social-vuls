@@ -1,0 +1,48 @@
+
+
+        <!-- main contents -->
+        <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
+
+            <div class="flex max-lg:flex-col 2xl:gap-12 gap-10 2xl:max-w-[1220px] max-w-[1065px] mx-auto" id="js-oversized">
+
+                <div class="flex-1">
+
+
+                    <table id="users">
+                        <tr>
+                          <th>Name</th>
+                          <th>University</th>
+                          <th>Address</th>
+                          <th>Job</th>
+                          <th>Status</th>
+                        </tr>
+
+                        <% userinfo.forEach( userinfos => { %>
+                            <tr>
+                                <td>
+                                  <div class="user-name">
+                                    <h3><%= userinfos.firstname %> <%= userinfos.lastname %></h3>
+                                  </div>
+                                </td>
+                                <td><%= userinfos.university %></td>
+                                <td><%= userinfos.live %></td>
+                                <td><%= userinfos.job %></td>
+                                <td>
+                                  <div>
+                                    <div class="user-status">Friend</div>
+                                  </div>
+                                </td>
+                              </tr>
+                        <% }) %>
+
+                        
+                      </table>
+
+                </div>
+    
+            </div>
+            
+        </main>
+
+        <%- contentFor('other') %>
+

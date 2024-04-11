@@ -6,6 +6,7 @@ import bodyParser from "body-parser"
 import { fileURLToPath } from 'url';
 import { get404page } from './middleware/404.js';
 import path from "path"
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -14,7 +15,6 @@ const port = process.env.PORT || 8080
 
 //config view 
 configViewEngine(app,__dirname)
-
 
 //route
 app.use("/",Route)
