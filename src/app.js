@@ -8,6 +8,7 @@ import { get404page } from './middleware/404.js';
 import { userAuth } from './middleware/userAuth.js';
 import path from "path"
 import bcrypt from "bcryptjs/dist/bcrypt.js"
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,6 +20,7 @@ configViewEngine(app,__dirname)
 
 //authen middleware
 app.use(userAuth)
+
 //route
 app.use("/",Route)
 
