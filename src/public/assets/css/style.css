@@ -1015,53 +1015,36 @@ input:checked + .switch-button:before {
   overflow-x: scroll;
 }
 
-#users {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#users td,
-#users th {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-#users tr:nth-child(even) {
-  background-color: #645858;
-}
-
-#users tr:hover {
-  background-color: #ddd;
-}
-
-#users th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #285b48;
-  color: white;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.user-name {
+.usr{
+  height: 100px;
+  width: 600px;
+  background-color: #384e73;
   display: flex;
+  border-radius: 10px;
   align-items: center;
-  justify-content: center;
+  margin-top: 10px;
 }
 
-.user-status {
-  background-color: #04aa6d;
-  opacity: 0.7;
-  padding: 5px 0;
-  border-radius: 5px;
+.fl-btn{
+  height: 30px;
+  width: 60px;
+  margin-bottom: auto;
+  margin-top: auto;
+  background-color: darkblue;
+  border-radius: 4px;
   color: white;
+  margin-left: auto;
+  margin-right: 20px;
+  border: none
+}
+
+.fl-btn:hover{
+  cursor: pointer;
+}
+
+li .usr-info {
+  font-weight: bold; 
+  list-style: none; 
+  font-size: 18px; 
+  margin-bottom: 4px
 }

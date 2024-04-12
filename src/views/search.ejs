@@ -7,38 +7,21 @@
 
                 <div class="flex-1">
 
+                <% userinfo.forEach( userinfos => { %>
+                  <div class="usr">
+                    <img style="border-radius: 50%; width: 80px;; margin-left: 10px; height: 80px; display: block; margin-bottom: auto; margin-top: auto" src="assets/images/avatars/user2.jpg">
+                    <ul style="margin-left: 20px;">
+                        <li class="usr-info" style="font-weight: bold;"><%= userinfos.firstname %> <%= userinfos.lastname %></li>
+                        <li ><%= userinfos.university %></li>
+                        <li ><%= userinfos.live %></li>
+                    </ul>
+            
+                    <button class="fl-btn" style="font-size: 14px;">Follow</button>
+                    </div>
+                <% }) %>
 
-                    <table id="users">
-                        <tr>
-                          <th>Name</th>
-                          <th>University</th>
-                          <th>Address</th>
-                          <th>Job</th>
-                          <th>Status</th>
-                        </tr>
-
-                        <% userinfo.forEach( userinfos => { %>
-                            <tr>
-                                <td>
-                                  <div class="user-name">
-                                    <h3><%= userinfos.firstname %> <%= userinfos.lastname %></h3>
-                                  </div>
-                                </td>
-                                <td><%= userinfos.university %></td>
-                                <td><%= userinfos.live %></td>
-                                <td><%= userinfos.job %></td>
-                                <td>
-                                  <div>
-                                    <div class="user-status">Add Friend</div>
-                                  </div>
-                                </td>
-                              </tr>
-                        <% }) %>
-
-                        
-                      </table>
-
-                </div>
+                
+              </div>
     
             </div>
             

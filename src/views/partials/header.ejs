@@ -33,8 +33,8 @@
                 <!-- search -->
                 <div id="search--box" class="xl:w-[680px] sm:w-96 sm:relative rounded-xl overflow-hidden z-20 bg-secondery max-md:hidden w-screen left-0 max-sm:fixed max-sm:top-2 dark:!bg-white/5">
                     <ion-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2"></ion-icon>
-                    <form action="/search" method="GET">
-                        <input name="name" type="text" placeholder="Search Friends, videos .." class="w-full !pl-10 !font-normal !bg-transparent h-12 !text-sm">
+                    <form action="/search2" method="GET">
+                        <input name="name" id="search" type="text" placeholder="Search Friends, videos .." class="w-full !pl-10 !font-normal !bg-transparent h-12 !text-sm">
                     </form>
                 </div>  
                 <!-- search dropdown-->
@@ -46,14 +46,12 @@
                                 <div class=" text-black dark:text-white">Recent</div>
                                 <button type="button" class="text-blue-500">Clear</button>
                             </div>
-                            <nav class="text-sm font-medium text-black dark:text-white">
-                                <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/avatars/avatar-2.jpg" class="w-9 h-9 rounded-full"> <div>   <div> Jesse Steeve </div>  <div class="text-xs text-blue-500 font-medium mt-0.5">  Friend </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>  
-                                <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/avatars/avatar-2.jpg" class="w-9 h-9 rounded-full"> <div>   <div>  Martin Gray </div>  <div class="text-xs text-blue-500 font-medium mt-0.5">  Friend </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>  
-                                <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/group/group-2.jpg" class="w-9 h-9 rounded-full"> <div>   <div>  Delicious Foods  </div>  <div class="text-xs text-rose-500 font-medium mt-0.5">  Group </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>  
-                                <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/group/group-1.jpg" class="w-9 h-9 rounded-full"> <div>   <div> Delicious Foods  </div>  <div class="text-xs text-yellow-500 font-medium mt-0.5">  Page </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>  
-                                <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/avatars/avatar-6.jpg" class="w-9 h-9 rounded-full"> <div>   <div>  John Welim </div>  <div class="text-xs text-blue-500 font-medium mt-0.5">  Friend </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>  
-                                <a href="#" class="hidden relative  px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <ion-icon class="text-2xl" name="search-outline"></ion-icon>  Creative ideas about Business  </a>  
-                                <a href="#" class="hidden relative  px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <ion-icon class="text-2xl" name="search-outline"></ion-icon>  8 Facts About Writting  </a>  
+
+                            <!--drop-->
+                            <nav class="text-sm font-medium text-black dark:text-white" id="results">
+                                 
+
+                                
                             </nav>
                             <hr class="-mx-2 mt-2 hidden">
                             <div class="flex justify-end pr-2 text-sm font-medium text-red-500 hidden"> 
@@ -495,3 +493,55 @@
     </div>
 
 </header>
+
+<script type="text/javascript">
+
+    const searchInput = document.querySelector('#search');
+    
+    const results_body = document.querySelector('#results');
+    
+    load_data();
+    
+    function load_data(query = '')
+    {
+        const request = new XMLHttpRequest();
+    
+        request.open('GET', `/search?name=${query}`);
+    
+        request.onload = () => {
+    
+            const results = JSON.parse(request.responseText);
+    
+            let html = '';
+    
+            if(results.length > 0)
+            {
+                results.forEach(result => {
+                    html += `
+                    <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/avatars/user2.jpg" class="w-9 h-9 rounded-full"> <div>   <div> `+ result.firstname + " " + result.lastname +` </div>  <div class="text-xs text-blue-500 font-medium mt-0.5">  `+ result.university + ` </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a>
+                    `;
+                });
+            }
+            else
+            {
+                html += `
+                    <a href="#" class=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"> <img src="assets/images/avatars/avatar-2.jpg" class="w-9 h-9 rounded-full"> <div>   <div> No data Found </div>  <div class="text-xs text-blue-500 font-medium mt-0.5">  Friend </div>   </div> <ion-icon name="close" class="text-base absolute right-3 top-1/2 -translate-y-1/2 "></ion-icon>  </a> 
+                `;
+            }
+    
+            results_body.innerHTML = html;
+    
+        };
+    
+        request.send();
+    }
+    
+    searchInput.addEventListener('input', () => {
+    
+        const query = searchInput.value;
+    
+        load_data(query);
+    
+    });
+    
+    </script>
