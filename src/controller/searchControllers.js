@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import db from "../config/database.js"
 
-const prisma = new PrismaClient()
+import db from "../config/database.js"
 
 // prisma
 
@@ -66,7 +64,6 @@ const search = async (req, res) => {
     }
 }
 
-
 const search2 = async (req, res) => {
     const obj = req.query
     var chr = ["'", "-", '"', "union", "select", "drop", "#", "select"]
@@ -106,7 +103,6 @@ const search2 = async (req, res) => {
     }
 }
 
-
 /*
 const search2 = async (req, res) => {
     const obj = req.query
@@ -114,7 +110,6 @@ const search2 = async (req, res) => {
     const findUser = await db.Client.query(query, (err, result) => {
         if(err) console.error("Error!")
         else{
-            console.log(result.rows)
             let arrUser = result.rows
             var fUser = users.filter( (user) => {
                 return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
@@ -122,14 +117,14 @@ const search2 = async (req, res) => {
 
             if(obj.name != '')
             {
-                console.log(fUser)
-                res.render('search', {userinfo: fUser})
+                console.log(arrUser)
+                res.render('search', {userinfo: arrUser})
             }
         }
     })
 }
-
 */
+
 
 
 export default {search, search2}
