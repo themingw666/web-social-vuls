@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import db from "../config/database.js"
 
-const prisma = new PrismaClient()
+import db from "../config/database.js"
 
 // prisma
 
@@ -24,7 +22,7 @@ var users = [
     {firstname : "Đặng ",lastname :"Phúc",university:"FPTU",live:"Hà Nội",job:"Sinh viên",role:0,userid:4}
 ];
 
-const search = async (req, res) => {
+const search2 = async (req, res) => {
 
     const obj = req.query
 
@@ -66,55 +64,75 @@ const search = async (req, res) => {
     }
 }
 
-
-const search2 = async (req, res) => {
+const search = async (req, res) => {
     const obj = req.query
-    var chr = ["'", "-", '"', "union", "select", "drop", "#", "select"]
-    let kiemtra = true
-    for(let i = 0; i < chr.length; i++)
-    {
-        let check = obj.name.indexOf(chr[i])
-        if(check != -1) 
+
+    let checkStatus;
+    const sql = await db.Client.query(`SELECT status FROM public."vulnerable" WHERE name = 'SQL Injection'`, (err, result) => {
+        if(err) console.log('ERROR!')
+        else{
+            const check = result.rows;
+            if (check.length > 0) {
+                console.log(check[0].status);
+                checkStatus = check[0].status
+            } else {
+                console.log("Not found!");
+            }
+        }
+    })
+
+    if(checkStatus == "Yes"){
+        var chr = ["'", "-", '"', "union", "select", "drop", "#", ")"]
+        let kiemtra = true
+        for(let i = 0; i < chr.length; i++)
         {
-            kiemtra = false
-            break
+            let check = obj.name.indexOf(chr[i])
+            if(check != -1) 
+            {
+                kiemtra = false
+                break
+            }
+        }
+
+        if(!kiemtra){
+            res.send("Error Input!!!")
         }
     }
 
-    if(!kiemtra){
-        res.send("Error Input!!!")
-    }
+    const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
+
+    const findUser = await db.Client.query(query, (err, result) => {
+    if(err) console.error("Error!")
     else{
-        const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
+        let arrUser = result.rows
 
-        const findUser = await db.Client.query(query, (err, result) => {
-        if(err) console.error("Error!")
-        else{
-            let arrUser = result.rows
-
-            var fUser = users.filter( (user) => {
-                return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
-            })
-
-            if(obj.name != '')
-            {
-                console.log(fUser)
-                res.render('search', {userinfo: fUser})
-            }
-        }   
+        var fUser = users.filter( (user) => {
+            return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
         })
-    }
+
+        if(obj.name != '')
+        {
+            if(checkStatus == "Yes") {
+                console.log("SQL Injection")
+                res.render('search', {userinfo: arrUser})
+            }
+            else {
+                console.log("No SQL Injection")
+                res.render('search', {userinfo: fUser})
+
+            }
+        }
+    }   
+    })
 }
 
-
 /*
-const search2 = async (req, res) => {
+const search = async (req, res) => {
     const obj = req.query
     const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
     const findUser = await db.Client.query(query, (err, result) => {
         if(err) console.error("Error!")
         else{
-            console.log(result.rows)
             let arrUser = result.rows
             var fUser = users.filter( (user) => {
                 return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
@@ -122,14 +140,14 @@ const search2 = async (req, res) => {
 
             if(obj.name != '')
             {
-                console.log(fUser)
-                res.render('search', {userinfo: fUser})
+                console.log(arrUser)
+                res.render('search', {userinfo: arrUser})
             }
         }
     })
 }
-
 */
+
 
 
 export default {search, search2}

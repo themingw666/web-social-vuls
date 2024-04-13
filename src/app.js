@@ -8,6 +8,7 @@ import { get404page } from './middleware/404.js';
 import { userAuth } from './middleware/userAuth.js';
 import path from "path"
 import bcrypt from "bcryptjs/dist/bcrypt.js"
+import methodOverride from "method-override"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,8 @@ const port = process.env.PORT || 3000
 
 //config view 
 configViewEngine(app,__dirname)
+
+app.use(methodOverride('_method'))
 
 //authen middleware
 app.use(userAuth)

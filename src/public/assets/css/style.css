@@ -1049,12 +1049,49 @@ li .usr-info {
   margin-bottom: 4px
 }
 
-.vul-select{
-  margin: 10px 10px;
-  background-color: darkgrey;
+.vul-header{
+  width: 100%;
+  height: 50px;
+  background-color: rgba(73, 81, 97, 0.877);
+  margin: 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.vul-select label{
-  margin-right: 10px;
-  margin-left: 60px;
+.vul-header p{
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.vul-body{
+  display: flex;
+  justify-content:space-around;
+}
+
+.form-vul{
+  margin-top: 100px;
+  width: 1000px;
+  display: flex;
+}
+
+.vul-select{
+  margin-top: 10px;
+  width: 33.33333%;
+}
+
+.vul-select-input{
+  width: 200px;
+  flex: 1
+}
+
+.vul-btn{
+  width: 100px;
 }
