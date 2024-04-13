@@ -13,10 +13,20 @@ const setting = async (req,res) => {
 }
 
 // [PUT] /settings/submit
-const submit = (req, res) => {
+const submit = async (req, res) => {
     const obj = req.body
-    console.log(obj.XSS)
-    res.send("OK")
+    for(const key in obj){
+        const query = `UPDATE vulnerable SET status = '${obj[key]}' WHERE name = '${key}'`
+        await db.Client.query(query, (err, result) => {
+            if(err) console.log("ERROR!")
+            else{
+                
+            }
+        })
+    }
+    setTimeout(() => {
+        res.redirect('/')
+    }, 3000)
 }
 
 export default {setting, submit}

@@ -12,6 +12,13 @@
     <div class="vul-header">
         <p>Vulnerables Setting</p>
     </div>
+
+    <div id="alert_infor" class="alert alert-success" hidden role="alert">
+        <h4 class="alert-heading">Updated Succesfully!</h4>
+        <p>Hack this web.</p>
+        <hr>
+        <p class="mb-0">You will be taken to the home page in <span id="time">3</span> second!</p>
+      </div>
     
     <div class="vul-body container">
         <form class="form-vul row" action="/settings/submit?_method=PUT" method="POST">
@@ -34,10 +41,37 @@
 
 
             <div class="col-md-12 text-center">
-                <button type="submit" class="vul-btn btn btn-secondary">Apply</button>
+                <button onclick="toggle(this)" type="submit" class="vul-btn btn btn-secondary">Apply</button>
             </div>
+
+            <script>
+                let toggle = button => {
+                    document.getElementById("alert_infor").removeAttribute("hidden");
+                }
+
+                function startTimer(Second, display) {
+                    var timer = Second;
+                    setInterval(function () {
+                        
+                        display.textContent = timer;
+
+                        if (--timer < 0) {
+                            timer = Second;
+                        }
+                    }, 1000);
+                }
+
+                window.onload = function () {
+                    var fiveSecond = 4,
+                        display = document.querySelector('#time');
+                    startTimer(fiveSecond, display);
+                };
+
+            </script>
         </form>
     </div>
+
+    
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

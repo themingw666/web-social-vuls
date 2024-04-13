@@ -39,19 +39,19 @@
     {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :5}
  ],
  "vulnerable": [
-   {"id": 1, "name": "SQL Injection" ,"status": "No"},
-   {"id": 2, "name": "SSRF" ,"status": "No"},
-   {"id": 3, "name": "XSS" ,"status": "No"},
-   {"id": 4, "name": "CSRF" ,"status": "No"},
-   {"id": 5, "name": "Broken Authentication" ,"status": "No"},
-   {"id": 6, "name": "Path Traversal" ,"status": "No"},
-   {"id": 7, "name": "HTTP Smuggling" ,"status": "No"},
-   {"id": 8, "name": "SSTI" ,"status": "No"},
-   {"id": 9, "name": "JWT" ,"status": "No"},
-   {"id": 10, "name": "XXE" ,"status": "No"},
-   {"id": 11, "name": "File Upload Vuls" ,"status": "No"},
-   {"id": 12, "name": "OS Command Injection" ,"status": "No"},
-   {"id": 13, "name": "Deserialization" ,"status": "No"},
-   {"id": 14, "name": "IDOR" ,"status": "No"}
+   {"id": 1, "name": "SQL Injection", "status": "No"},
+   {"id": 2, "name": "SSRF", "status": "No"},
+   {"id": 3, "name": "XSS", "status": "No"},
+   {"id": 4, "name": "CSRF", "status": "No"},
+   {"id": 5, "name": "Broken Authentication", "status": "No"},
+   {"id": 6, "name": "Path Traversal", "status": "No"},
+   {"id": 7, "name": "HTTP Smuggling", "status": "No"},
+   {"id": 8, "name": "SSTI", "status": "No"},
+   {"id": 9, "name": "JWT", "status": "No"},
+   {"id": 10, "name": "XXE", "status": "No"},
+   {"id": 11, "name": "File Upload Vuls", "status": "No"},
+   {"id": 12, "name": "OS Command Injection", "status": "No"},
+   {"id": 13, "name": "Deserialization", "status": "No"},
+   {"id": 14, "name": "IDOR", "status": "No"}
  ]
 }
