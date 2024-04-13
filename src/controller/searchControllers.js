@@ -44,7 +44,7 @@ const search = async (req, res) => {
         res.send("Error Input!!!")
     }
     else{
-        const query = `SELECT firstname, lastname, university, live, job FROM public."User_info"  where lastname LIKE '%${obj.name}%'`
+        const query = `SELECT firstname, lastname, university, live, job FROM public."user_info" where lastname LIKE '%${obj.name}%'`
 
         const findUser = await db.Client.query(query, (err, result) => {
             if(err) console.error("Error!")
@@ -69,7 +69,7 @@ const search = async (req, res) => {
 
 const search2 = async (req, res) => {
     const obj = req.query
-    var chr = ["'", "-", '"', "union", "select", "drop"]
+    var chr = ["'", "-", '"', "union", "select", "drop", "#", "select"]
     let kiemtra = true
     for(let i = 0; i < chr.length; i++)
     {
@@ -85,7 +85,7 @@ const search2 = async (req, res) => {
         res.send("Error Input!!!")
     }
     else{
-        const query = `SELECT firstname, lastname, university, live, job FROM public."User_info"  where lastname LIKE '%${obj.name}%'`
+        const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
 
         const findUser = await db.Client.query(query, (err, result) => {
         if(err) console.error("Error!")
@@ -105,5 +105,31 @@ const search2 = async (req, res) => {
         })
     }
 }
+
+
+/*
+const search2 = async (req, res) => {
+    const obj = req.query
+    const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
+    const findUser = await db.Client.query(query, (err, result) => {
+        if(err) console.error("Error!")
+        else{
+            console.log(result.rows)
+            let arrUser = result.rows
+            var fUser = users.filter( (user) => {
+                return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+            })
+
+            if(obj.name != '')
+            {
+                console.log(fUser)
+                res.render('search', {userinfo: fUser})
+            }
+        }
+    })
+}
+
+*/
+
 
 export default {search, search2}

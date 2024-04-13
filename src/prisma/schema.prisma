@@ -7,17 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model user {
   id        Int                 @id @default(autoincrement())
   username  String              @unique
   email     String              @unique
   password  String
-  posts     Post[]
-  story     Story[]
-  user_info User_info?
+  posts     post[]
+  story     story[]
+  user_info user_info?
 }
 
-model User_info {
+model user_info {
   id         Int    @id @default(autoincrement())
   firstname  String
   lastname   String
@@ -26,44 +26,49 @@ model User_info {
   job        String
   role       Int
   userid     Int    @unique
-  user       User   @relation(fields: [userid], references: [id])
+  user       user   @relation(fields: [userid], references: [id])
 }
 
-model Post {
+model post {
   id        Int      @id @default(autoincrement())
   authorid  Int
   content   String
   create_at DateTime @default(now())
-  author    User     @relation(fields: [authorid], references: [id])
-  photoPost Photo[] 
-  videoPost Video[]   
+  author    user     @relation(fields: [authorid], references: [id])
+  photoPost photo[] 
+  videoPost video[]   
 }
 
-model Story {
+model story {
   id         Int      @id @default(autoincrement())
   authorid   Int
   content    String
   create_at  DateTime @default(now())
   photoId    Int      @unique
-  author     User     @relation(fields: [authorid], references: [id])
-  photoStory Photo    @relation(fields: [photoId], references: [id])
+  author     user     @relation(fields: [authorid], references: [id])
+  photoStory photo    @relation(fields: [photoId], references: [id])
 }
 
-model Photo {
+model photo {
   id    Int    @id @default(autoincrement())
   url   String
   postid Int  
-  story Story?
-  postof  Post   @relation(fields: [postid] ,references: [id])  
+  story story?
+  postof  post   @relation(fields: [postid] ,references: [id])  
 }
 
-model Video {
+model video {
   id    Int    @id @default(autoincrement())
   url   String
   postid Int  
-  postof  Post   @relation(fields: [postid] ,references: [id])  
+  postof  post   @relation(fields: [postid] ,references: [id])  
 }
 
+model vulnerable {
+  id Int @id @default(autoincrement())
+  name String
+  status String
+}
 
 
 // model Message {

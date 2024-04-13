@@ -28,6 +28,8 @@ import timelineFundingRoute from "./timelineFundingRoute.js"
 import fakedataRoute from "./fakedataRoute.js"
 import searchRoute from "./searchRoute.js"
 import search2Route from "./search2Route.js"
+import settingVulRoute from "./settingvulRoute.js"
+
 const Route = express.Router()
 
 Route.use("/",feedRoute)
@@ -60,5 +62,6 @@ Route.use("/timeline-funding",timelineFundingRoute)
 Route.use("/fakedata",fakedataRoute)
 Route.use("/search", searchRoute)
 Route.use("/search2", search2Route)
+Route.use("/settings", settingVulRoute)
 
 export default Route

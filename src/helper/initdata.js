@@ -17,6 +17,7 @@ async function main() {
         await prisma.post.deleteMany();
         await prisma.user_info.deleteMany();
         await prisma.user.deleteMany();
+        await prisma.vulnerable.deleteMany();
         console.log("All records deleted successfully.");
       } catch (error) {
         console.error("Error deleting records:", error);
@@ -25,30 +26,35 @@ async function main() {
     // create many  
     const createMany = await prisma.user.createMany(
         {
-            data:data['User']
+            data:data['user']
         }
     )
     const createManyInfo  =  await prisma.user_info.createMany(
         {
-            data :data['User_info']    
+            data :data['user_info']    
         }
     )
     const createManyPost = await prisma.post.createMany(
         {
-            data:data['Post']
+            data:data['post']
         }
     )
     const createManyPhoto =  await prisma.photo.createMany(
         {
-            data:data['Photo']
+            data:data['photo']
         }
     )
     const createManyVideo = await prisma.video.createMany(
         {
-            data:data['Video']
+            data:data['video']
         }
     )
-    let datapro = JSON.stringify(data['User']) + JSON.stringify(data['User_info']) + JSON.stringify(data['Post']) + JSON.stringify(data['Photo']) + JSON.stringify(data['Video']); 
+    const createManyVulnerable = await prisma.vulnerable.createMany(
+        {
+            data:data['vulnerable']
+        }
+    )
+    let datapro = JSON.stringify(data['user']) + JSON.stringify(data['user_info']) + JSON.stringify(data['post']) + JSON.stringify(data['photo']) + JSON.stringify(data['video']) + JSON.stringify(data['vulnerable']); 
     return datapro
 } 
 

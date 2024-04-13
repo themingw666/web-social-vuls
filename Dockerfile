@@ -7,6 +7,6 @@ COPY . .
 
 RUN npm install
 
-RUN chmod 755 scripts/entrypoint.sh
+RUN chmod 755 src/scripts/entrypoint.sh
 
 EXPOSE 3000

@@ -1048,3 +1048,13 @@ li .usr-info {
   font-size: 18px; 
   margin-bottom: 4px
 }
+
+.vul-select{
+  margin: 10px 10px;
+  background-color: darkgrey;
+}
+
+.vul-select label{
+  margin-right: 10px;
+  margin-left: 60px;
+}
