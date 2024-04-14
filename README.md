@@ -18,4 +18,4 @@ Go to: [localhost:3000/fakedata](http:localhost:3000/fakedata)
 ### Step 4
 Go to: [localhost:3000/settings](http:localhost:3000/settings)
 
-![Alt text](image.png)
+![Alt text](src/public/assets/images/image.png)
