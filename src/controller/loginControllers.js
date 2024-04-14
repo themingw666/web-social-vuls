@@ -1,6 +1,7 @@
 import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
 import jsonwebtoken  from 'jsonwebtoken';
+import md5 from 'md5'
 const prisma = new PrismaClient();
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
@@ -23,7 +24,7 @@ const  handleLogin =  async (req,res) =>{
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 
-      if(result.length == 0 || password !== result[0].password) {
+      if(result.length == 0 || md5(password) !== result[0].password) {
           const error = {
               message : "Email or Password is incorrect !"
           }
