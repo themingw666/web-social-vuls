@@ -33,5 +33,5 @@ app.use(get404page)
 
 //bind 
 app.listen(port,()=>{
-    console.log(`server 1 is listening on http://localhost:${port}`)
+    console.log(`server  is listening on http://localhost:${port}`)
 })
