@@ -74,7 +74,12 @@ const search = async (req, res) => {
             if(checkStatus == "No"){
                 console.log("No SQL Injection")
                 
-                if(!kiemtra) res.send("Input is not permitted!")
+                if(!kiemtra) {
+                    let fUser = lowercaseNames.filter( (lowercaseName) => {
+                        return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+                    })
+                    res.render('search', {userinfo: fUser, check: true, checkChar: true})
+                }
                 else{
                     const findUser = db.Client.query(query, (err, result2) => {
                         if(err) console.log("Error!")
@@ -84,10 +89,10 @@ const search = async (req, res) => {
                             })
                             if(obj.name != '')
                             {
-                                res.render('search', {userinfo: fUser, check: true})
+                                res.render('search', {userinfo: fUser, check: true, checkChar: false})
                             }
                             else {
-                                res.render('search', {userinfo: fUser, check: false})
+                                res.render('search', {userinfo: fUser, check: false, checkChar: false})
                             }
                         }   
                     })
@@ -101,8 +106,8 @@ const search = async (req, res) => {
                             return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
                         })
                         let arrUser = result2.rows
-                        if(obj.name.search("'") >= 0) res.render('search', {userinfo: arrUser, check: true})
-                        else res.render('search', {userinfo: fUser, check: true})
+                        if(obj.name.search("'") >= 0) res.render('search', {userinfo: arrUser, check: true, checkChar: false})
+                        else res.render('search', {userinfo: fUser, check: true, checkChar: false})
                     }   
                 })
             }

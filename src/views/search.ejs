@@ -7,27 +7,30 @@
 
                 <div class="flex-1">
                    
-                <% if(check == true) { %>
-                  <% if(userinfo.length == 0) { %>
-                    <p>No user found!!!</p>
+                <% if(checkChar == true) { %>
+                      <p>Invalid Input!</p>
                   <% } else {%>
-                    <% userinfo.forEach( userinfos => { %>
-                      <div class="usr">
-                        <img style="border-radius: 50%; width: 80px;; margin-left: 10px; height: 80px; display: block; margin-bottom: auto; margin-top: auto" src="assets/images/avatars/user2.jpg">
-                        <ul style="margin-left: 20px;">
-                            <li class="usr-info" style="font-weight: bold;"><%= userinfos.firstname %> <%= userinfos.lastname %></li>
-                            <li ><%= userinfos.university %></li>
-                            <li ><%= userinfos.live %></li>
-                        </ul>
-                
-                        <button class="fl-btn" style="font-size: 14px;">Follow</button>
-                        </div>
-                    <% }) %>
+                    <% if(check == true) { %>
+                      <% if(userinfo.length == 0) { %>
+                        <p>No user found!</p>
+                      <% } else {%>
+                        <% userinfo.forEach( userinfos => { %>
+                          <div class="usr">
+                            <img style="border-radius: 50%; width: 80px;; margin-left: 10px; height: 80px; display: block; margin-bottom: auto; margin-top: auto" src="assets/images/avatars/user2.jpg">
+                            <ul style="margin-left: 20px;">
+                                <li class="usr-info" style="font-weight: bold;"><%= userinfos.firstname %> <%= userinfos.lastname %></li>
+                                <li ><%= userinfos.university %></li>
+                                <li ><%= userinfos.live %></li>
+                            </ul>
+                    
+                            <button class="fl-btn" style="font-size: 14px;">Follow</button>
+                            </div>
+                        <% }) %>
+                      <% } %>
+                    <% } else { %>
+                          <p>Please enter name of user!</p>
+                    <% } %>
                   <% } %>
-                <% } else { %>
-                      <p>Please enter name of user!</p>
-                  <% } %>
-
               </div>
     
             </div>

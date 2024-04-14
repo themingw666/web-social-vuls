@@ -25,7 +25,7 @@
 
             <% vul.forEach( vuls => { %>
                 <div class="input-group mb-3 vul-select col-md-4">
-                    <span class="input-group-text" id="basic-addon1"><%= vuls.name %></span>
+                    <span class="input-group-text vul-name" id="basic-addon1"><%= vuls.name %></span>
                     <select name="<%= vuls.name %>" class="form-select vul-select-input" aria-label="Default select example"> 
                         <% if (vuls.status == "Yes") { %>
                             <option value="Yes" selected>Yes</option>
