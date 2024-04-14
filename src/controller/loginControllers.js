@@ -27,7 +27,7 @@ const  handleLogin =  async (req,res) =>{
           const error = {
               message : "Email or Password is incorrect !"
           }
-          res.render('form-login', { layout: false ,error:error})
+         return res.render('form-login', { layout: false ,error:error})
      
       }else{
           //create JWT token 
@@ -45,8 +45,11 @@ const  handleLogin =  async (req,res) =>{
         });
           res.redirect('/')
       }
-    } catch (error) {
-       console.log(error)
+    } catch {
+      const error = {
+        message : "Email or Password is incorrect !"
+    }
+   return res.render('form-login', { layout: false ,error:error})
     }
 }
 export default {getLoginPage,handleLogin}
