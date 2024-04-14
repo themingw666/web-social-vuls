@@ -1073,23 +1073,25 @@ li .usr-info {
 
 .vul-body{
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
 .form-vul{
   margin-top: 100px;
-  width: 1000px;
+  width: 80%;
   display: flex;
 }
 
 .vul-select{
   margin-top: 10px;
-  width: 33.33333%;
+}
+
+.vul-name{
+  flex:1
 }
 
 .vul-select-input{
-  width: 200px;
-  flex: 1
+  width: 20%;
 }
 
 .vul-btn{

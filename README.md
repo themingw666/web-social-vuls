@@ -13,9 +13,9 @@ docker-compose up --build
 ```
 
 ### Step 3
-Go to: localhost:3000/fakedata
+Go to: [localhost:3000/fakedata](http:localhost:3000/fakedata)
 
 ### Step 4
-Go to: localhost:3000/settings
+Go to: [localhost:3000/settings](http:localhost:3000/settings)
 
-![image](https://github.com/pentest-khoa-02/Group1/assets/127246130/5429722a-f74a-4a2d-a57f-290580aedbda)
+![Alt text](src/public/assets/images/image.png)

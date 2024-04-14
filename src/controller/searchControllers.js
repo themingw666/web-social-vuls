@@ -1,31 +1,7 @@
-
 import db from "../config/database.js"
 
-// prisma
-
-/*
-const search = async (req,res) => {
-    const obj = req.query
-    console.log(obj.name);
-    const users = await prisma.$queryRaw`SELECT firstname, lastname from "User_info" WHERE lastname = ${obj.name}`
-    res.json(users)
-}
-*/
-
-// pg
-
-var users = [
-    {firstname : "Đặng",lastname :"Khánh",university:"KMA",live:"Hà Nội",job:"Sinh viên",role:0,userid:1},
-    {firstname : "Dương",lastname :"Hào",university:"PTIT",live:"Hà Nội",job:"Sinh viên",role:0,userid:2},
-    {firstname : "Nguyễn",lastname :"Trọng" ,university:"KMA",live:"Hà Nội",job:"Sinh viên",role:0,userid:5},
-    {firstname : "Nguyễn",lastname :"Minh",university:"Chăn rau ",live:"Hà Nội",job:"Sinh viên",role:0,userid:3},
-    {firstname : "Đặng ",lastname :"Phúc",university:"FPTU",live:"Hà Nội",job:"Sinh viên",role:0,userid:4}
-];
-
 const search2 = async (req, res) => {
-
     const obj = req.query
-
     var chr = ["'", "-", '"', "union", "select", "drop"]
     let kiemtra = true
     for(let i = 0; i < chr.length; i++)
@@ -37,25 +13,28 @@ const search2 = async (req, res) => {
             break
         }
     }
-
     if(!kiemtra){
-        res.send("Error Input!!!")
+        return res.send("Error Input!!!")
     }
     else{
         const query = `SELECT firstname, lastname, university, live, job FROM public."user_info" where lastname LIKE '%${obj.name}%'`
-
+        const query2 = `SELECT firstname, lastname, university FROM public."user_info"`
+        let lowercaseNames
+        await db.Client.query(query2, (err, result) => {
+            if(err) console.log('Error!')
+            else{
+                lowercaseNames = result.rows
+            }
+        })
         const findUser = await db.Client.query(query, (err, result) => {
             if(err) console.error("Error!")
             else{
-                let arrUser = result.rows
-
-                var fUser = users.filter( (user) => {
-                    return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+                var fUser = lowercaseNames.filter( (lowercaseName) => {
+                    return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
                 })
 
                 if(obj.name != '')
                 {
-                    console.log(fUser)
                     res.send(fUser)
                 }
             }
@@ -66,88 +45,74 @@ const search2 = async (req, res) => {
 
 const search = async (req, res) => {
     const obj = req.query
-
-    let checkStatus;
+    var chr = ["'", "-", '"', "union", "select", "drop", "#", ")"]
+    let kiemtra = true
+    for(let i = 0; i < chr.length; i++)
+    {
+        let check = obj.name.indexOf(chr[i])
+        if(check != -1) 
+        {
+            kiemtra = false
+            break
+        }
+    }
+    const query = `SELECT firstname, lastname, university, live, job FROM public."user_info" where lastname LIKE '%${obj.name}%'`
+    const query2 = `SELECT firstname, lastname, live, university FROM public."user_info"`
+    let lowercaseNames
+    await db.Client.query(query2, (err, result) => {
+        if(err) console.log('Error!')
+        else{
+            lowercaseNames = result.rows
+        }
+    })
+    let checkStatus = "";
     const sql = await db.Client.query(`SELECT status FROM public."vulnerable" WHERE name = 'SQL Injection'`, (err, result) => {
         if(err) console.log('ERROR!')
         else{
-            const check = result.rows;
-            if (check.length > 0) {
-                console.log(check[0].status);
-                checkStatus = check[0].status
-            } else {
-                console.log("Not found!");
-            }
-        }
-    })
-
-    if(checkStatus == "Yes"){
-        var chr = ["'", "-", '"', "union", "select", "drop", "#", ")"]
-        let kiemtra = true
-        for(let i = 0; i < chr.length; i++)
-        {
-            let check = obj.name.indexOf(chr[i])
-            if(check != -1) 
-            {
-                kiemtra = false
-                break
-            }
-        }
-
-        if(!kiemtra){
-            res.send("Error Input!!!")
-        }
-    }
-
-    const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
-
-    const findUser = await db.Client.query(query, (err, result) => {
-    if(err) console.error("Error!")
-    else{
-        let arrUser = result.rows
-
-        var fUser = users.filter( (user) => {
-            return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
-        })
-
-        if(obj.name != '')
-        {
-            if(checkStatus == "Yes") {
-                console.log("SQL Injection")
-                res.render('search', {userinfo: arrUser})
-            }
-            else {
+            var checkS = result.rows
+            checkStatus = checkS[0].status 
+            if(checkStatus == "No"){
                 console.log("No SQL Injection")
-                res.render('search', {userinfo: fUser})
-
+                
+                if(!kiemtra) {
+                    let fUser = lowercaseNames.filter( (lowercaseName) => {
+                        return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+                    })
+                    res.render('search', {userinfo: fUser, check: true, checkChar: true})
+                }
+                else{
+                    const findUser = db.Client.query(query, (err, result2) => {
+                        if(err) console.log("Error!")
+                        else{
+                            let fUser = lowercaseNames.filter( (lowercaseName) => {
+                                return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+                            })
+                            if(obj.name != '')
+                            {
+                                res.render('search', {userinfo: fUser, check: true, checkChar: false})
+                            }
+                            else {
+                                res.render('search', {userinfo: fUser, check: false, checkChar: false})
+                            }
+                        }   
+                    })
+                }
+            }
+            else{
+                const findUser = db.Client.query(query, (err, result2) => {
+                    if(err) console.log("Error!")
+                    else{
+                        let fUser = lowercaseNames.filter( (lowercaseName) => {
+                            return (lowercaseName.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
+                        })
+                        let arrUser = result2.rows
+                        if(obj.name.search("'") >= 0) res.render('search', {userinfo: arrUser, check: true, checkChar: false})
+                        else res.render('search', {userinfo: fUser, check: true, checkChar: false})
+                    }   
+                })
             }
         }
-    }   
     })
 }
-
-/*
-const search = async (req, res) => {
-    const obj = req.query
-    const query = `SELECT firstname, lastname, university, live, job FROM public."user_info"  where lastname LIKE '%${obj.name}%'`
-    const findUser = await db.Client.query(query, (err, result) => {
-        if(err) console.error("Error!")
-        else{
-            let arrUser = result.rows
-            var fUser = users.filter( (user) => {
-                return (user.lastname).toLowerCase().indexOf(obj.name.toLowerCase()) !== -1
-            })
-
-            if(obj.name != '')
-            {
-                console.log(arrUser)
-                res.render('search', {userinfo: arrUser})
-            }
-        }
-    })
-}
-*/
-
-
 
 export default {search, search2}

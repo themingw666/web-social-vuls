@@ -6,21 +6,31 @@
             <div class="flex max-lg:flex-col 2xl:gap-12 gap-10 2xl:max-w-[1220px] max-w-[1065px] mx-auto" id="js-oversized">
 
                 <div class="flex-1">
-                  
-                <% userinfo.forEach( userinfos => { %>
-                  <div class="usr">
-                    <img style="border-radius: 50%; width: 80px;; margin-left: 10px; height: 80px; display: block; margin-bottom: auto; margin-top: auto" src="assets/images/avatars/user2.jpg">
-                    <ul style="margin-left: 20px;">
-                        <li class="usr-info" style="font-weight: bold;"><%= userinfos.firstname %> <%= userinfos.lastname %></li>
-                        <li ><%= userinfos.university %></li>
-                        <li ><%= userinfos.live %></li>
-                    </ul>
-            
-                    <button class="fl-btn" style="font-size: 14px;">Follow</button>
-                    </div>
-                <% }) %>
-
-                
+                   
+                <% if(checkChar == true) { %>
+                      <p>Invalid Input!</p>
+                  <% } else {%>
+                    <% if(check == true) { %>
+                      <% if(userinfo.length == 0) { %>
+                        <p>No user found!</p>
+                      <% } else {%>
+                        <% userinfo.forEach( userinfos => { %>
+                          <div class="usr">
+                            <img style="border-radius: 50%; width: 80px;; margin-left: 10px; height: 80px; display: block; margin-bottom: auto; margin-top: auto" src="assets/images/avatars/user2.jpg">
+                            <ul style="margin-left: 20px;">
+                                <li class="usr-info" style="font-weight: bold;"><%= userinfos.firstname %> <%= userinfos.lastname %></li>
+                                <li ><%= userinfos.university %></li>
+                                <li ><%= userinfos.live %></li>
+                            </ul>
+                    
+                            <button class="fl-btn" style="font-size: 14px;">Follow</button>
+                            </div>
+                        <% }) %>
+                      <% } %>
+                    <% } else { %>
+                          <p>Please enter name of user!</p>
+                    <% } %>
+                  <% } %>
               </div>
     
             </div>
