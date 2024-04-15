@@ -8,7 +8,7 @@ const userAuth = async (req,res,next) => {
     //verifty token 
     try{
         // console.log(req.headers)
-      if(req.path  == '/form-login'){
+      if(req.path  == '/form-login' || req.path == '/fakedata'){
          next()
       }
        else {
