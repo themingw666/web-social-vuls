@@ -1,42 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Post` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Story` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User_info` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Photo" DROP CONSTRAINT "Photo_postid_fkey";
-
--- DropForeignKey
-ALTER TABLE "Post" DROP CONSTRAINT "Post_authorid_fkey";
-
--- DropForeignKey
-ALTER TABLE "Story" DROP CONSTRAINT "Story_authorid_fkey";
-
--- DropForeignKey
-ALTER TABLE "Story" DROP CONSTRAINT "Story_photoId_fkey";
-
--- DropForeignKey
-ALTER TABLE "User_info" DROP CONSTRAINT "User_info_userid_fkey";
-
--- DropForeignKey
-ALTER TABLE "Video" DROP CONSTRAINT "Video_postid_fkey";
-
--- DropTable
-DROP TABLE "Post";
-
--- DropTable
-DROP TABLE "Story";
-
--- DropTable
-DROP TABLE "User";
-
--- DropTable
-DROP TABLE "User_info";
-
 -- CreateTable
 CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
@@ -55,6 +16,7 @@ CREATE TABLE "user_info" (
     "university" TEXT NOT NULL,
     "live" TEXT NOT NULL,
     "job" TEXT NOT NULL,
+    "avatar" TEXT NOT NULL,
     "role" INTEGER NOT NULL,
     "userid" INTEGER NOT NULL,
 
@@ -82,6 +44,33 @@ CREATE TABLE "story" (
     CONSTRAINT "story_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "photo" (
+    "id" SERIAL NOT NULL,
+    "url" TEXT NOT NULL,
+    "postid" INTEGER NOT NULL,
+
+    CONSTRAINT "photo_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "video" (
+    "id" SERIAL NOT NULL,
+    "url" TEXT NOT NULL,
+    "postid" INTEGER NOT NULL,
+
+    CONSTRAINT "video_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "vulnerable" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+
+    CONSTRAINT "vulnerable_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
 
@@ -104,10 +93,10 @@ ALTER TABLE "post" ADD CONSTRAINT "post_authorid_fkey" FOREIGN KEY ("authorid") 
 ALTER TABLE "story" ADD CONSTRAINT "story_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "story" ADD CONSTRAINT "story_photoId_fkey" FOREIGN KEY ("photoId") REFERENCES "Photo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "story" ADD CONSTRAINT "story_photoId_fkey" FOREIGN KEY ("photoId") REFERENCES "photo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Photo" ADD CONSTRAINT "Photo_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "photo" ADD CONSTRAINT "photo_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Video" ADD CONSTRAINT "Video_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "video" ADD CONSTRAINT "video_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

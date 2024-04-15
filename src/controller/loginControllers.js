@@ -1,13 +1,13 @@
 import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
-import jsonwebtoken  from 'jsonwebtoken';
-import md5 from 'md5'
-const prisma = new PrismaClient();
+import jsonwebtoken from 'jsonwebtoken'
+const prisma = new PrismaClient()
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
 }
 const  handleLogin =  async (req,res) =>{
     const {email,password,rememberme} = await  req.body
+<<<<<<< HEAD
     // if(email.toLowerCase().includes('select')){
     //   const error = {
     //     message : "Email or Password is incorrect !"
@@ -15,6 +15,9 @@ const  handleLogin =  async (req,res) =>{
     // console.log("hi")
     //   return res.render('form-login', { layout: false ,error:error})
     // }
+=======
+    
+>>>>>>> bf9edc8c01a062bfcfb41b77861773f1a16f4103
     try{
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
@@ -24,7 +27,11 @@ const  handleLogin =  async (req,res) =>{
       }else {
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
+<<<<<<< HEAD
       // console.log(result)
+=======
+
+>>>>>>> bf9edc8c01a062bfcfb41b77861773f1a16f4103
       //verifty 
       if(result.length == 0 || md5(password) !== result[0].password) {
           const error = {

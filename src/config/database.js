@@ -11,11 +11,10 @@ const Client = new pg.Client({
 Client
 	.connect()
 	.then(() => {
-		console.log('Connected to PostgreSQL database successfully!!!');
+		console.log('Connected to PostgreSQL database successfully!!!')
 	})
 	.catch((err) => {
-		console.error('Error connecting to PostgreSQL database', err);
-	});
+		console.error('Error connecting to PostgreSQL database', err)
+	})
 
-export default {Client}    
-
+export default {Client}
