@@ -33,7 +33,7 @@ const  handleLogin =  async (req,res) =>{
          return res.render('form-login', { layout: false ,error:error})
      
       }else{
-          //create JWT token 
+          //create JWT token 1
           const jwtsecret = process.env.SecretJWT
        const payload = {
             id : result[0].id,
