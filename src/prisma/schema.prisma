@@ -8,9 +8,9 @@ datasource db {
 }
 
 model user {
-  id        Int                 @id @default(autoincrement())
-  username  String              @unique
-  email     String              @unique
+  id        Int        @id @default(autoincrement())
+  username  String     @unique
+  email     String     @unique
   password  String
   posts     post[]
   story     story[]
@@ -24,6 +24,7 @@ model user_info {
   university String
   live       String
   job        String
+  avatar     String
   role       Int
   userid     Int    @unique
   user       user   @relation(fields: [userid], references: [id])
@@ -34,9 +35,9 @@ model post {
   authorid  Int
   content   String
   create_at DateTime @default(now())
+  photoPost photo[]
   author    user     @relation(fields: [authorid], references: [id])
-  photoPost photo[] 
-  videoPost video[]   
+  videoPost video[]
 }
 
 model story {
@@ -50,34 +51,22 @@ model story {
 }
 
 model photo {
-  id    Int    @id @default(autoincrement())
-  url   String
-  postid Int  
-  story story?
-  postof  post   @relation(fields: [postid] ,references: [id])  
+  id     Int    @id @default(autoincrement())
+  url    String
+  postid Int
+  postof post   @relation(fields: [postid], references: [id])
+  story  story?
 }
 
 model video {
-  id    Int    @id @default(autoincrement())
-  url   String
-  postid Int  
-  postof  post   @relation(fields: [postid] ,references: [id])  
+  id     Int    @id @default(autoincrement())
+  url    String
+  postid Int
+  postof post   @relation(fields: [postid], references: [id])
 }
 
 model vulnerable {
-  id Int @id @default(autoincrement())
-  name String
+  id     Int    @id @default(autoincrement())
+  name   String
   status String
 }
-
-
-// model Message {
-//   senderId      Int 
-//   receiverId    Int
-//   userid1      User @relation(fields: [senderId] ,references: [id],name: "sender")
-//   userid2      User @relation(fields: [receiverId] ,references: [id],name: "receive")
-//   messsage_text String
-//   create_at     DateTime            @default(now())
-//  @@id([senderId,receiverId])
-// }
-

@@ -1,12 +1,12 @@
 import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
-import jsonwebtoken  from 'jsonwebtoken';
-const prisma = new PrismaClient();
+import jsonwebtoken from 'jsonwebtoken'
+const prisma = new PrismaClient()
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
 }
-const  handleLogin =  async (req,res) =>{
-    const {email,password,rememberme} = req.body;
+const handleLogin = async (req,res) =>{
+    const {email,password} = req.body
     const result = await prisma.user.findUnique({
         where: {
           email: email,
@@ -18,7 +18,7 @@ const  handleLogin =  async (req,res) =>{
         const error = {
             message : "Email or Password is incorrect !"
         }
-        res.render('form-login', { layout: false ,error:error})
+        res.render('form-login', { layout: false, error: error })
 
     }else{
         //create JWT token 
@@ -33,7 +33,7 @@ const  handleLogin =  async (req,res) =>{
        res.cookie("jwt", token, {
         httpOnly: true,
         maxAge: 10000 * 1000,
-      });
+      })
         res.redirect('/')
     }
 }

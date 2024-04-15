@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import feedRoute from "./feedRoute.js"
 import messageRoute from "./messageRoute.js"
 import videoRoute from "./videoRoute.js"
@@ -29,8 +29,14 @@ import fakedataRoute from "./fakedataRoute.js"
 import searchRoute from "./searchRoute.js"
 import search2Route from "./search2Route.js"
 import settingVulRoute from "./settingvulRoute.js"
+import { userAuth } from "../middleware/userAuth.js"
 
 const Route = express.Router()
+
+Route.use("/fakedata",fakedataRoute)
+
+//authen middleware
+Route.use(userAuth)
 
 Route.use("/",feedRoute)
 Route.use("/feed",feedRoute)
@@ -59,7 +65,6 @@ Route.use("/timeline-page",timelinePageRoute)
 Route.use("/blog-read",blogReadRoute)
 Route.use("/product-view-1",productViewRoute)
 Route.use("/timeline-funding",timelineFundingRoute)
-Route.use("/fakedata",fakedataRoute)
 Route.use("/search", searchRoute)
 Route.use("/search2", search2Route)
 Route.use("/settings", settingVulRoute)

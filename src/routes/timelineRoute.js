@@ -1,7 +1,7 @@
 import express  from "express";
-import  timlineController from "../controller/timelineControllers.js"
+import  timelineController from "../controller/timelineControllers.js"
 const Route = express.Router()
 
-Route.get("/",timlineController.getTimelinePage)
+Route.get("/",timelineController.getTimelinePage)
 
 export default Route

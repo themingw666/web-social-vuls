@@ -3,7 +3,7 @@ import pg from 'pg'
 const Client = new pg.Client({
     user: "postgres",
     host: "localhost",
-    password: "postgres",
+    password: "113",
 	port: '5432',
 	database: 'social_network',
 })
@@ -11,11 +11,10 @@ const Client = new pg.Client({
 Client
 	.connect()
 	.then(() => {
-		console.log('Connected to PostgreSQL database successfully!!!');
+		console.log('Connected to PostgreSQL database successfully!!!')
 	})
 	.catch((err) => {
-		console.error('Error connecting to PostgreSQL database', err);
-	});
+		console.error('Error connecting to PostgreSQL database', err)
+	})
 
-export default {Client}    
-
+export default {Client}
