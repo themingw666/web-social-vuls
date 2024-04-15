@@ -41,7 +41,7 @@ const  handleLogin =  async (req,res) =>{
           res.redirect('/')
       }
     } catch(ERROR) {
-      // console.log(error)
+      // console.log(error1)
       const error = {
         message : "Email or Password is incorrect !"
     }
