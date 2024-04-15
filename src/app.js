@@ -26,10 +26,4 @@ app.use("/",Route)
 app.use(get404page)
 
 //bind 
-<<<<<<< HEAD
 app.listen(port, () => console.info(`App listening on http://localhost:${port}!!`))
-=======
-app.listen(port,()=>{
-    console.log(`server  is listening on http://localhost:${port}`)
-})
->>>>>>> 81762f486601e48bebe839079ca07a70395e28ca
