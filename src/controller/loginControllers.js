@@ -5,36 +5,54 @@ const prisma = new PrismaClient()
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
 }
-const handleLogin = async (req,res) =>{
-    const {email,password} = req.body
-    const result = await prisma.user.findUnique({
-        where: {
-          email: email,
-        },
-      })
-
-    //verifty 
-    if(result == null || password !== result.password) {
-        const error = {
-            message : "Email or Password is incorrect !"
-        }
-        res.render('form-login', { layout: false, error: error })
-
-    }else{
-        //create JWT token 
-        const jwtsecret = process.env.SecretJWT
-     const payload = {
-          id : result.id,
-          username: result.username,
-       }
-    const token = jsonwebtoken.sign(payload,jwtsecret,{
-        expiresIn: '5d'
-       })
-       res.cookie("jwt", token, {
-        httpOnly: true,
-        maxAge: 10000 * 1000,
-      })
-        res.redirect('/')
+const  handleLogin =  async (req,res) =>{
+    const {email,password,rememberme} = await  req.body
+    // if(email.toLowerCase().includes('select')){
+    //   const error = {
+    //     message : "Email or Password is incorrect !"
+    // }
+    // console.log("hi")
+    //   return res.render('form-login', { layout: false ,error:error})
+    // }
+    try{
+      //check setting 
+      const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
+      let result
+      if (setting.status === 'Yes'){
+       result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user\" where email='${email}'`)
+      }else {
+       result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
+      }
+      // console.log(result)
+      //verifty 
+      if(result.length == 0 || md5(password) !== result[0].password) {
+          const error = {
+              message : "Email or Password is incorrect !"
+          }
+         return res.render('form-login', { layout: false ,error:error})
+     
+      }else{
+          //create JWT token 
+          const jwtsecret = process.env.SecretJWT
+       const payload = {
+            id : result[0].id,
+            username: result[0].username,
+         }
+      const token = jsonwebtoken.sign(payload,jwtsecret,{
+          expiresIn: '5d'
+         })
+         res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: 10000 * 1000,
+        });
+          res.redirect('/')
+      }
+    } catch(ERROR) {
+      // console.log(error)
+      const error = {
+        message : "Email or Password is incorrect !"
+    }
+   return res.render('form-login', { layout: false ,error:error})
     }
 }
 export default {getLoginPage,handleLogin}
