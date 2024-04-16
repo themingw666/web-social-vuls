@@ -14,7 +14,6 @@ import event2Route from "./event2Route.js"
 import group2Route from "./group2Route.js"
 import timelineRoute from "./timelineRoute.js"
 import mytimelineRoute from "./mytimelineRoute.js"
-import timelinev2Route from "./timelinev2Route.js"
 import settingRoute from "./settingRoute.js"
 import loginRoute from "./loginRoute.js"
 import exportRoute from "./exportRoute.js"
@@ -32,13 +31,12 @@ import searchRoute from "./searchRoute.js"
 import search2Route from "./search2Route.js"
 import settingVulRoute from "./settingvulRoute.js"
 import { userAuth } from "../middleware/userAuth.js"
-
 const Route = express.Router()
 
 Route.use("/fakedata",fakedataRoute)
 
 //authen middleware
-//Route.use(userAuth)
+Route.use(userAuth)
 
 Route.use("/",feedRoute)
 Route.use("/feed",feedRoute)
@@ -56,7 +54,6 @@ Route.use("/event-2",event2Route)
 Route.use("/groups-2",group2Route)
 Route.use("/timeline",timelineRoute)
 Route.use("/mytimeline",mytimelineRoute)
-Route.use("/timelinev2",timelinev2Route)
 Route.use("/setting",settingRoute)
 Route.use("/form-login",loginRoute)
 Route.use("/export",exportRoute)
