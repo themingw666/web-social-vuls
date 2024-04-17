@@ -5,6 +5,7 @@ import 'dotenv/config'
 import bodyParser from "body-parser"
 import { fileURLToPath } from 'url'
 import { get404page } from './middleware/404.js'
+import { userAuth } from './middleware/userAuth.js'
 import path from "path"
 import bcrypt from "bcryptjs/dist/bcrypt.js"
 import methodOverride from "method-override"
@@ -18,6 +19,7 @@ const port = process.env.PORT || 3000
 //config view 
 configViewEngine(app,__dirname)
 
+app.use(userAuth)
 app.use(methodOverride('_method'))
 
 //get cookie
