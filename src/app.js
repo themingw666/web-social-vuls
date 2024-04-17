@@ -9,6 +9,7 @@ import { userAuth } from './middleware/userAuth.js'
 import path from "path"
 import bcrypt from "bcryptjs/dist/bcrypt.js"
 import methodOverride from "method-override"
+import cookieParser from 'cookie-parser';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -20,6 +21,9 @@ configViewEngine(app,__dirname)
 
 app.use(userAuth)
 app.use(methodOverride('_method'))
+
+//get cookie
+app.use(cookieParser());
 
 //route
 app.use("/",Route)
