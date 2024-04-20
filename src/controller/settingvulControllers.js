@@ -20,7 +20,6 @@ const submit = async (req, res) => {
         await db.Client.query(query, (err, result) => {
             if(err) console.log("ERROR!")
             else{
-                
             }
         })
     }

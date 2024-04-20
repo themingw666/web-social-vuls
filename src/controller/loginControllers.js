@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs"
 import jsonwebtoken from 'jsonwebtoken'
 import md5 from 'md5'
 const prisma = new PrismaClient()
+
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
 }
@@ -29,7 +30,7 @@ const handleLogin = async (req,res) =>{
           //create JWT token 1
           const jwtsecret = process.env.SecretJWT
        const payload = {
-            id : result[0].id,
+            id: result[0].id,
             username: result[0].username,
          }
       const token = jsonwebtoken.sign(payload,jwtsecret,{

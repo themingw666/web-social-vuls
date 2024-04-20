@@ -19,11 +19,12 @@ const port = process.env.PORT || 3000
 //config view 
 configViewEngine(app,__dirname)
 
-app.use(userAuth)
-app.use(methodOverride('_method'))
-
 //get cookie
 app.use(cookieParser());
+
+//authen middleware
+app.use(userAuth)
+app.use(methodOverride('_method'))
 
 //route
 app.use("/",Route)

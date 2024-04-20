@@ -13,7 +13,6 @@ import blog2Route from "./blog2Route.js"
 import event2Route from "./event2Route.js"
 import group2Route from "./group2Route.js"
 import timelineRoute from "./timelineRoute.js"
-import mytimelineRoute from "./mytimelineRoute.js"
 import settingRoute from "./settingRoute.js"
 import loginRoute from "./loginRoute.js"
 import exportRoute from "./exportRoute.js"
@@ -30,15 +29,9 @@ import fakedataRoute from "./fakedataRoute.js"
 import searchRoute from "./searchRoute.js"
 import search2Route from "./search2Route.js"
 import settingVulRoute from "./settingvulRoute.js"
-import { userAuth } from "../middleware/userAuth.js"
+import profileRoute from "./profileRoute.js"
 const Route = express.Router()
 
-Route.use("/fakedata",fakedataRoute)
-
-//authen middleware
-Route.use(userAuth)
-
-Route.use("/",feedRoute)
 Route.use("/feed",feedRoute)
 Route.use("/messages",messageRoute)
 Route.use("/video",videoRoute)
@@ -53,7 +46,6 @@ Route.use("/blog-2",blog2Route)
 Route.use("/event-2",event2Route)
 Route.use("/groups-2",group2Route)
 Route.use("/timeline",timelineRoute)
-Route.use("/mytimeline",mytimelineRoute)
 Route.use("/setting",settingRoute)
 Route.use("/form-login",loginRoute)
 Route.use("/export",exportRoute)
@@ -69,5 +61,8 @@ Route.use("/timeline-funding",timelineFundingRoute)
 Route.use("/search", searchRoute)
 Route.use("/search2", search2Route)
 Route.use("/settings", settingVulRoute)
+Route.use("/profile", profileRoute)
+Route.use("/fakedata", fakedataRoute)
+Route.use("/",feedRoute)
 
 export default Route
