@@ -8,7 +8,7 @@ async function getTimelinePage(req,res){
         return res.render('timelineerror', {data: "Missing id parameter"})
     }
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
-    if (setting.status === 'Yes'){
+    if (setting.status === 'Easy'){
         try {
             const result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user_info\" WHERE userid = '${id}'`)
             const blacklist = ['select', 'SELECT', 'union', 'UNION', 'drop', 'DROP', 'OR', 'and', 'AND', 'substring', 'SUBSTRING', 'pg_sleep', 'PG_SLEEP', '-', '#']
@@ -25,7 +25,8 @@ async function getTimelinePage(req,res){
         } catch (err) {
             res.render('timelineerror', {data: "Error executing query"})
         }
-    } else {
+    }
+    if (setting.status === 'None'){
         const id1 = Number(id)
         if (isNaN(id1))
             res.render('timelineerror', {data: "id is not valid"})
