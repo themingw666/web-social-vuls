@@ -2,6 +2,7 @@ import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
 import jsonwebtoken from 'jsonwebtoken'
 import md5 from 'md5'
+import { v4 as uuidv4 } from 'uuid';
 const prisma = new PrismaClient()
 
 const getLoginPage =(req,res) =>{
@@ -14,9 +15,10 @@ const handleLogin = async (req,res) =>{
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
       let result
-      if (setting.status === 'Yes'){
+      if (setting.status === 'Easy'){
        result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user\" where email='${email}'`)
-      }else {
+      } 
+      if (setting.status === 'None') {
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 
@@ -28,11 +30,15 @@ const handleLogin = async (req,res) =>{
      
       }else{
           //create JWT token 1
-          const jwtsecret = process.env.SecretJWT
+          let jwtsecret = process.env.SecretJWT
        const payload = {
             id: result[0].id,
             username: result[0].username,
          }
+      const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
+      if (setting.status === "Medium") {
+        jwtsecret = process.env.NotSecretJWT // Not secret JWT
+      }
       const token = jsonwebtoken.sign(payload,jwtsecret,{
           expiresIn: '5d'
          })
@@ -43,7 +49,6 @@ const handleLogin = async (req,res) =>{
           res.redirect('/')
       }
     } catch(ERROR) {
-   
       const error = {
         message : "Email or Password is incorrect !"
     }
