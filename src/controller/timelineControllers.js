@@ -1,5 +1,4 @@
 import db from '../config/database.js'
-import jwt from 'jsonwebtoken';
 import {PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
@@ -45,19 +44,4 @@ async function getTimelinePage(req,res){
     }
 }
 
-async function index(req,res){
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.SecretJWT, (err, decoded) => {
-            if (err) {
-                res.status(401).send('Invalid token');
-            } else {
-                res.redirect(`/timeline?id=${decoded.id}`)
-            }
-        });
-    } else {
-        res.status(401).send('No token provided');
-    }
-}
-
-export default {getTimelinePage, index}
+export default {getTimelinePage}
