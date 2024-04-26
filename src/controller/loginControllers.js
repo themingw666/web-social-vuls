@@ -4,13 +4,21 @@ import jsonwebtoken from 'jsonwebtoken'
 import md5 from 'md5'
 import { v4 as uuidv4 } from 'uuid';
 const prisma = new PrismaClient()
+import fs from 'fs';
+import path from 'path';
+const __dirname = import.meta.dirname;
 
 const getLoginPage =(req,res) =>{
     res.render('form-login', { layout: false })
 }
 const handleLogin = async (req,res) =>{
     const {email,password,rememberme} = await req.body
-    
+    /*let private_key = path.join(__dirname, '../helper/RSA_keys/private_key.pem')
+        const private_key_pem = fs.readFileSync(private_key, 'utf8');
+        const private_key_jwk = forge.pki.privateKeyFromPem(private_key_pem);
+        const { e, n } = private_key_jwk;
+        
+        console.log(Buffer.from(e.toString('hex'), 'hex').toString('base64'))*/
     try{
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
@@ -35,10 +43,11 @@ const handleLogin = async (req,res) =>{
             id: result[0].id,
             username: result[0].username,
          }
-      const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
+      /*const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
       if (setting.status === "Medium") {
         jwtsecret = process.env.NotSecretJWT // Not secret JWT
-      }
+      }*/
+
       const token = jsonwebtoken.sign(payload,jwtsecret,{
           expiresIn: '5d'
          })
@@ -46,8 +55,44 @@ const handleLogin = async (req,res) =>{
           httpOnly: true,
           maxAge: 10000 * 1000,
         });
-          res.redirect('/')
+          return res.redirect('/')
       }
+        
+        /*const header = {
+          "kid": "ed2Nf8sb-sD6ng0-scs5390g-fFD8sfxG",
+          "typ": "JWT",
+          "alg": "RS256",
+          "jwk": {
+              "kty": "RSA",
+              "e": "AQAB",
+              "kid": "ed2Nf8sb-sD6ng0-scs5390g-fFD8sfxG",
+              "n": "yy1wpYmffgXBxhAUJzHHocCuJolwDqql75ZWuCQ_cb33K2vh9m"
+          }
+        };*/
+        
+        /*const private_key = path.join(__dirname, '../helper/RSA_keys/private_key.jwk')
+        const private_key_pem = fs.readFileSync(private_key, 'utf8');
+        jwk = JSON.parse(private_key_pem)
+        console.log(jwk)
+        const header = {
+          "kid": "ed2Nf8sb-sD6ng0-scs5390g-fFD8sfxG",
+          "typ": "JWT",
+          "alg": "RS256",
+          jwk
+        };
+
+        const token = jsonwebtoken.sign(payload,jwk,{
+          expiresIn: '5d',
+          header
+          })
+          res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: 10000 * 1000,
+        });
+          res.redirect('/')
+      }*/
+
+
     } catch(ERROR) {
       const error = {
         message : "Email or Password is incorrect !"
