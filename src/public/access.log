@@ -397,4 +397,3 @@
 ::1 - - [26/Apr/2024:05:37:45 +0000] "GET /settings HTTP/1.1" 200 12053 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
 ::1 - - [26/Apr/2024:05:37:46 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://localhost:3000/settings" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
 ::1 - - [26/Apr/2024:05:37:46 +0000] "GET /settings HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-::1 - - [26/Apr/2024:05:37:46 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://localhost:3000/settings" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
