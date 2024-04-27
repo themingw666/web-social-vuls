@@ -45,6 +45,7 @@ const userAuth = async (req,res,next) => {
           }
       }
     } catch (error) {
+
         return res.redirect('/form-login')
     }
 }

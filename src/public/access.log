@@ -1834,3 +1834,5 @@
 ::1 - - [27/Apr/2024:09:43:05 +0000] "POST /form-login HTTP/1.1" 302 46 "http://localhost:3000/form-login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 ::1 - - [27/Apr/2024:09:43:05 +0000] "GET / HTTP/1.1" 200 143691 "http://localhost:3000/form-login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 ::1 - - [27/Apr/2024:09:43:05 +0000] "GET /unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.esm.js HTTP/1.1" 200 1968 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+::1 - - [27/Apr/2024:09:48:39 +0000] "GET / HTTP/1.1" 304 - "http://localhost:3000/form-login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+::1 - - [27/Apr/2024:09:48:39 +0000] "GET /unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.esm.js HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
