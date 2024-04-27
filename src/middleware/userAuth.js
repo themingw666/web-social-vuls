@@ -4,13 +4,25 @@ const prisma = new PrismaClient()
 
 const userAuth = async (req,res,next) => {
     const prisma = new PrismaClient()
+    let key, value
+    if (req.headers.cookie){
+      req.headers.cookie.split('; ').forEach(cookie => {
+        const [k, v] = cookie.split('=');
+        if (k === 'jwt')
+        {
+          key = k
+          value = v
+        }
+      });
+    }
+
     try{
-      if(req.path == '/form-login' && (!req.headers.cookie || !req.headers.cookie.split('=')[1]) 
-        || req.path == '/fakedata' || req.path == '/settings'){
+      if(req.path === '/fakedata' || req.path.includes('/settings')
+        || (req.path === '/form-login' && (!key || !value)) ){
          next()
       }
        else {
-          const token = req.headers.cookie.split('=')[1];
+          const token = value
           let decoded;
           const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
           //verifty token
@@ -41,7 +53,7 @@ const userAuth = async (req,res,next) => {
           }
       }
     } catch (error) {
-        return res.cookie('jwt', '', { expiresIn: '1d' }).redirect('/form-login')
+        return res.clearCookie('jwt').redirect('/form-login')
     }
 }
 

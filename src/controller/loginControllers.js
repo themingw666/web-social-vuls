@@ -46,7 +46,7 @@ const handleLogin = async (req,res) =>{
           httpOnly: true,
           maxAge: 10000 * 1000,
         });
-          res.redirect('/')
+          return res.redirect('/')
       }
     } catch(ERROR) {
       const error = {
