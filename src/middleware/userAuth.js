@@ -1,9 +1,12 @@
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import { prisma } from '../config/prisma.js';
+import fs from "fs"
+import { fileURLToPath } from 'url'
+import path from "path"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const userAuth = async (req,res,next) => {
-    const prisma = new PrismaClient()
     try{
       if(req.path == '/form-login' && (!req.headers.cookie || !req.headers.cookie.split('=')[1]) 
         || req.path == '/fakedata' || req.path == '/settings'){
@@ -21,8 +24,9 @@ const userAuth = async (req,res,next) => {
             decoded = jwt.verify(token, process.env.NotSecretJWT) // NotSecretJWT
           }
           else if (setting.status === "Hard"){
-              //hard
-
+               const header=jwt.decode(token, { complete: true }).header;
+               const  secretkey = fs.readFileSync(path.join(__dirname,'../helper/key/',header.kid),'utf-8') 
+                decoded = jwt.verify(token, secretkey) 
           }
           else {
             decoded = jwt.verify(token, process.env.SecretJWT)
@@ -41,7 +45,7 @@ const userAuth = async (req,res,next) => {
           }
       }
     } catch (error) {
-        return res.cookie('jwt', '', { expiresIn: '1d' }).redirect('/form-login')
+        return res.redirect('/form-login')
     }
 }
 
