@@ -24,7 +24,7 @@ const submit = async (req, res) => {
         })
     }
     setTimeout(() => {
-        res.redirect('/')
+        res.redirect('/settings')
     }, 3000)
 }
 
