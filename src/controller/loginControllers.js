@@ -1,15 +1,21 @@
 import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
-import jsonwebtoken from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import md5 from 'md5'
 import { v4 as uuidv4 } from 'uuid';
+import fs from "fs"
+import { fileURLToPath } from 'url'
+import path from "path"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 const prisma = new PrismaClient()
 import fs from 'fs';
 import path from 'path';
 const __dirname = import.meta.dirname;
 
 const getLoginPage =(req,res) =>{
-    res.render('form-login', { layout: false })
+   return res.render('form-login', { layout: false })
 }
 const handleLogin = async (req,res) =>{
     const {email,password,rememberme} = await req.body
@@ -38,24 +44,30 @@ const handleLogin = async (req,res) =>{
      
       }else{
           //create JWT token 1
+          const header = {
+            alg: 'HS256', // Algorithm
+            typ: 'JWT' ,   // Type
+        };
           let jwtsecret = process.env.SecretJWT
        const payload = {
             id: result[0].id,
             username: result[0].username,
          }
-      /*const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
+      const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
       if (setting.status === "Medium") {
         jwtsecret = process.env.NotSecretJWT // Not secret JWT
-      }*/
-
-      const token = jsonwebtoken.sign(payload,jwtsecret,{
-          expiresIn: '5d'
-         })
+      }  
+      if(setting.status === "Hard"){
+       header.kid = "6f597b7-fd81-44c7-956f-6937ea94cdf6"
+       const  data = fs.readFileSync(path.join(__dirname,'../helper/key/',header.kid),'utf-8')
+        jwtsecret = data
+    }
+    const token=jwt.sign(payload,jwtsecret,{expiresIn: '5d' ,header })
          res.cookie("jwt", token, {
           httpOnly: true,
           maxAge: 10000 * 1000,
         });
-          return res.redirect('/')
+        return res.redirect('/')
       }
         
         /*const header = {
@@ -94,6 +106,7 @@ const handleLogin = async (req,res) =>{
 
 
     } catch(ERROR) {
+      console.log(ERROR)
       const error = {
         message : "Email or Password is incorrect !"
     }
