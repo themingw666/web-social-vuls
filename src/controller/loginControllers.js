@@ -7,11 +7,8 @@ import fs from "fs"
 import { fileURLToPath } from 'url'
 import path from "path"
 const __filename = fileURLToPath(import.meta.url)
-
+const __dirname = path.dirname(__filename)
 const prisma = new PrismaClient()
-import fs from 'fs';
-import path from 'path';
-const __dirname = import.meta.dirname;
 
 const getLoginPage =(req,res) =>{
    return res.render('form-login', { layout: false })
@@ -52,7 +49,7 @@ const handleLogin = async (req,res) =>{
             id: result[0].id,
             username: result[0].username,
          }
-      const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
+     /* const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
       if (setting.status === "Medium") {
         jwtsecret = process.env.NotSecretJWT // Not secret JWT
       }  
@@ -60,7 +57,7 @@ const handleLogin = async (req,res) =>{
        header.kid = "6f597b7-fd81-44c7-956f-6937ea94cdf6"
        const  data = fs.readFileSync(path.join(__dirname,'../helper/key/',header.kid),'utf-8')
         jwtsecret = data
-    }
+    }*/
     const token=jwt.sign(payload,jwtsecret,{expiresIn: '5d' ,header })
          res.cookie("jwt", token, {
           httpOnly: true,
@@ -105,11 +102,11 @@ const handleLogin = async (req,res) =>{
 
 
     } catch(ERROR) {
-      console.log(ERROR)
       const error = {
         message : "Email or Password is incorrect !"
     }
    return res.render('form-login', { layout: false ,error:error})
     }
 }
+
 export default {getLoginPage,handleLogin}

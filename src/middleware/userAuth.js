@@ -7,17 +7,29 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const userAuth = async (req,res,next) => {
+    let key, value
+    if (req.headers.cookie){
+      req.headers.cookie.split('; ').forEach(cookie => {
+        const [k, v] = cookie.split('=');
+        if (k === 'jwt')
+        {
+          key = k
+          value = v
+        }
+      });
+    }
+
     try{
       if(req.path === '/fakedata' || req.path.includes('/settings')
         || (req.path === '/form-login' && (!key || !value)) ){
          next()
       }
        else {
-          const token = req.headers.cookie.split('=')[1];
+          const token = value
           let decoded;
           const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
           //verifty token
-          if (setting.status === "Easy"){
+          /*if (setting.status === "Easy"){
             decoded = jwt.decode(token)
           }
           else if (setting.status === "Medium"){
@@ -30,7 +42,8 @@ const userAuth = async (req,res,next) => {
           }
           else {
             decoded = jwt.verify(token, process.env.SecretJWT)
-          }
+          }*/
+          decoded = jwt.decode(token)
           req.decoded = decoded
           const username = decoded.username
           const result = await prisma.user.findUnique({
@@ -45,8 +58,7 @@ const userAuth = async (req,res,next) => {
           }
       }
     } catch (error) {
-
-        return res.redirect('/form-login')
+        return res.clearCookie('jwt').redirect('/form-login')
     }
 }
 

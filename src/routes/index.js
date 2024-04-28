@@ -32,10 +32,6 @@ import settingVulRoute from "./settingvulRoute.js"
 import profileRoute from "./profileRoute.js"
 import exploitRoute from "./exploitRoute.js"
 import accesslogRoute from "./accesslogRoute.js"
-<<<<<<< HEAD
-=======
-// import JkuJsonRoute from "./
->>>>>>> 8beabc54a499c4b1f5bc82835b653372165ca3f4
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
