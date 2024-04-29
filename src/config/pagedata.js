@@ -14,10 +14,14 @@ const pagedata = async(req,res,next) => {
             userid: id,
             },
         })
-        if (data === null)
+        const data1 = await prisma.user.findUnique({
+            where: {
+            id: id,
+            },
+        })
+        if (data === null && data1 === null)
             next()
-        let firstname = data.firstname
-        req.fulldata = { firstname: firstname };
+        req.fulldata = { data: data, data1: data1 };
         next()
     } catch (error) {
         res.clearCookie('jwt')

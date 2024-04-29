@@ -28,8 +28,6 @@ app.use(userAuth)
 app.use(pagedata)
 app.use(methodOverride('_method'))
 
-//app.use(pagedata)
-
 //route
 app.use("/",Route)
 

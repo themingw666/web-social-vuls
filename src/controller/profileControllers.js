@@ -9,10 +9,11 @@ async function logout(req,res){
     return res.clearCookie('jwt').redirect('/form-login')
 }
 
-async function index(req,res){
-    const firstname = req.fulldata.firstname
-    res.setHeader('Content-Type', 'application/json');
-    res.json({ firstname: firstname })
+async function pagedata(req,res){
+    const fullname = req.fulldata.data.firstname + ' ' + req.fulldata.data.lastname
+    const username = req.fulldata.data1.username
+    const avatar = req.fulldata.data.avatar
+    res.json({ fullname: fullname, username: username, avatar: avatar })
 }
 
-export default {mytimeline, logout, index}
+export default {mytimeline, logout, pagedata}

@@ -71,9 +71,4 @@ Route.use("/exploit",exploitRoute)
 Route.use("/access-log",accesslogRoute)
 Route.use("/",feedRoute)
 
-import profileControllers from "../controller/profileControllers.js"
-import { pagedata } from '../config/pagedata.js'
-Route.get("/pagedata1", profileControllers.index)
-
-
 export default Route
