@@ -406,6 +406,8 @@
                                 <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-10 h-10 rounded-full shadow">
                                 <div class="flex-1">
                                     <h4 class="text-sm font-medium text-black">Stell johnson</h4>
+                                    <h4 class="text-sm font-medium text-black" id="firstnamene">Stell johnson</h4>
+                                    <h1>Welcome <span id="fullName"></span>
                                     <div class="text-sm mt-1 text-blue-600 font-light dark:text-white/70">@mohnson</div>
                                 </div>
                             </div>
@@ -543,5 +545,26 @@
         load_data(query);
     
     });
-    
-    </script>
+</script>
+
+<script>
+    // Get data from server
+    console.log("ZBC")
+    fetch('/pagedata1')
+        .then(response => response.json())
+        .then(data => {
+             // Lấy ra các phần tử HTML
+             const fullNameSpan = document.getElementById('fullNameSpan');
+            const userIdSpan = document.getElementById('userIdSpan');
+
+            // Kiểm tra xem các phần tử đã tồn tại trong DOM chưa
+            if (fullNameSpan && userIdSpan) {
+                // Cập nhật dữ liệu vào phần tử tương ứng
+                fullNameSpan.innerText = data.fullName;
+                userIdSpan.innerText = data.userId;
+            } else {
+                console.error('One or more elements are missing.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+</script>

@@ -33,6 +33,7 @@ import profileRoute from "./profileRoute.js"
 import exploitRoute from "./exploitRoute.js"
 import accesslogRoute from "./accesslogRoute.js"
 // import JkuJsonRoute from "./
+
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -69,5 +70,10 @@ Route.use("/fakedata", fakedataRoute)
 Route.use("/exploit",exploitRoute)
 Route.use("/access-log",accesslogRoute)
 Route.use("/",feedRoute)
+
+import profileControllers from "../controller/profileControllers.js"
+import { pagedata } from '../config/pagedata.js'
+Route.get("/pagedata1", profileControllers.index)
+
 
 export default Route
