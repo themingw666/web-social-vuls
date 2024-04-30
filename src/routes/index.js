@@ -65,8 +65,8 @@ Route.use("/search2", search2Route)
 Route.use("/settings", settingVulRoute)
 Route.use("/profile", profileRoute)
 Route.use("/fakedata", fakedataRoute)
-Route.use("/exploit",exploitRoute)
-Route.use("/access-log",accesslogRoute)
-Route.use("/",feedRoute)
+Route.use("/exploit", exploitRoute)
+Route.use("/access-log", accesslogRoute)
+Route.use("/", feedRoute)
 
 export default Route
