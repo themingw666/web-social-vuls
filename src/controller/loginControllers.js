@@ -1,22 +1,28 @@
 import {PrismaClient } from '@prisma/client'
 import bcryptjs from "bcryptjs"
-import jsonwebtoken from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import md5 from 'md5'
+import { v4 as uuidv4 } from 'uuid';
+import fs from "fs"
+import { fileURLToPath } from 'url'
+import path from "path"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const prisma = new PrismaClient()
 
 const getLoginPage =(req,res) =>{
-    res.render('form-login', { layout: false })
+   return res.render('form-login', { layout: false })
 }
 const handleLogin = async (req,res) =>{
     const {email,password,rememberme} = await req.body
-    
     try{
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
       let result
-      if (setting.status === 'Yes'){
+      if (setting.status === 'Easy'){
        result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user\" where email='${email}'`)
-      }else {
+      } 
+      else if (setting.status === 'None') {
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 
@@ -25,29 +31,58 @@ const handleLogin = async (req,res) =>{
               message : "Email or Password is incorrect !"
           }
          return res.render('form-login', { layout: false ,error:error})
-     
       }else{
-          //create JWT token 1
-          const jwtsecret = process.env.SecretJWT
-       const payload = {
-            id: result[0].id,
-            username: result[0].username,
-         }
-      const token = jsonwebtoken.sign(payload,jwtsecret,{
-          expiresIn: '5d'
-         })
-         res.cookie("jwt", token, {
+        const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
+        let token, header
+        if (setting.status === "Easy" || setting.status === "Hard") {
+          header = {
+            alg: 'HS256',
+            typ: 'JWT',
+          }
+        }
+        else { //Medium and None
+          header = {
+            alg: 'RS256',
+            typ: 'JWT',
+          }
+        }
+        const payload = {
+          id: result[0].id,
+          username: result[0].username,
+        }
+        let jwtsecret = process.env.SecretJWT
+        let privateKey
+
+      if (setting.status === "Easy") {
+        jwtsecret = process.env.NotSecretJWT //NotSecretJWT
+      }
+      else if(setting.status === "Hard"){
+       header.kid = "6f597b7-fd81-44c7-956f-6937ea94cdf6"
+       const data = fs.readFileSync(path.join(__dirname,'../helper/key/',header.kid),'utf-8')
+       jwtsecret = data
+      }
+      else { //Medium and None
+        header.kid = "6f597b7-fd81-44c7-956f-6937ea94cdf6"
+        privateKey = fs.readFileSync(path.join(__dirname,'../helper/key/privatekey.pem'),'utf-8')
+      }
+      if (setting.status === "Easy" || setting.status === "Hard") {
+        token=jwt.sign(payload,jwtsecret,{expiresIn: '5d' ,header })
+      } 
+      else { //Medium and None
+        token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
+      }
+        res.cookie("jwt", token, {
           httpOnly: true,
           maxAge: 10000 * 1000,
         });
-          res.redirect('/')
+        return res.redirect('/')
       }
     } catch(ERROR) {
-   
       const error = {
         message : "Email or Password is incorrect !"
     }
    return res.render('form-login', { layout: false ,error:error})
     }
 }
+
 export default {getLoginPage,handleLogin}
