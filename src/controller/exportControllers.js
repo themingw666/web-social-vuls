@@ -1,14 +1,35 @@
 import  service from "../service/renderPDF.js"
+import { prisma } from "../config/prisma.js"
+import {check_url_easy,check_url_standard} from "../helper/validate/validate-url.js"
 const getPdfPage = async(req,res) =>{
-    const url = req.get("Referer")
+    let url = req.get("Referer")
+
+    //level easy 
+    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSRF'`
+     
+    
+    let key, value
+    if (req.headers.cookie){
+      req.headers.cookie.split('; ').forEach(cookie => {
+        const [k, v] = cookie.split('=');
+        if (k === 'jwt')
+        {
+          key = k
+          value = v
+        }
+      });
+    }
    try {
-    const pdfBuffer  = await service.renderPDF(url)
+    if(setting.status === 'Easy'){
+        url = check_url_easy(url) ? url : "https://khanhkma.000webhostapp.com/"    
+    }else {
+        url = check_url_standard(url)? url : "https://khanhkma.000webhostapp.com/"
+    }
+    const pdfBuffer  = await service.renderPDF(url,value)
+    res.setHeader('Content-disposition', 'attachment; filename=profile.pdf');
+    res.setHeader('Content-type', 'application/pdf');
     res.status(200)
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': 'inline',
-    })
-    res.send(pdfBuffer);
+    res.end(pdfBuffer);
    } catch (error) {
     res.status(500)
     res.setHeader('Content-Type', 'application/json')

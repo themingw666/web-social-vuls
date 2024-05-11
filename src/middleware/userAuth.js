@@ -20,7 +20,6 @@ const userAuth = async (req,res,next) => {
         }
       });
     }
-
     try{
       if(req.path === '/fakedata' || req.path.includes('/settings')
         || (req.path === '/form-login' && (!key || !value)) ){
