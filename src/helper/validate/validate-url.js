@@ -1,11 +1,9 @@
 import url from "url"
-const check_url_easy= (addsr) => {
- let addr ="file://C:/Windows/System32/drivers/etc/hosts%25%32%33@web-vul.com:3000/timeline?id=1"
+const check_url_easy= (addr) => {
     //step1 decoding 
   let url_decoding = decodeURIComponent(addr)
     //whitelist 
     const q = url.parse(url_decoding, true);
-    console.log(q)
     if (q.hostname === "web-vul.com"){
          return true;
     }
@@ -31,5 +29,4 @@ const check_url_standard = (addr) =>{
     }
     return true
 }
-check_url_easy()
 export {check_url_easy,check_url_standard}
