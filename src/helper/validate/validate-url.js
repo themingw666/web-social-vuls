@@ -1,5 +1,14 @@
 import url from "url"
-const check_url_easy= (addr) => {
+const check_url_easy = (addr) =>{
+  let url_decoding = decodeURIComponent(addr)
+  //blacklist 
+  const q = url.parse(url_decoding, true);
+  if (q.hostname === "localhost"){
+       return false;
+  }
+  return true
+}
+const check_url_medium = (addr) => {
     //step1 decoding 
   let url_decoding = decodeURIComponent(addr)
     //whitelist 
@@ -29,4 +38,4 @@ const check_url_standard = (addr) =>{
     }
     return true
 }
-export {check_url_easy,check_url_standard}
+export {check_url_easy,check_url_standard,check_url_medium}

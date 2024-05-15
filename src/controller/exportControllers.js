@@ -1,6 +1,6 @@
 import  service from "../service/renderPDF.js"
 import { prisma } from "../config/prisma.js"
-import {check_url_easy,check_url_standard} from "../helper/validate/validate-url.js"
+import {check_url_easy,check_url_medium,check_url_standard} from "../helper/validate/validate-url.js"
 const getPdfPage = async(req,res) =>{
     let url = req.get("Referer")
 
@@ -22,8 +22,10 @@ const getPdfPage = async(req,res) =>{
    try {
     if(setting.status === 'Easy'){
         url = check_url_easy(url) ? url : "https://khanhkma.000webhostapp.com/"    
+    }else if (setting.status == 'Medium') {
+        url = check_url_medium(url)? url : "https://khanhkma.000webhostapp.com/"
     }else {
-        url = check_url_standard(url)? url : "https://khanhkma.000webhostapp.com/"
+      url = check_url_standard(url)? url : "https://khanhkma.000webhostapp.com/"
     }
     const pdfBuffer  = await service.renderPDF(url,value)
     res.setHeader('Content-disposition', 'attachment; filename=profile.pdf');
