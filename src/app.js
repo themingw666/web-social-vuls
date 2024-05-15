@@ -11,6 +11,7 @@ import bcrypt from "bcryptjs/dist/bcrypt.js"
 import methodOverride from "method-override"
 import cookieParser from 'cookie-parser';
 import { pagedata } from './config/pagedata.js'
+import initWebsocket from "./config/websocket.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,7 +20,7 @@ const port = process.env.PORT || 3000
 
 //config view 
 configViewEngine(app,__dirname)
-
+initWebsocket()
 //get cookie
 app.use(cookieParser());
 
@@ -33,6 +34,8 @@ app.use("/",Route)
 
 //handl 404 not found 
 app.use(get404page)
+
+
 
 //bind 
 app.listen(port, () => console.info(`App listening on http://localhost:${port}!!`))
