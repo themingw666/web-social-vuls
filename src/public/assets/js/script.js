@@ -30,7 +30,7 @@ if(path== 'messages'){
     const fullnameUser = document.querySelector('.fullname-user')  
     const profileUser = document.querySelector('.user-profile')  
     const chatlist = document.querySelector('.chatlist')  
-
+    let mainUser 
     
    
     fetch('/userlist')
@@ -43,6 +43,11 @@ if(path== 'messages'){
       return response.json();
     })
     .then(data => {
+        //getMainuser  = 
+       [mainUser] = data.filter(element =>{
+            return element.userid == mainUserID
+        })
+        console.log(mainUser)
       // Do something with the JSON data
       data.forEach((element,index) => {
         if(index == (data.length - 1) ){
@@ -73,7 +78,7 @@ if(path== 'messages'){
                         }else {
                             message +=`
                             <div class="flex gap-2 flex-row-reverse items-end mt-3">
-                                <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-5 h-5 rounded-full shadow">
+                                <img src="${mainUser.avatar}" alt="" class="w-5 h-5 rounded-full shadow">
                                 <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${chatElement.content}</div>
                             </div>`
                         }
@@ -88,6 +93,7 @@ if(path== 'messages'){
             })
 
         }
+         
         let content = `
         <a href="#" class="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery user" data-user-id="${element.userid}">
         <div class="relative w-14 h-14 shrink-0"> 
@@ -128,7 +134,6 @@ if(path== 'messages'){
             })
             .then(chatdata => {
                 //frist element 
-                console.log(chatdata)
                 let message = ''
                 if(chatdata.length != 0){
                     chatdata.forEach(chatElement => {
@@ -143,7 +148,7 @@ if(path== 'messages'){
                         }else {
                             message +=`
                             <div class="flex gap-2 flex-row-reverse items-end mt-3">
-                                <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-5 h-5 rounded-full shadow">
+                                <img src="${mainUser.avatar}" alt="" class="w-5 h-5 rounded-full shadow">
                                 <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${chatElement.content}</div>
                             </div>`
                         }
@@ -187,24 +192,29 @@ if(path== 'messages'){
     //handl event submit 
     chatForm.addEventListener('submit',(event) => {
         event.preventDefault();
-           
-        const  data = {
-            type : "message",
-            sender_id : mainUserID,
-            revceiver_id : profileUser.getAttribute('href').split('=')[1],
-            message : textareaElement.value
-        }
-        const jsonString = JSON.stringify(data);
-        ws.send(jsonString);
+        if (textareaElement.value != ""){
+            const urlregex = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\/.*$/
 
-        //inner 
-        let senderHTML = `
-                                <div class="flex gap-2 flex-row-reverse items-end mt-3">
-                                    <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-5 h-5 rounded-full shadow">
-                                    <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${data.message}</div>
-                                </div>`
-     chatlist.insertAdjacentHTML('beforeend',senderHTML)
-      textareaElement.value=''
+            const  data = {
+                type : "message",
+                sender_id : mainUserID,
+                revceiver_id : profileUser.getAttribute('href').split('=')[1],
+                message : textareaElement.value,
+                type_message :  urlregex.test(textareaElement.value) ? "url" : "text"
+            }
+            const jsonString = JSON.stringify(data);
+            ws.send(jsonString);
+    
+            //inner 
+            let senderHTML = `
+                                    <div class="flex gap-2 flex-row-reverse items-end mt-3">
+                                        <img src="${mainUser.avatar}" alt="" class="w-5 h-5 rounded-full shadow">
+                                        <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${data.message}</div>
+                                    </div>`
+         chatlist.insertAdjacentHTML('beforeend',senderHTML)
+          textareaElement.value=''
+        }
+        
     })
 
     

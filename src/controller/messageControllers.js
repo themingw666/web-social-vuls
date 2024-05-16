@@ -4,7 +4,7 @@ const getMessagePage = (req,res) => {
 }
 const getchat = async (req,res) => {
     try {
-        const messages = await prisma.$queryRaw`Select * from message where ("userSender_id" = ${req.fulldata.data1.id} and "userRecipient_id" = ${Number(req.params.receiveID)} ) OR ("userSender_id" = ${Number(req.params.receiveID)} and "userRecipient_id" = ${Number(req.fulldata.data1.id)})`
+        const messages = await prisma.$queryRaw`Select * from message where ("userSender_id" = ${req.fulldata.data1.id} and "userRecipient_id" = ${Number(req.params.receiveID)} ) OR ("userSender_id" = ${Number(req.params.receiveID)} and "userRecipient_id" = ${Number(req.fulldata.data1.id)}) ORDER BY id ASC`
         res.send(JSON.stringify(messages))
     } catch (error) {
         res.send(JSON.stringify(error))

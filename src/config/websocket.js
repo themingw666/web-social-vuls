@@ -1,6 +1,7 @@
 import { WebSocketServer } from 'ws';
 import {prisma} from "../config/prisma.js"
-
+import escapeHtml from "escape-html"
+import cheerio  from "cheerio"
 const initWebsocket = () => {
     // Create a WebSocket server attached to the HTTP server
 const wss = new WebSocketServer({ port:8080 });
@@ -9,12 +10,10 @@ const clients = {};
 
 // Khi một client kết nối
 wss.on('connection', (ws) => {
-  console.log('A client connected');
 
   // Lắng nghe tin nhắn từ client
   ws.on('message', async(message) => {
     const data = JSON.parse(message);
-
     // Xử lý đăng ký client với userid
     if (data.type === 'register') {
       const userId = data.userId;
@@ -27,8 +26,31 @@ wss.on('connection', (ws) => {
 
     // Xử lý các tin nhắn khác từ client
     else if (data.type === 'message') {
-      console.log(`Message from ${data.sender_id}: ${data.message}`);
       // Xử lý tin nhắn hoặc chuyển tiếp tin nhắn đến client khác
+
+      //handle type message 
+       if(data.type_message == "url"){
+        //fetch header data 
+     try {
+      const response = await fetch(data.message)
+      const content  = await  response.text()
+      const $ = cheerio.load(content);
+      const title = $('title').text(); // Tiêu đề của trang
+      const description = $('meta[name="description"]').attr('content'); // Mô tả của trang
+      const imageUrl = $('meta[property="og:image"]').attr('content'); // URL ảnh đại diện
+        data.message= `<div class='preview'>
+      <a style="text-decoration: underline" href=${data.message}>${data.message}</a>
+      <img src=${imageUrl} />
+      <p>${description}</p>
+      </div>`
+     } catch (error) {
+      data.message= `<div class='preview'>
+      <a href=${data.message}>${data.message}</a>
+      <p>${error}</p>
+      </div>`
+     }
+
+       }
       //process db 
       try {
         const message = await prisma.message.create({
