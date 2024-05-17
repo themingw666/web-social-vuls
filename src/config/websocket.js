@@ -1,7 +1,7 @@
 import { WebSocketServer } from 'ws';
 import {prisma} from "../config/prisma.js"
-import escapeHtml from "escape-html"
 import cheerio  from "cheerio"
+import {check_url_easy,check_url_standard} from "../helper/validate/validate-url.js"
 const initWebsocket = () => {
     // Create a WebSocket server attached to the HTTP server
 const wss = new WebSocketServer({ port:8080 });
@@ -18,7 +18,6 @@ wss.on('connection', (ws) => {
     if (data.type === 'register') {
       const userId = data.userId;
       clients[userId] = ws;
-      console.log(`Client registered with ID: ${userId}`);
 
       // Gửi phản hồi lại cho client
       ws.send(JSON.stringify({ type: 'registered', success: true, userId }));
@@ -30,16 +29,24 @@ wss.on('connection', (ws) => {
      
       //handle type message 
        if(data.type_message == "url"){
+        //check setting 
+        const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSRF'`
         //fetch header data 
+        let url 
+        if(setting.status === 'Easy'){
+          url = check_url_easy(data.message) ? data.message : "https://khanhkma.000webhostapp.com/"    
+      }else {
+          url = check_url_standard(data.message)? data.message : "https://khanhkma.000webhostapp.com/"
+      }
      try {
-      const response = await fetch(data.message)
+      const response = await fetch(url)
       const content  = await  response.text()
       const $ = cheerio.load(content);
       const title = $('title').text(); // Tiêu đề của trang
       const description = $('meta[name="description"]').attr('content'); // Mô tả của trang
       const imageUrl = $('meta[property="og:image"]').attr('content'); // URL ảnh đại diện
         data.message= `<div class='preview'>
-      <a style="text-decoration: underline" href=${data.message}>${data.message}</a>
+      <a style="text-decoration: underline" href=${url}>${data.message}</a>
       <img src=${imageUrl} />
       <p>${description}</p>
       </div>`
@@ -82,7 +89,6 @@ wss.on('connection', (ws) => {
   ws.on('close', () => {
     for (const userId in clients) {
       if (clients[userId] === ws) {
-        console.log(`Client disconnected: ${userId}`);
         delete clients[userId];
         break;
       }
