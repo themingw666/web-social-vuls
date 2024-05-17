@@ -11,7 +11,7 @@ if(path== 'messages'){
 
     //initial socket 
     let ws
-    ws = new WebSocket('ws://localhost:8080');
+    ws = new WebSocket('ws://localhost:8080','echo-protocol');
     ws.onopen = function() {
         console.log('WebSocket connected');
         ws.send(JSON.stringify({type: 'register', userId : mainUserID}))
@@ -165,24 +165,32 @@ if(path== 'messages'){
       })
       
       ws.onmessage = function(event) {
-        // console.log('Received message:', event.data);
         //handl insert HTML
+        
      let  messageObj = JSON.parse(event.data)
-        const [usersender] = data.filter(element => {
+     const [usersender] = data.filter(element => {
             return element.userid == messageObj.from 
         })
         if(messageObj.from == profileUser.getAttribute('href').split('=')[1]){
-
-            let message = '' 
-            message +=`
+         
+           
+           let receiveHTML =`
             
             <div class="flex gap-3">
                     <img src="${usersender.avatar}" alt="" class="w-9 h-9 rounded-full shadow">
                     <div class="px-4 py-2 rounded-[20px] max-w-sm bg-secondery"> ${messageObj.message} </div>
                 </div>
             `
-             chatlist.insertAdjacentHTML('beforeend',message)
+             chatlist.insertAdjacentHTML('beforeend',receiveHTML)
+            
     
+          }else if (messageObj.from == mainUserID){
+            let senderHTML = `
+                                    <div class="flex gap-2 flex-row-reverse items-end mt-3">
+                                        <img src="${mainUser.avatar}" alt="" class="w-5 h-5 rounded-full shadow">
+                                        <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${messageObj.message}</div>
+                                    </div>`
+          chatlist.insertAdjacentHTML('beforeend',senderHTML)
           };
         }
 
@@ -205,13 +213,6 @@ if(path== 'messages'){
             const jsonString = JSON.stringify(data);
             ws.send(jsonString);
     
-            //inner 
-            let senderHTML = `
-                                    <div class="flex gap-2 flex-row-reverse items-end mt-3">
-                                        <img src="${mainUser.avatar}" alt="" class="w-5 h-5 rounded-full shadow">
-                                        <div class="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow"> ${data.message}</div>
-                                    </div>`
-         chatlist.insertAdjacentHTML('beforeend',senderHTML)
           textareaElement.value=''
         }
         

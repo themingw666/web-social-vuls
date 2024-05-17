@@ -27,7 +27,7 @@ wss.on('connection', (ws) => {
     // Xử lý các tin nhắn khác từ client
     else if (data.type === 'message') {
       // Xử lý tin nhắn hoặc chuyển tiếp tin nhắn đến client khác
-
+     
       //handle type message 
        if(data.type_message == "url"){
         //fetch header data 
@@ -49,8 +49,13 @@ wss.on('connection', (ws) => {
       <p>${error}</p>
       </div>`
      }
-
-       }
+    }
+    ws.send(JSON.stringify({
+      type: 'message',
+      from :data.sender_id,
+      message : data.message,
+      to : data.revceiver_id
+  }))
        //test3 
       //process db 
       try {
@@ -73,7 +78,6 @@ wss.on('connection', (ws) => {
       }
     }
   });
- console.log("sjshsj")
   // Xử lý ngắt kết nối
   ws.on('close', () => {
     for (const userId in clients) {
