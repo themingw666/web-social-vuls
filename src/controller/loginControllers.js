@@ -19,7 +19,7 @@ const handleLogin = async (req,res) =>{
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
       let result
-      if (setting.status === 'Easy'){
+      if (setting.status === 'Hard'){
        result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user\" where email='${email}'`)
       } 
       else if (setting.status === 'None') {
