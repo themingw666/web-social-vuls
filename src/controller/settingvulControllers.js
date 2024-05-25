@@ -25,7 +25,7 @@ const submit = async (req, res) => {
     }
     setTimeout(() => {
         res.redirect('/settings')
-    }, 3000)
+    }, 1000)
 }
 
 export default {setting, submit}
