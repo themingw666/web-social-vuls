@@ -54,5 +54,13 @@
    {"id": 12, "name": "OS Command Injection", "status": "None"},
    {"id": 13, "name": "Deserialization", "status": "None"},
    {"id": 14, "name": "IDOR", "status": "None"}
+ ],
+ "message" : [
+   {"id":1,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Cuộc sống em ổn không" , "type" : "text"},
+   {"id":2,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Có giống em hi vọng" , "type" : "text"},
+   {"id":3,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Thấy em khóc nhào" , "type" : "text"},
+   {"id":4,"userSender_id" : 2 , "userRecipient_id" : 1 , "content" : "Cứ gọi là ok anh ơi" , "type" : "text"},
+   {"id":5,"userSender_id" : 1 , "userRecipient_id" : 6 , "content" : "Cho em vay 20 triệu tết em trả" , "type" : "text"},
+   {"id":6,"userSender_id" : 6 , "userRecipient_id" : 1 , "content" : "Tin chuẩn chưa" , "type" : "text"}
  ]
 }

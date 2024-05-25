@@ -32,6 +32,8 @@ import settingVulRoute from "./settingvulRoute.js"
 import profileRoute from "./profileRoute.js"
 import exploitRoute from "./exploitRoute.js"
 import accesslogRoute from "./accesslogRoute.js"
+import userlistRoute from "./userlistRoute.js"
+import messageDetailRoute from "./messageDetailRoute.js"
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -67,6 +69,8 @@ Route.use("/profile", profileRoute)
 Route.use("/fakedata", fakedataRoute)
 Route.use("/exploit", exploitRoute)
 Route.use("/access-log", accesslogRoute)
+Route.use("/userlist", userlistRoute)
+Route.use("/messageDetail", messageDetailRoute)
 Route.use("/", feedRoute)
 
 export default Route

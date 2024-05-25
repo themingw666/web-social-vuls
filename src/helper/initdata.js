@@ -12,6 +12,7 @@ const data = JSON.parse(fs.readFileSync(path.join(__dirname,"data.json")));
 async function main() {
       try {
         // Delete all records
+        await prisma.message.deleteMany();
         await prisma.video.deleteMany();
         await prisma.photo.deleteMany();
         await prisma.post.deleteMany();
@@ -52,6 +53,11 @@ async function main() {
     const createManyVulnerable = await prisma.vulnerable.createMany(
         {
             data:data['vulnerable']
+        }
+    )
+    const createManyMessage = await prisma.message.createMany(
+        {
+            data:data['message']
         }
     )
     let datapro = JSON.stringify(data['user']) + JSON.stringify(data['user_info']) + JSON.stringify(data['post']) + JSON.stringify(data['photo']) + JSON.stringify(data['video']) + JSON.stringify(data['vulnerable']); 

@@ -72,7 +72,7 @@ const handleLogin = async (req,res) =>{
         token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
       }
         res.cookie("jwt", token, {
-          httpOnly: true,
+          httpOnly: false,
           maxAge: 10000 * 1000,
         });
         return res.redirect('/')
