@@ -1,6 +1,7 @@
 import { WebSocketServer } from 'ws';
 import {prisma} from "../config/prisma.js"
 import cheerio  from "cheerio"
+import  {encode,decode} from "html-entities"
 import {check_url_easy,check_url_standard} from "../helper/validate/validate-url.js"
 const initWebsocket = () => {
     // Create a WebSocket server attached to the HTTP server
@@ -50,6 +51,7 @@ wss.on('connection', (ws) => {
       <img src=${imageUrl} />
       <p>${description}</p>
       </div>`
+      
      } catch (error) {
       data.message= `<div class='preview'>
       <a href=${data.message}>${data.message}</a>
@@ -57,6 +59,12 @@ wss.on('connection', (ws) => {
       </div>`
      }
     }
+    //check setting 
+    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XSS'`
+    if (setting.status == 'None' && data.type_message != 'url' ){
+       data.message = encode(data.message)
+    }
+     
     ws.send(JSON.stringify({
       type: 'message',
       from :data.sender_id,
