@@ -6,8 +6,13 @@ import axios from 'axios';
 
 const getHomePage = async (req,res) => {
     try {
+        //defense
+        //res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' https: data:; object-src 'none'; media-src 'self'; frame-src 'none'");
+
         //fetch data status
         let data1 = await prisma.$queryRaw`
+        SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
+        let data4 = await prisma.$queryRaw`
         SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
         //fetch my data
         let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`
@@ -15,8 +20,9 @@ const getHomePage = async (req,res) => {
         for (let i = 0; i < data1.length; ++i) {
             let data3 = await prisma.$queryRaw`
             SELECT * FROM "post_comment" INNER JOIN "user_info" ON post_comment.authorid=user_info.userid WHERE postid=${data1[i].id} ORDER BY commentid ASC`
-            if (data3[0])
+            if (data3[0]){
                 data1[i].comment = data3
+            }
         }
         //time
         const now = new Date()
@@ -40,10 +46,10 @@ const getHomePage = async (req,res) => {
                 data1[i].post_time = `${seconds} seconds ago`;
             }
         }
-        return res.render('feed', {data1, data2: data2[0]})
+        return res.render('feed', {data1, data2: data2[0], data4})
         
       } catch (error) {
-        //console.error("Error: ", error.message);
+        console.error("Error: ", error.message);
         return res.status(500).send('Internal Server Error');
     }
 }

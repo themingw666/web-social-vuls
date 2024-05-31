@@ -141,16 +141,16 @@
                     
                 </div>
                 
-                <% for (const value of data1) { %>
+                <% for (let i = 0; i < data1.length; ++i) { %>
                 <!-- post text-->
                 <div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
 
                     <!-- post heading -->
                     <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                        <a href="/timeline?id=<%= value.authorid %> "> <img src="<%= value.avatar %>" alt="" class="w-9 h-9 rounded-full"> </a> 
+                        <a href="/timeline?id=<%= data1[i].authorid %> "> <img src="<%= data1[i].avatar %>" alt="" class="w-9 h-9 rounded-full"> </a> 
                         <div class="flex-1">
-                            <a href="/timeline?id=<%= value.authorid %> "> <h4 class="text-black dark:text-white"> <%= value.firstname %> <%= value.lastname %> </h4> </a> 
-                            <a href="/statuspost?id=<%= value.id %> "> <div class="text-xs text-gray-500 dark:text-white/80"> <%= value.post_time %> </div> </a>
+                            <a href="/timeline?id=<%= data1[i].authorid %> "> <h4 class="text-black dark:text-white"> <%= data1[i].firstname %> <%= data1[i].lastname %> </h4> </a> 
+                            <a href="/statuspost?id=<%= data1[i].id %> "> <div class="text-xs text-gray-500 dark:text-white/80"> <%= data1[i].post_time %> </div> </a>
                         </div>
 
                         <div class="-mr-1">
@@ -169,13 +169,13 @@
                     </div>
 
                     <div class="sm:px-4 p-2.5 pt-0">
-                        <p class="font-normal" style="word-wrap: break-word;"> <%= value.content %> </p>
+                        <p class="font-normal" style="word-wrap: break-word;"> <%= data1[i].content %> </p>
 
-                        <% if (value.url !== 'None') { %>
-                        <a href="<%= value.url %>"> 
+                        <% if (data1[i].url !== 'None') { %>
+                        <a href="<%= data1[i].url %>"> 
                             <figure class="figure mt-3">
-                                <img src="<%= value.view_image %>" class="figure-img-img-fluid-rounded" alt="Your image" style="width:100%; height:200px;">
-                                <figcaption class="figure-caption mt-2 text-sm text-gray-500" style="word-wrap: break-word;"> <%= value.description %> </figcaption>
+                                <img src="<%= data1[i].view_image %>" class="figure-img-img-fluid-rounded" alt="Your image" style="width:100%; height:200px;">
+                                <figcaption class="figure-caption mt-2 text-sm text-gray-500" style="word-wrap: break-word;"> <%= data1[i].description %> </figcaption>
                             </figure>
                         </a>
                         <% } %>
@@ -217,13 +217,13 @@
                             More Comment
                         </button>
 
-                        <% if (value.comment) { %>
-                        <% for (const value1 of value.comment) { %>
+                        <% if (data1[i].comment) { %>
+                        <% for (const value1 of data1[i].comment) { %>
                         <div class="flex items-start gap-3 relative">
                             <a href="/timeline?id=<%= value1.authorid %> "> <img src="<%= value1.avatar %>" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
                             <div class="flex-1">
                                 <a href="/timeline?id=<%= value1.authorid %> " class="text-black font-medium inline-block dark:text-white"> <%= value1.firstname %> <%= value1.lastname %> </a>
-                                <p class="mt-0.5"> <%= value1.content %> </p>
+                                <p class="mt-0.5"> <%- value1.content %> </p>
                             </div>
                         </div>
                         <% } %>
@@ -281,11 +281,20 @@
                         }
 
                         var content = textarea.value.trim();
-                        content = encodeURIComponent(content)
+
+                        function escapeHtml(unsafe) {
+                            return unsafe
+                                .replace(/&/g, "&amp;")
+                                .replace(/</g, "&lt;")
+                                .replace(/>/g, "&gt;")
+                                .replace(/"/g, "&quot;")
+                                .replace(/'/g, "&#039;");
+                        }
+                        
                         var index = Array.from(postElement.parentNode.children).indexOf(postElement);
                         
-                        let data1 = JSON.parse('<%- JSON.stringify(data1) %>')
-                        
+                        let data1 = JSON.parse('<%- JSON.stringify(data4) %>')
+
                         fetch('/commentpost', {
                             method: 'POST',
                             headers: {
@@ -308,7 +317,7 @@
                                 <a href="/timeline?id=<%= data2.avatar %> "> <img src="<%= data2.avatar %>" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
                                 <div class="flex-1">
                                     <a href="/timeline?id=<%= data2.avatar %> " class="text-black font-medium inline-block dark:text-white"> <%= data2.firstname %> <%= data2.lastname %> </a>
-                                    <p class="mt-0.5"> ${content} </p>
+                                    <p class="mt-0.5"> ${escapeHtml(content)} </p>
                                 </div>
                             </div>
                         `;
@@ -319,6 +328,7 @@
                             console.error('Không thể tìm thấy container của bình luận.');
                             return;
                         }
+
                         commentsContainer.innerHTML += commentHTML;
                         
                         textarea.value = '';
@@ -330,6 +340,8 @@
                     textarea.addEventListener('input', function() {
                         toggleSubmitButton(textarea, button);
                     });
+
+                    //window.onload = encodecontent;
                 });
             });
 
