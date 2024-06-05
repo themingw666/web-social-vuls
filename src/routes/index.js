@@ -34,6 +34,8 @@ import exploitRoute from "./exploitRoute.js"
 import accesslogRoute from "./accesslogRoute.js"
 import userlistRoute from "./userlistRoute.js"
 import messageDetailRoute from "./messageDetailRoute.js"
+import statuspostRoute from "./statuspostRoute.js"
+import commentpostRoute from "./commentpostRoute.js"
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -71,6 +73,8 @@ Route.use("/exploit", exploitRoute)
 Route.use("/access-log", accesslogRoute)
 Route.use("/userlist", userlistRoute)
 Route.use("/messageDetail", messageDetailRoute)
+Route.use("/statuspost", statuspostRoute)
+Route.use("/commentpost", commentpostRoute)
 Route.use("/", feedRoute)
 
 export default Route

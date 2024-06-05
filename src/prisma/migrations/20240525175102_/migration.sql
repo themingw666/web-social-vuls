@@ -10,7 +10,6 @@ CREATE TABLE "user" (
 
 -- CreateTable
 CREATE TABLE "user_info" (
-    "id" SERIAL NOT NULL,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "university" TEXT NOT NULL,
@@ -18,9 +17,7 @@ CREATE TABLE "user_info" (
     "job" TEXT NOT NULL,
     "avatar" TEXT NOT NULL,
     "role" INTEGER NOT NULL,
-    "userid" INTEGER NOT NULL,
-
-    CONSTRAINT "user_info_pkey" PRIMARY KEY ("id")
+    "userid" INTEGER NOT NULL
 );
 
 -- CreateTable
@@ -28,9 +25,27 @@ CREATE TABLE "post" (
     "id" SERIAL NOT NULL,
     "authorid" INTEGER NOT NULL,
     "content" TEXT NOT NULL,
-    "create_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "create_at" TEXT NOT NULL,
+    "checkin" TEXT NOT NULL,
+    "feeling" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "video" TEXT NOT NULL,
+    "viewingobject" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    "view_image" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
 
     CONSTRAINT "post_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "post_comment" (
+    "commentid" SERIAL NOT NULL,
+    "authorid" INTEGER NOT NULL,
+    "postid" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+
+    CONSTRAINT "post_comment_pkey" PRIMARY KEY ("commentid")
 );
 
 -- CreateTable
@@ -38,8 +53,7 @@ CREATE TABLE "story" (
     "id" SERIAL NOT NULL,
     "authorid" INTEGER NOT NULL,
     "content" TEXT NOT NULL,
-    "create_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "photoId" INTEGER NOT NULL,
+    "create_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "story_pkey" PRIMARY KEY ("id")
 );
@@ -48,7 +62,6 @@ CREATE TABLE "story" (
 CREATE TABLE "photo" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
-    "postid" INTEGER NOT NULL,
 
     CONSTRAINT "photo_pkey" PRIMARY KEY ("id")
 );
@@ -57,7 +70,6 @@ CREATE TABLE "photo" (
 CREATE TABLE "video" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
-    "postid" INTEGER NOT NULL,
 
     CONSTRAINT "video_pkey" PRIMARY KEY ("id")
 );
@@ -71,6 +83,17 @@ CREATE TABLE "vulnerable" (
     CONSTRAINT "vulnerable_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "message" (
+    "id" SERIAL NOT NULL,
+    "userSender_id" INTEGER NOT NULL,
+    "userRecipient_id" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+
+    CONSTRAINT "message_pkey" PRIMARY KEY ("id","userSender_id","userRecipient_id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
 
@@ -80,9 +103,6 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "user_info_userid_key" ON "user_info"("userid");
 
--- CreateIndex
-CREATE UNIQUE INDEX "story_photoId_key" ON "story"("photoId");
-
 -- AddForeignKey
 ALTER TABLE "user_info" ADD CONSTRAINT "user_info_userid_fkey" FOREIGN KEY ("userid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -90,13 +110,16 @@ ALTER TABLE "user_info" ADD CONSTRAINT "user_info_userid_fkey" FOREIGN KEY ("use
 ALTER TABLE "post" ADD CONSTRAINT "post_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "post_comment" ADD CONSTRAINT "post_comment_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "post_comment" ADD CONSTRAINT "post_comment_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "story" ADD CONSTRAINT "story_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "story" ADD CONSTRAINT "story_photoId_fkey" FOREIGN KEY ("photoId") REFERENCES "photo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "message" ADD CONSTRAINT "message_userSender_id_fkey" FOREIGN KEY ("userSender_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "photo" ADD CONSTRAINT "photo_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "video" ADD CONSTRAINT "video_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "message" ADD CONSTRAINT "message_userRecipient_id_fkey" FOREIGN KEY ("userRecipient_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

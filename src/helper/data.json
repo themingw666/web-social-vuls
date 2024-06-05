@@ -1,44 +1,67 @@
 {
- "user" : [
+  "user" : [
     {"id":1, "username" : "khanhdz","email" :"khanhdangkma2003@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
     {"id":2, "username" : "haodz","email"   :"haodz123@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
-    {"id":3, "username" : "minhdz","email" :"minhdz@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
+    {"id":666666, "username" : "minhdz","email" :"minhdz@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
     {"id":4, "username" : "phucdz","email" :"phucdz@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
     {"id":5, "username" : "trongdz","email" :"trongdz@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
-    {"id":6, "username" : "tuandz","email" :"tuandz@gmail.com","password":"0192023a7bbd73250516f069df18b500"}
+    {"id":6, "username" : "tuandz","email" :"tuandz@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
+    {"id":7, "username" : "laoliu","email" :"laoliu@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
+    {"id":8, "username" : "anhdaden","email" :"anhdaden@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
+    {"id":9, "username" : "ttthanhnga","email" :"ttthanhnga@gmail.com","password":"0192023a7bbd73250516f069df18b500"},
+    {"id":10, "username" : "chloeclem","email" :"chloeclem@gmail.com","password":"0192023a7bbd73250516f069df18b500"}
  ],
  "user_info" : [
    {"firstname" : "Đặng Ngọc","lastname" :"Khánh","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/oFaVY7j.png","role":0,"userid":1},
    {"firstname" : "Dương Quang","lastname" :"Hào","university":"PTIT","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/SujpfSJ.png","role":0,"userid":2},
    {"firstname" : "Lê","lastname" :"Trọng ","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/vNwRkQf.png","role":0,"userid":5},
-   {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","role":0,"userid":3},
+   {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","role":0,"userid":666666},
    {"firstname" : "Đặng","lastname" :"Phúc","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/q7bnxek.png","role":0,"userid":4},
-   {"firstname" : "Trần Thanh ","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","role":0,"userid":6}
+   {"firstname" : "Trần Thanh","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","role":0,"userid":6},
+   {"firstname" : "老","lastname" :"六","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/ALmaNhj.jpeg","role":0,"userid":7},
+   {"firstname" : "Anh Da","lastname" :"Đen","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/tP9aCYs.png","role":0,"userid":8},
+   {"firstname" : "Thái Thị","lastname" :"Thanh Nga","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/6fYEH7o.jpeg","role":0,"userid":9},
+   {"firstname" : "Chloe","lastname" :"Clem","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/plMoMhL.png","role":0,"userid":10}
  ],
  "post" : [
-    {"id":1,"authorid" :1,"content" :"Chào cả nhà mình là bệu đây!"},
-    {"id":2,"authorid" :1,"content" :"Helu cả nhà yêu dấu!"},
-    {"id":3,"authorid" :2,"content" :"Chào cả nhà mình là bệu đây!"},
-    {"id":4,"authorid" :3,"content" :"Chào cả nhà mình là bệu đây!"},
-    {"id":5,"authorid" :4,"content" :"Chào cả nhà mình là bệu đây!"},
-    {"id":6,"authorid" :5,"content" :"Chào cả nhà mình là bệu đây!"},
-    {"id":7,"authorid" :6,"content" :"Chào cả nhà mình là bệu đây!"}
- ],
- "photo" : [
-    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid" :1},
-    {"url" : "https://plus.unsplash.com/premium_photo-1675337267945-3b2fff5344a0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid" :2},
-    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid" :3},
-    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid" :4},
-    {"url" : "https://images.unsplash.com/photo-1710878872223-9beab35c04fc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid" :5},
-    {"url" : "https://images.unsplash.com/photo-1682687220801-eef408f95d71?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","postid":6}
- ],
- "video" : [
-    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :1},
-    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :2},
-    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :3},
-    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :4},
-    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z","postid" :5}
- ],
+  {"id":1,"authorid" :666666,"content" :"Chào cả nhà mình là bệu đây!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":2,"authorid" :10,"content" :"mmmmmmmmmmmm!!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":3,"authorid" :7,"content" :"helloworld(“print”)","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":4,"authorid" :666666,"content" :"https://www.youtube.com/watch?v=UcZqu2fgesc","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=UcZqu2fgesc","view_image": "https://i.ytimg.com/vi/UcZqu2fgesc/maxresdefault.jpg","description": "歌詞：https://www.kugeci.com/song/qm5YIn6v歐陽朵 - 失去才懂作詞：歐陽朵作曲：歐陽朵或許你腳步太快她出現的太意外我沒有預料陌生的傷害黑夜裡無聲的對白寂寞的我在發呆你永遠不懂我有多失落她長得太可愛氣質還有點呆不是小女神卻讓你格外的喜歡我多難堪我多不安這種背叛都怪我自己沒有太早的..."},
+  {"id":6,"authorid" :2,"content" :"Những thằng khác ngại tán em, .. tại ngán anh!!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":7,"authorid" :5,"content" :"Các bạn vào like, share video và subscribe cho channel của mình nha, cảm ơn các bạn rất nhiều","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://youtube.com/","view_image": "https://www.youtube.com/img/desktop/yt_1200.png","description": "Thưởng thức video và nhạc bạn yêu thích, tải nội dung do bạn sáng tạo lên và chia sẻ nội dung đó với gia đình, bạn bè cũng như mọi người trên YouTube."},
+  {"id":8,"authorid" :4,"content" :"Hình như tôi chiều các em quá, các em hư đúng không ? ?","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":9,"authorid" :1,"content" :"https://www.youtube.com/watch?v=poyi2a5pQsQ","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=poyi2a5pQsQ","view_image": "https://i.ytimg.com/vi/poyi2a5pQsQ/maxresdefault.jpg","description": "Welcome to Việt Mix TVNONSTOP 2024 MIXTAPE | NHẠC TRẺ REMIX 2024 HAY NHẤT HIỆN NAY | NONSTOP 2024 VINAHOUSE BASS CỰC MẠNH #nonstop #vinahouse #nhactreremix📸..."},
+  {"id":10,"authorid" :6,"content" :"Mọi người lưu ý nha https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","view_image": "http://viettelidc.com.vn//uploadimage/Root/root/21-01-3-cach-phong-chong-ransomware-tan-cong-vo-cung-hieu-qua.png","description": "Công ty TNHH Viettel - CHT"},
+  {"id":11,"authorid" :666666,"content" :"“Người bi quan nhìn thấy khó khăn ở mọi cơ hội. Người lạc quan nhìn thấy cơ hội ở mọi khó khăn.”","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+  {"id":12,"authorid" :9,"content" :"tus đc 100 tym Nga sẽ livestream review mực bento nha m.n","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"}
+
+],
+"post_comment" : [
+ {"authorid" :666666,"postid":12,"content" :"mọi người thả tym đi!!"},
+ {"authorid" :666666,"postid":12,"content" :"<3 <3 <3"},
+ {"authorid" :1,"postid":6,"content" :"gắt!!!"},
+ {"authorid" :666666,"postid":6,"content" :"kHá QuÁ"},
+ {"authorid" :666666,"postid":7,"content" :"<3 <3"},
+ {"authorid" :2,"postid":8,"content" :"bao nhiêu em? cho con số cụ thể coi"},
+ {"authorid" :2,"postid":11,"content" :"hay quá"},
+ {"authorid" :4,"postid":11,"content" :"tuyệt vời!!"}
+],
+"photo" : [
+  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  {"url" : "https://plus.unsplash.com/premium_photo-1675337267945-3b2fff5344a0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  {"url" : "https://images.unsplash.com/photo-1710878872223-9beab35c04fc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  {"url" : "https://images.unsplash.com/photo-1682687220801-eef408f95d71?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+],
+"video" : [
+  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"}
+],
  "vulnerable": [
    {"id": 1, "name": "SQL Injection", "status": "None"},
    {"id": 2, "name": "SSRF", "status": "None"},

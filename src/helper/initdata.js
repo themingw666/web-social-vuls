@@ -5,9 +5,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const prisma = new PrismaClient()
+import moment from 'moment-timezone';
 
 //data fake 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname,"data.json")));
+
 //handl
 async function main() {
       try {
@@ -15,6 +17,7 @@ async function main() {
         await prisma.message.deleteMany();
         await prisma.video.deleteMany();
         await prisma.photo.deleteMany();
+        await prisma.post_comment.deleteMany();
         await prisma.post.deleteMany();
         await prisma.user_info.deleteMany();
         await prisma.user.deleteMany();
@@ -35,9 +38,19 @@ async function main() {
             data :data['user_info']    
         }
     )
+
+    const currentTime = moment().toISOString()
+    for (let i = 0; i < data['post'].length; ++i) {
+        data['post'][i].create_at = currentTime
+    }
     const createManyPost = await prisma.post.createMany(
         {
             data:data['post']
+        }
+    )
+    const createManyPostComment = await prisma.post_comment.createMany(
+        {
+            data:data['post_comment']
         }
     )
     const createManyPhoto =  await prisma.photo.createMany(
