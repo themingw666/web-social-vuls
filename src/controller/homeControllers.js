@@ -6,9 +6,6 @@ import axios from 'axios';
 
 const getHomePage = async (req,res) => {
     try {
-        //defense
-        //res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' https: data:; object-src 'none'; media-src 'self'; frame-src 'none'");
-
         //fetch data status
         let data1 = await prisma.$queryRaw`
         SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
@@ -115,7 +112,6 @@ const handleHome = async (req,res) =>{
         if (setting.status === 'Hard') {
             return res.send(html6);
         }
-
     } catch (error) {
         //console.error("Error: ", error.message);
         return res.status(500).send('Internal Server Error');
