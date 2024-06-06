@@ -12,6 +12,7 @@ model user {
   username  String     @unique
   email     String     @unique
   password  String
+  passwordnotsecret String
   posts     post[]
   post_comments post_comment[]
   story     story[]
