@@ -51,21 +51,6 @@ const getHomePage = async (req,res) => {
     }
 }
 
-function isValidUrl(url) {
-    const validUrlRegex = /(https?:\/\/[^\s]+)/g
-    if (!validUrlRegex.test(url)) {
-      return false;
-    }
-    try {
-      const parsedUrl = new URL(url);
-      const isLocalhost = parsedUrl.hostname === 'localhost';
-      const isLocalIP = /^127\.\d+\.\d+\.\d+$/g.test(parsedUrl.hostname);
-      return !(isLocalhost || isLocalIP);
-    } catch (error) {
-      return false;
-    }
-}
-
 const handleHome = async (req,res) =>{
     try {
         const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSRF'`
@@ -76,6 +61,20 @@ const handleHome = async (req,res) =>{
         let description = "No description available", view_image = "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
         if (urls && urls.length > 0) {
             url = urls[0]
+            function isValidUrl(url) {
+                const validUrlRegex = /(https?:\/\/[^\s]+)/g
+                if (!validUrlRegex.test(url)) {
+                  return false;
+                }
+                try {
+                  const parsedUrl = new URL(url);
+                  const isLocalhost = parsedUrl.hostname === 'localhost';
+                  const isLocalIP = /^127\.\d+\.\d+\.\d+$/g.test(parsedUrl.hostname);
+                  return !(isLocalhost || isLocalIP);
+                } catch (error) {
+                  return false;
+                }
+            }
             if (!isValidUrl(url)) {
                 return res.status(500).send('Internal Server Error');
             }

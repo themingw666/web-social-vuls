@@ -31,6 +31,8 @@ const getStatusPage = async (req,res) => {
         //fetch data status
         let data1 = await prisma.$queryRaw`
         SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.id=${id1}` 
+        let data4 = await prisma.$queryRaw`
+        SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.id=${id1}` 
         //fetch my data
         let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`
         //fetch comment data
@@ -62,7 +64,7 @@ const getStatusPage = async (req,res) => {
                 data1[i].post_time = `${seconds} seconds ago`;
             }
         }
-        return res.render('statuspost', {data, data1, data2: data2[0]})
+        return res.render('statuspost', {data, data1, data2: data2[0], data4})
         
     } catch (error) {
         //console.error("Error: ", error.message);
