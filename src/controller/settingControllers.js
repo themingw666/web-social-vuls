@@ -6,6 +6,7 @@ import path from "path"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 import jwt from 'jsonwebtoken'
+import validator from 'validator'
 
 const getSettingPage = async (req,res) =>{
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='Broken Authentication'`
@@ -39,13 +40,13 @@ const getSettingPage = async (req,res) =>{
                 typ: 'JWT',
             }
             const payload = {
-            id: id1,
-            username: data1.username,
+                id: id1,
+                username: data1.username,
             }
             const privateKey = fs.readFileSync(path.join(__dirname,'../helper/key/privatekey.pem'),'utf-8')
             const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
             res.cookie("jwt", token, {
-                httpOnly: false,    
+                httpOnly: true,    
                 maxAge: 10000 * 1000,
             });
             return res.render('setting', {data, data1})
@@ -113,4 +114,62 @@ const getSettingPage = async (req,res) =>{
     }
 }
 
-export default {getSettingPage}
+const postSettingPage = async (req,res) => {
+    try {
+        const {username, email} = req.body
+        let data
+
+        data = await prisma.user.findUnique({
+            where: {
+            email: email,
+            },
+        })
+        if (validator.isEmail(email) && !data) {
+            await prisma.user.update({
+                where: {
+                    id: req.decoded.id,
+                },
+                data: {
+                    email: email,
+                },
+            })
+        }
+        data = await prisma.user.findUnique({
+            where: {
+            username: username,
+            },
+        })
+        if (username && !data) {
+            await prisma.user.update({
+                where: {
+                    id: req.decoded.id,
+                },
+                data: {
+                    username: username,
+                },
+            })
+            
+            //Re-sign
+            const header = {
+                alg: 'RS256',
+                typ: 'JWT',
+            }
+            const payload = {
+                id: req.decoded.id,
+                username: username,
+            }
+            const privateKey = fs.readFileSync(path.join(__dirname,'../helper/key/privatekey.pem'),'utf-8')
+            const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
+            res.cookie("jwt", token, {
+                httpOnly: true,    
+                maxAge: 10000 * 1000,
+            });
+        }
+        return res.redirect('profile/setting');
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export default {getSettingPage, postSettingPage}

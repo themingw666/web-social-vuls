@@ -76,7 +76,9 @@
                         
     
                         <!-- tab user basic info -->
+                        
                         <div>
+                        <form method="post" action="/setting">
     
                             <div>
                                 
@@ -85,14 +87,14 @@
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Username </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <input type="text" placeholder="<%= data1.username %>" class="lg:w-1/2 w-full">
+                                            <input type="text" name="username" placeholder="<%= data1.username %>" class="lg:w-1/2 w-full">
                                         </div>
                                     </div>
                                     
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Email </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <input type="text" placeholder="<%= data1.email %>" class="w-full">
+                                            <input type="email" name="email" placeholder="<%= data1.email %>" class="w-full">
                                         </div>
                                     </div> 
             
@@ -137,14 +139,15 @@
                                 </div>
       
                                 <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
-                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
+                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancel</button>
                                     <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Save <span class="ripple-overlay"></span></button>
                                 </div>
                                 
                             </div> 
-    
+
+                        </form>
                         </div>
-    
+                        
                         <!-- tab socialinks -->   
                         <div>
     
