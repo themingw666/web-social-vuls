@@ -17,13 +17,19 @@ Go to: [localhost:3000/fakedata](http:localhost:3000/fakedata)
 ### Step 4
 Go to: [localhost:3000/settings](http:localhost:3000/settings)
 
-![Alt text](src/public/assets/images/image.png)![alt text](image.png)
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image.png" width="666px">
+</p>
 
 ## Review website and vulnerabilities
 
-![Alt text](src/public/assets/images/image2.png)![alt text](image2.png)
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image2.png" width="666px">
+</p>
 
-![Alt text](src/public/assets/images/image1.png)![alt text](image1.png)
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image1.png" width="666px">
+</p>
 
 ### SQL Injection
 - Easy: Search function - http://localhost:3000/search?name=minh
