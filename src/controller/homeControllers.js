@@ -3,6 +3,7 @@ const prisma = new PrismaClient()
 import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
 import axios from 'axios';
+import randomInt from 'random-int';
 
 const getHomePage = async (req,res) => {
     try {
@@ -106,8 +107,8 @@ const handleHome = async (req,res) =>{
             }
         }
         const currentTime = moment().toISOString()
-        await prisma.$queryRaw`INSERT INTO \"post\" (authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
-        VALUES (${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
+        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
+        VALUES (${randomInt(1, 1000000)}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
         if (setting.status === 'Hard') {
             return res.send(html6);
         }
