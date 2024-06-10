@@ -22,7 +22,7 @@ const handleLogin = async (req,res) =>{
       if (setting.status === 'Hard'){
        result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user\" where email='${email}'`)
       } 
-      else if (setting.status === 'None') {
+      else{
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 

@@ -36,6 +36,8 @@ import userlistRoute from "./userlistRoute.js"
 import messageDetailRoute from "./messageDetailRoute.js"
 import statuspostRoute from "./statuspostRoute.js"
 import commentpostRoute from "./commentpostRoute.js"
+import adminRoute from "./admin-panelRoute.js"
+import Adminmiddlware from "../middleware/isAdmin.js"
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -75,6 +77,7 @@ Route.use("/userlist", userlistRoute)
 Route.use("/messageDetail", messageDetailRoute)
 Route.use("/statuspost", statuspostRoute)
 Route.use("/commentpost", commentpostRoute)
+Route.use("/admin",adminRoute)
 Route.use("/", feedRoute)
 
 export default Route
