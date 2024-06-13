@@ -10,6 +10,9 @@ import methodOverride from "method-override"
 import cookieParser from 'cookie-parser';
 import { pagedata } from './config/pagedata.js'
 import initWebsocket from "./config/websocket.js"
+import { csrfProtection } from './middleware/csrfProtection.js'
+import {PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -25,6 +28,12 @@ app.use(cookieParser());
 //authen middleware
 app.use(userAuth)
 app.use(pagedata)
+
+const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
+if (setting.status === 'None') {
+    app.use(csrfProtection);
+}
+
 app.use(methodOverride('_method'))
 
 //route

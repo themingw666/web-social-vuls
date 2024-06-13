@@ -9,6 +9,66 @@ import jwt from 'jsonwebtoken'
 import validator from 'validator'
 
 const getSettingPage = async (req,res) =>{
+    //get method - change setting
+    const [setting1] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
+    if (setting1.status === 'Hard'){
+        const {username, email} = req.query
+        if (username != null && email != null) {
+            let data
+            if (email) {
+                data = await prisma.user.findUnique({
+                    where: {
+                    email: email,
+                    },
+                })
+                if (validator.isEmail(email) && !data) {
+                    await prisma.user.update({
+                        where: {
+                            id: req.decoded.id,
+                        },
+                        data: {
+                            email: email,
+                        },
+                    })
+                }
+            }
+            if (username) {
+                data = await prisma.user.findUnique({
+                    where: {
+                    username: username,
+                    },
+                })
+                if (!data) {
+                    await prisma.user.update({
+                        where: {
+                            id: req.decoded.id,
+                        },
+                        data: {
+                            username: username,
+                        },
+                    })
+                }
+            
+                //Re-sign
+                const header = {
+                    alg: 'RS256',
+                    typ: 'JWT',
+                }
+                const payload = {
+                    id: req.decoded.id,
+                    username: username,
+                }
+                const privateKey = fs.readFileSync(path.join(__dirname,'../helper/key/privatekey.pem'),'utf-8')
+                const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
+                res.cookie("jwt", token, {
+                    httpOnly: true,    
+                    maxAge: 10000 * 1000,
+                });
+            }
+            return res.redirect('profile/setting');
+        }
+    }
+
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='Broken Authentication'`
     if (setting.status === 'Easy'){
         const { id } = req.query
@@ -115,10 +175,33 @@ const getSettingPage = async (req,res) =>{
 }
 
 const postSettingPage = async (req,res) => {
+    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
     try {
+        let referer = req.headers['referer']
+        if (setting.status === 'Easy'){
+        }
+        else if (setting.status === 'Medium'){
+            if (referer) {
+                const urlObject = new URL(referer);
+                if (urlObject.host !== req.get('host') && referer.hostname !== req.originalUrl){
+                    return res.status(404).send('Invalid referer header');
+                }
+            }
+        }
+        else {
+            /*if (referer) {
+                const urlObject = new URL(referer);
+                if (urlObject.host !== req.get('host') && referer.hostname !== req.originalUrl){
+                    return res.status(404).send('Invalid referer header');
+                }
+            }
+            else {
+                return res.status(404).send('Referer header not found!');
+            }*/
+        }
+
         const {username, email} = req.body
         let data
-
         data = await prisma.user.findUnique({
             where: {
             email: email,

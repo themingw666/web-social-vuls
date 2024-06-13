@@ -74,6 +74,7 @@ const handleLogin = async (req,res) =>{
         res.cookie("jwt", token, {
           httpOnly: false,
           maxAge: 10000 * 1000,
+          sameSite: 'strict',
         });
         return res.redirect('/')
       }
