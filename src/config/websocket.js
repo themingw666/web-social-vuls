@@ -4,7 +4,7 @@ import cheerio  from "cheerio"
 import {check_url_easy,check_url_standard} from "../helper/validate/validate-url.js"
 const initWebsocket = () => {
     // Create a WebSocket server attached to the HTTP server
-const wss = new WebSocketServer({ port:8080 });
+const wss = new WebSocketServer({ port:8081 });
 
 const clients = {};
 
