@@ -8,8 +8,6 @@ const csrfProtection = async (req, res, next) => {
         //secure: true, // HTTPS
         sameSite: 'strict'
     });
-    
-    res.setHeader('X-CSRF-Token', token);
     next();
 };
 

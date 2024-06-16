@@ -70,6 +70,7 @@ const getSettingPage = async (req,res) =>{
     }
 
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='Broken Authentication'`
+    const csrftoken = {token :req.cookies.csrfToken}
     if (setting.status === 'Easy'){
         const { id } = req.query
         if (!id) {
@@ -109,7 +110,7 @@ const getSettingPage = async (req,res) =>{
                 httpOnly: true,    
                 maxAge: 10000 * 1000,
             });
-            return res.render('setting', {data, data1})
+            return res.render('setting', {data, data1,csrftoken})
         } catch (error) {
             return res.render('timelineerror', {data: "User not found"})
         }
@@ -139,7 +140,7 @@ const getSettingPage = async (req,res) =>{
                 next()
             
             if (id1 != req.decoded.id){
-                res.render('setting', { data, data1 }, (err, html) => {
+                res.render('setting', { data, data1,csrftoken }, (err, html) => {
                     if (err) {
                         res.status(500).send('An error occurred while rendering the page');
                     } else {
@@ -150,7 +151,7 @@ const getSettingPage = async (req,res) =>{
                 });
             }
             else {
-                return res.render('setting', {data, data1})
+                return res.render('setting', {data, data1,csrftoken})
             }
         } catch (error) {
             return res.render('timelineerror', {data: "User not found"})
@@ -170,7 +171,7 @@ const getSettingPage = async (req,res) =>{
         if (data === null || data1 === null)
             next()
         
-        return res.render('setting', {data, data1})
+        return res.render('setting', {data, data1,csrftoken})
     }
 }
 
@@ -178,7 +179,13 @@ const postSettingPage = async (req,res) => {
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
     try {
         let referer = req.headers['referer']
-        if (setting.status === 'Easy'){
+        if (setting.status === 'None' || setting.status === 'Easy'){
+            if( !(req.body.csrftoken != undefined && req.cookies.csrfToken === req.body.csrftoken) ){
+                  
+                return res.send('Dont process without csrftoken')
+               
+            }
+
         }
         else if (setting.status === 'Medium'){
             if (referer) {
@@ -187,17 +194,6 @@ const postSettingPage = async (req,res) => {
                     return res.status(404).send('Invalid referer header');
                 }
             }
-        }
-        else {
-            /*if (referer) {
-                const urlObject = new URL(referer);
-                if (urlObject.host !== req.get('host') && referer.hostname !== req.originalUrl){
-                    return res.status(404).send('Invalid referer header');
-                }
-            }
-            else {
-                return res.status(404).send('Referer header not found!');
-            }*/
         }
 
         const {username, email} = req.body
@@ -244,7 +240,7 @@ const postSettingPage = async (req,res) => {
             const privateKey = fs.readFileSync(path.join(__dirname,'../helper/key/privatekey.pem'),'utf-8')
             const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
             res.cookie("jwt", token, {
-                httpOnly: true,    
+                httpOnly: false,    
                 maxAge: 10000 * 1000,
             });
         }

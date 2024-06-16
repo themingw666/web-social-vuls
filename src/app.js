@@ -29,11 +29,6 @@ app.use(cookieParser());
 app.use(userAuth)
 app.use(pagedata)
 
-const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
-if (setting.status === 'None') {
-    app.use(csrfProtection);
-}
-
 app.use(methodOverride('_method'))
 
 //route
