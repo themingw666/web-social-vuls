@@ -13,6 +13,7 @@ model user {
   email     String     @unique
   password  String
   posts     post[]
+  post_comments post_comment[]
   story     story[]
   sentMessages       message[] @relation("SentMessages")
   receivedMessages   message[] @relation("ReceivedMessages")
@@ -20,7 +21,6 @@ model user {
 }
 
 model user_info {
-  id         Int    @id @default(autoincrement())
   firstname  String
   lastname   String
   university String
@@ -33,38 +33,47 @@ model user_info {
 }
 
 model post {
-  id        Int      @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
+  authorid      Int
+  content       String
+  create_at     String
+  checkin       String
+  feeling       String
+  image         String
+  video         String
+  viewingobject String
+  url           String
+  view_image    String
+  description   String
+  comments      post_comment[]
+  author        user   @relation(fields: [authorid], references: [id])
+}
+
+model post_comment {
+  commentid Int    @id @default(autoincrement())
   authorid  Int
+  postid    Int
   content   String
-  create_at DateTime @default(now())
-  photoPost photo[]
-  author    user     @relation(fields: [authorid], references: [id])
-  videoPost video[]
+  comment   post   @relation(fields: [postid], references: [id])
+  author    user   @relation(fields: [authorid], references: [id])
 }
 
 model story {
-  id         Int      @id @default(autoincrement())
-  authorid   Int
-  content    String
-  create_at  DateTime @default(now())
-  photoId    Int      @unique
-  author     user     @relation(fields: [authorid], references: [id])
-  photoStory photo    @relation(fields: [photoId], references: [id])
+  id        Int      @id @default(autoincrement())
+  authorid  Int
+  content   String
+  create_at DateTime
+  author    user     @relation(fields: [authorid], references: [id])
 }
 
 model photo {
-  id     Int    @id @default(autoincrement())
-  url    String
-  postid Int
-  postof post   @relation(fields: [postid], references: [id])
-  story  story?
+  id  Int    @id @default(autoincrement())
+  url String
 }
 
 model video {
-  id     Int    @id @default(autoincrement())
-  url    String
-  postid Int
-  postof post   @relation(fields: [postid], references: [id])
+  id  Int    @id @default(autoincrement())
+  url String
 }
 
 model vulnerable {
@@ -72,6 +81,7 @@ model vulnerable {
   name   String
   status String
 }
+
 model message {
    id     Int     @default(autoincrement())
    userSender_id  Int 
