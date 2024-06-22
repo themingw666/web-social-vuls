@@ -8,16 +8,16 @@ datasource db {
 }
 
 model user {
-  id        Int        @id @default(autoincrement())
-  username  String     @unique
-  email     String     @unique
-  password  String
-  posts     post[]
-  post_comments post_comment[]
-  story     story[]
-  sentMessages       message[] @relation("SentMessages")
-  receivedMessages   message[] @relation("ReceivedMessages")
-  user_info user_info?
+  id               Int            @id @default(autoincrement())
+  username         String         @unique
+  email            String         @unique
+  password         String
+  posts            post[]
+  post_comments    post_comment[]
+  story            story[]
+  sentMessages     message[]      @relation("SentMessages")
+  receivedMessages message[]      @relation("ReceivedMessages")
+  user_info        user_info?
 }
 
 model user_info {
@@ -27,13 +27,13 @@ model user_info {
   live       String
   job        String
   avatar     String
-  role       Int
-  userid     Int    @unique
-  user       user   @relation(fields: [userid], references: [id])
+  role       user_role[]
+  userid     Int         @unique
+  user       user        @relation(fields: [userid], references: [id])
 }
 
 model post {
-  id            Int    @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   authorid      Int
   content       String
   create_at     String
@@ -46,7 +46,7 @@ model post {
   view_image    String
   description   String
   comments      post_comment[]
-  author        user   @relation(fields: [authorid], references: [id])
+  author        user           @relation(fields: [authorid], references: [id])
 }
 
 model post_comment {
@@ -83,12 +83,44 @@ model vulnerable {
 }
 
 model message {
-   id     Int     @default(autoincrement())
-   userSender_id  Int 
-   userSender    user     @relation( "SentMessages",fields: [userSender_id], references: [id])
-   userRecipient_id Int
-   userRecipient  user     @relation( "ReceivedMessages",fields: [userRecipient_id], references: [id])
-   content   String 
-   type    String  
-   @@id([id,userSender_id,userRecipient_id])
+  id               Int    @default(autoincrement())
+  userSender_id    Int
+  userSender       user   @relation("SentMessages", fields: [userSender_id], references: [id])
+  userRecipient_id Int
+  userRecipient    user   @relation("ReceivedMessages", fields: [userRecipient_id], references: [id])
+  content          String
+  type             String
+
+  @@id([id, userSender_id, userRecipient_id])
+}
+
+model roles {
+  id        Int               @id
+  role_name String
+  role      role_permission[]
+  user      user_role[]
+}
+
+model permission {
+  id       Int               @id
+  per_name String
+  per      role_permission[]
+}
+
+model role_permission {
+  role_id Int
+  per_id  Int
+  role    roles      @relation(fields: [role_id], references: [id])
+  per     permission @relation(fields: [per_id], references: [id])
+
+  @@id([role_id, per_id])
+}
+
+model user_role {
+  user_id Int
+  role_id Int
+  user    user_info @relation(fields: [user_id], references: [userid])
+  role    roles     @relation(fields: [role_id], references: [id])
+
+  @@id([user_id, role_id])
 }
