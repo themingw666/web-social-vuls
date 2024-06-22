@@ -6,6 +6,7 @@ async function mytimeline(req,res){
 }
 
 async function logout(req,res){
+    res.clearCookie('csrfToken')
     return res.clearCookie('jwt').redirect('/form-login')
 }
 
@@ -16,4 +17,14 @@ async function pagedata(req,res){
     res.json({ fullname: fullname, username: username, avatar: avatar })
 }
 
-export default {mytimeline, logout, pagedata}
+async function setting(req,res){
+    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='Broken Authentication'`
+    if (setting.status === 'Easy' || setting.status === 'Medium' ){
+        return res.redirect(`/setting?id=${req.decoded.id}`)
+    }
+    else {
+        return res.redirect(`/setting`)
+    }
+}
+
+export default {mytimeline, logout, pagedata, setting}

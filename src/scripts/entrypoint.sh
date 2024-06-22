@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 while ! npx prisma migrate dev 2>&1; do
     echo "Makemigrations"

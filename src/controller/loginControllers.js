@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from "fs"
 import { fileURLToPath } from 'url'
 import path from "path"
+import csrf from "csrf"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const prisma = new PrismaClient()
@@ -71,7 +72,20 @@ const handleLogin = async (req,res) =>{
       else { //Medium and None
         token = jwt.sign(payload, privateKey, { algorithm: 'RS256', header });
       }
+          
         res.cookie("jwt", token, {
+          httpOnly: false,
+          maxAge: 10000 * 1000,
+        });
+        const [settingCsrf] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
+        const tokens = new csrf();
+        const secret = process.env.Secretcsrf; 
+        let csrfToken = tokens.create(secret);
+        if(settingCsrf.status === 'Easy'){
+          csrfToken= "aebh==787ashsvvlqxnah"
+        }
+        
+        res.cookie("csrfToken", csrfToken, {
           httpOnly: false,
           maxAge: 10000 * 1000,
         });

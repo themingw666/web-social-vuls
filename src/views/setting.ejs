@@ -14,7 +14,7 @@
                         <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0"> 
     
                             <label for="file" class="cursor-pointer">
-                                <img id="img" src="assets/images/avatars/avatar-3.jpg" class="object-cover w-full h-full rounded-full" alt=""/>
+                                <img id="img" src="<%= data.avatar %>" class="object-cover w-full h-full rounded-full" alt=""/>
                                 <input type="file" id="file" class="hidden" />
                             </label>
       
@@ -32,8 +32,8 @@
                         </div>
     
                         <div class="flex-1">
-                            <h3 class="md:text-xl text-base font-semibold text-black dark:text-white"> Monroe Parker </h3>
-                            <p class="text-sm text-blue-600 mt-1 font-normal">@Monroe</p>
+                            <h3 class="md:text-xl text-base font-semibold text-black dark:text-white"> <%= data.firstname %> <%= data.lastname %> </h3>
+                            <p class="text-sm text-blue-600 mt-1 font-normal">@<%= data1.username %></p>
                         </div>
     
                         <button class="inline-flex items-center gap-1 py-1 pl-2.5 pr-3 rounded-full bg-slate-50 border-2 border-slate-100 dark:text-white dark:bg-slate-700" type="button" aria-haspopup="true" aria-expanded="false"> 
@@ -76,7 +76,9 @@
                         
     
                         <!-- tab user basic info -->
+                        
                         <div>
+                        <form method="post" action="/setting">
     
                             <div>
                                 
@@ -85,14 +87,15 @@
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Username </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <input type="text" placeholder="Monroe" class="lg:w-1/2 w-full">
+                                            <input type="text" name="username" placeholder="<%= data1.username %>" class="lg:w-1/2 w-full">
                                         </div>
                                     </div>
                                     
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Email </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <input type="text" placeholder="info@mydomain.com" class="w-full">
+                                            <input type="email" name="email" placeholder="<%= data1.email %>" class="w-full">
+                                            <input type="hidden" name="csrftoken" value="<%= csrftoken.token %>" class="w-full">
                                         </div>
                                     </div> 
             
@@ -137,14 +140,15 @@
                                 </div>
       
                                 <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
-                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
+                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancel</button>
                                     <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Save <span class="ripple-overlay"></span></button>
                                 </div>
                                 
                             </div> 
-    
+
+                        </form>
                         </div>
-    
+                        
                         <!-- tab socialinks -->   
                         <div>
     
@@ -568,7 +572,7 @@
                                     <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
                                         <label class="md:w-40 text-right"> Current Password </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <input type="password" placeholder="******" class="w-full">
+                                            <input type="password" placeholder="******" value="<%= data1.passwordnotsecret %>" class="w-full">
                                         </div>
                                     </div>
                                   

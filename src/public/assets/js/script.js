@@ -11,7 +11,7 @@ if(path== 'messages'){
 
     //initial socket 
     let ws
-    ws = new WebSocket('ws://localhost:8080','echo-protocol');
+    ws = new WebSocket('ws://localhost:8081','echo-protocol');
     ws.onopen = function() {
         console.log('WebSocket connected');
         ws.send(JSON.stringify({type: 'register', userId : mainUserID}))

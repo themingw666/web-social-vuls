@@ -230,7 +230,7 @@
                                 </div>
                                 
     
-                                <button id="postcomment" type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Replay</button>
+                                <button id="poststatuspost" type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Replay</button>
                             </div> 
                             </form>
 
@@ -241,7 +241,7 @@
                     //post comment
                     document.addEventListener("DOMContentLoaded", function () {
                         // Nghe xem comment đang đứng ở post nào?
-                        document.querySelectorAll('button#postcomment').forEach(button => {
+                        document.querySelectorAll('button#poststatuspost').forEach(button => {
                             button.disabled = true;
                             button.addEventListener('click', function(event) {
                                 
@@ -257,10 +257,19 @@
         
                                 var content = textarea.value.trim();
         
+                                function escapeHtml(unsafe) {
+                                    return unsafe
+                                        .replace(/&/g, "&amp;")
+                                        .replace(/</g, "&lt;")
+                                        .replace(/>/g, "&gt;")
+                                        .replace(/"/g, "&quot;")
+                                        .replace(/'/g, "&#039;");
+                                }
+                                
                                 var index = Array.from(postElement.parentNode.children).indexOf(postElement);
                                 
-                                let data1 = JSON.parse('<%- JSON.stringify(data1) %>')
-                                
+                                let data1 = JSON.parse('<%- JSON.stringify(data4) %>')
+        
                                 fetch('/commentpost', {
                                     method: 'POST',
                                     headers: {
@@ -283,7 +292,7 @@
                                         <a href="/timeline?id=<%= data2.avatar %> "> <img src="<%= data2.avatar %>" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
                                         <div class="flex-1">
                                             <a href="/timeline?id=<%= data2.avatar %> " class="text-black font-medium inline-block dark:text-white"> <%= data2.firstname %> <%= data2.lastname %> </a>
-                                            <p class="mt-0.5"> ${content} </p>
+                                            <p class="mt-0.5"> ${escapeHtml(content)} </p>
                                         </div>
                                     </div>
                                 `;
@@ -294,6 +303,7 @@
                                     console.error('Không thể tìm thấy container của bình luận.');
                                     return;
                                 }
+        
                                 commentsContainer.innerHTML += commentHTML;
                                 
                                 textarea.value = '';
@@ -305,6 +315,8 @@
                             textarea.addEventListener('input', function() {
                                 toggleSubmitButton(textarea, button);
                             });
+        
+                            //window.onload = encodecontent;
                         });
                     });
         
@@ -315,7 +327,7 @@
                             button.disabled = false;
                         }
                     }
-                    
+        
                 </script>
 
                     </div>
