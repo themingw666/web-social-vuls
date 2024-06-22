@@ -12,16 +12,18 @@
     {"id":10, "username" : "chloeclem","email" :"chloeclem@gmail.com","password":"0192023a7bbd73250516f069df18b500","passwordnotsecret":"admin123"}
  ],
  "user_info" : [
-   {"firstname" : "Đặng Ngọc","lastname" :"Khánh","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/oFaVY7j.png","role":0,"userid":1},
-   {"firstname" : "Dương Quang","lastname" :"Hào","university":"PTIT","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/SujpfSJ.png","role":0,"userid":2},
-   {"firstname" : "Lê","lastname" :"Trọng ","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/vNwRkQf.png","role":0,"userid":5},
-   {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","role":0,"userid":666666},
-   {"firstname" : "Đặng","lastname" :"Phúc","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/q7bnxek.png","role":0,"userid":4},
-   {"firstname" : "Trần Thanh","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","role":0,"userid":6},
-   {"firstname" : "老","lastname" :"六","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/ALmaNhj.jpeg","role":0,"userid":7},
-   {"firstname" : "Anh Da","lastname" :"Đen","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/tP9aCYs.png","role":0,"userid":8},
-   {"firstname" : "Thái Thị","lastname" :"Thanh Nga","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/6fYEH7o.jpeg","role":0,"userid":9},
-   {"firstname" : "Chloe","lastname" :"Clem","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/plMoMhL.png","role":0,"userid":10}
+   {"firstname" : "Đặng Ngọc","lastname" :"Khánh","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/oFaVY7j.png","userid":1},
+   {"firstname" : "Dương Quang","lastname" :"Hào","university":"PTIT","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/SujpfSJ.png","userid":2},
+   {"firstname" : "Lê","lastname" :"Trọng ","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/vNwRkQf.png","userid":5},
+   {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","userid":666666},
+   {"firstname" : "Đặng","lastname" :"Phúc","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/q7bnxek.png","userid":4},
+   {"firstname" : "Trần Thanh","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","userid":6},
+   {"firstname" : "老","lastname" :"六","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/ALmaNhj.jpeg","userid":7},
+   {"firstname" : "Anh Da","lastname" :"Đen","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/tP9aCYs.png","userid":8},
+   {"firstname" : "Thái Thị","lastname" :"Thanh Nga","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/6fYEH7o.jpeg","userid":9},
+   {"firstname" : "Chloe","lastname" :"Clem","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/plMoMhL.png","userid":10},
+   {"firstname" : "hiếu","lastname" :"Cô Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/lWz8iBn.jpeg","userid":12},
+   {"firstname" : "dung","lastname" :"Độc Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/05iLZJy.jpeg","userid":11}
  ],
  "post" : [
   {"id":1,"authorid" :666666,"content" :"Chào cả nhà mình là bệu đây!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
@@ -85,5 +87,19 @@
    {"id":4,"userSender_id" : 2 , "userRecipient_id" : 1 , "content" : "Cứ gọi là ok anh ơi" , "type" : "text"},
    {"id":5,"userSender_id" : 1 , "userRecipient_id" : 6 , "content" : "Cho em vay 20 triệu tết em trả" , "type" : "text"},
    {"id":6,"userSender_id" : 6 , "userRecipient_id" : 1 , "content" : "Tin chuẩn chưa" , "type" : "text"}
+ ],
+ "roles" : [
+  {"id":0,"role_name":"user"},
+  {"id":1,"role_name":"admin"}
+ ],
+ "permissions" : [
+  {"id":0,"per_name":"view"},
+  {"id":1,"per_name":"delete_user"}
+ ],
+ "role_permission" : [
+  {"role_id" :1 , "per_id":1}
+ ],
+ "user_role" : [
+  {"user_id":1,"role_id":1}
  ]
 }

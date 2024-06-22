@@ -14,6 +14,10 @@ const data = JSON.parse(fs.readFileSync(path.join(__dirname,"data.json")));
 async function main() {
       try {
         // Delete all records
+        await prisma.user_role.deleteMany();
+        await prisma.role_permission.deleteMany();
+        await prisma.roles.deleteMany();
+        await prisma.permission.deleteMany();
         await prisma.message.deleteMany();
         await prisma.video.deleteMany();
         await prisma.photo.deleteMany();
@@ -71,6 +75,26 @@ async function main() {
     const createManyMessage = await prisma.message.createMany(
         {
             data:data['message']
+        }
+    )
+    const createManyRole = await prisma.roles.createMany(
+        {
+            data:data['roles']
+        }
+    )
+    const createManyPer = await prisma.permission.createMany(
+        {
+            data:data['permissions']
+        }
+    )
+    const createManyPer_role = await prisma.role_permission.createMany(
+        {
+            data:data['role_permission']
+        }
+    )
+    const createManyUser_role = await prisma.user_role.createMany(
+        {
+            data:data['user_role']
         }
     )
     let datapro = JSON.stringify(data['user']) + JSON.stringify(data['user_info']) + JSON.stringify(data['post']) + JSON.stringify(data['photo']) + JSON.stringify(data['video']) + JSON.stringify(data['vulnerable']); 

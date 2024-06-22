@@ -60,6 +60,7 @@ async function getTimelinePage(req,res){
 
             return res.render('timeline', {data, data1, data2: data2[0]})
         } catch (err) {
+            console.log(err)
             return res.render('timelineerror', {data: "Error executing query"})
         }
     }
