@@ -37,10 +37,13 @@ const handleComment = async (req,res) =>{
             INSERT INTO \"post_comment\" (authorid, postid, content) VALUES (${req.decoded.id}, ${req.body.postid}, ${filterBlacklist(req.body.content)})`
         }
         else {
-            const window = new JSDOM('').window;
+            await prisma.$queryRaw`
+            INSERT INTO \"post_comment\" (authorid, postid, content) VALUES (${req.decoded.id}, ${req.body.postid}, ${req.body.content})`
+            
+            /*const window = new JSDOM('').window;
             const DOMPurify = createDOMPurify(window);
             await prisma.$queryRaw`
-            INSERT INTO \"post_comment\" (authorid, postid, content) VALUES (${req.decoded.id}, ${req.body.postid}, ${DOMPurify.sanitize(xss(req.body.content))})`
+            INSERT INTO \"post_comment\" (authorid, postid, content) VALUES (${req.decoded.id}, ${req.body.postid}, ${DOMPurify.sanitize(xss(req.body.content))})`*/
         }
     } catch (error) {
         console.error("Error: ", error.message);
