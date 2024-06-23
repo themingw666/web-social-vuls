@@ -1,5 +1,6 @@
 import { prisma } from '../config/prisma.js';
-import pug from 'pug';
+//import pug from 'pug';
+const pug = require('pug');
 
 const getStatusPage = async (req,res) => {
     const { id } = req.query
