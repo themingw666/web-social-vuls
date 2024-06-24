@@ -196,7 +196,17 @@ const postSettingPage = async (req,res) => {
             }
         }
 
-        const {username, email} = req.body
+        const {username, email, bio} = req.body
+        if (bio) {
+            await prisma.user_info.update({
+                where: {
+                    userid: req.decoded.id,
+                },
+                data: {
+                    bio: bio,
+                },
+            })
+        }
         let data
         data = await prisma.user.findUnique({
             where: {

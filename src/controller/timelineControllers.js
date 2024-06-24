@@ -1,5 +1,7 @@
 import {PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
+import nunjucks from 'nunjucks';
+import ejs from 'ejs';
 
 async function getTimelinePage(req,res){
     const { id } = req.query
@@ -65,6 +67,7 @@ async function getTimelinePage(req,res){
         }
     }
     else {
+        const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSTI'`
         const id1 = Number(id)
         if (isNaN(id1))
             return res.render('timelineerror', {data: "id is not valid"})
@@ -77,6 +80,19 @@ async function getTimelinePage(req,res){
             })
             if (data === null)
                 next()
+
+            if (setting.status === 'Easy'){
+                try {
+                    data.bio = nunjucks.renderString(data.bio);
+                } catch (error) {
+                }
+            }
+            else if (setting.status === 'Hard'){
+                try {
+                    data.bio = ejs.render(data.bio);
+                } catch (error) {
+                }
+            }
 
             //fetch data status
             let data1 = await prisma.$queryRaw`
@@ -112,8 +128,8 @@ async function getTimelinePage(req,res){
                     data1[i].post_time = `${seconds} seconds ago`;
                 }
             }
-
             return res.render('timeline', {data, data1, data2: data2[0]})
+
         } catch (error) {
             return res.render('timelineerror', {data: "User not found"})
         }

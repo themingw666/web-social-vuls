@@ -12,6 +12,7 @@ const getStatusPage = async (req,res) => {
         return res.render('timelineerror', {data: "id is not valid"})
 
     try {
+        const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSTI'`
         //fetch data name and avatar
         const data = await prisma.post.findUnique({
             where: {
@@ -34,8 +35,13 @@ const getStatusPage = async (req,res) => {
             SELECT * FROM "post_comment" INNER JOIN "user_info" ON post_comment.authorid=user_info.userid WHERE postid=${data1[i].id} ORDER BY commentid ASC`
             if (data3[0]) {
                 data1[i].comment = data3
-                for (let j = 0; j < data3.length; ++j) {
-                    data3[j].content = pug.render(`|${data3[j].content}`)
+                if (setting.status === 'Medium'){
+                    for (let j = 0; j < data3.length; ++j) {
+                        try {
+                            data3[j].content = pug.render(`|${data3[j].content}`)
+                        } catch (error) {
+                        }
+                    }
                 }
             }
         }
@@ -61,7 +67,12 @@ const getStatusPage = async (req,res) => {
                 data1[i].post_time = `${seconds} seconds ago`;
             }
         }
-        return res.render('statuspost1', {data, data1, data2: data2[0], data4})
+        if (setting.status === 'Medium'){
+            return res.render('statuspost1', {data, data1, data2: data2[0], data4})
+        }
+        else {
+            return res.render('statuspost', {data, data1, data2: data2[0], data4})
+        }
         
     } catch (error) {
         //console.error("Error: ", error.message);
