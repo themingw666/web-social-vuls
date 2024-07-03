@@ -4,6 +4,20 @@ import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
 import axios from 'axios';
 
+const getLastestId = async function() {
+    const LastestId = await prisma.post.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+      take: 1,
+    });
+    if (LastestId.length > 0) {
+      return LastestId[0].id;
+    } else {
+      return 1;
+    }
+}
+
 const getHomePage = async (req,res) => {
     try {
         //data status have comment
@@ -112,8 +126,10 @@ const handleHome = async (req,res) =>{
             }
         }
         const currentTime = moment().toISOString()
-        await prisma.$queryRaw`INSERT INTO \"post\" (authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
-        VALUES (${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
+
+        let LastestId = await getLastestId() + 1
+        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
+        VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
         if (setting.status === 'Hard') {
             return res.send(html6);
         }
