@@ -20,6 +20,12 @@ const getLastestId = async function() {
 
 const getHomePage = async (req,res) => {
     try {
+        
+    } catch (error) {
+        
+    }
+
+    try {
         //data status have comment
         let data1 = await prisma.$queryRaw`
         SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
