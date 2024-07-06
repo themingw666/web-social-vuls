@@ -79,4 +79,8 @@ const getStatusPage = async (req,res) => {
     }
 }
 
-export default {getStatusPage}
+const index = (req,res) => {
+    return res.render('pages')
+}
+
+export default {getStatusPage, index}

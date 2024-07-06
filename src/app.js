@@ -19,6 +19,10 @@ const prisma = new PrismaClient()
 const app = express()
 const port = process.env.PORT || 3000
 
+import multer from 'multer';
+const upload = multer({ dest: 'src/uploads/' });
+app.use(upload.single('xmlFile'));
+
 //config view 
 configViewEngine(app,__dirname)
 initWebsocket()

@@ -3,6 +3,7 @@ const prisma = new PrismaClient()
 import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
 import axios from 'axios';
+import fs from 'fs'
 
 const getLastestId = async function() {
     const LastestId = await prisma.post.findMany({
@@ -80,7 +81,7 @@ const getHomePage = async (req,res) => {
 const handleHome = async (req,res) =>{
     try {
         const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SSRF'`
-        const content = await req.body.content
+        const content = await req.body.contentstatus
         const urlRegex = /(https?:\/\/[^\s]+)/g
         const urls = content.match(urlRegex);
         let url = 'None', html6
@@ -132,8 +133,14 @@ const handleHome = async (req,res) =>{
             }
         }
         const currentTime = moment().toISOString()
-
         let LastestId = await getLastestId() + 1
+        let filePath, Document_data = "None", Document_name = "None"
+        if (req.file) {
+            filePath = __dirname + '/../uploads/' + req.file.filename
+            Document_data = await fs.readFile(filePath, 'utf8')
+            Document_name = req.file.originalname
+        }
+
         await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
         VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
         if (setting.status === 'Hard') {

