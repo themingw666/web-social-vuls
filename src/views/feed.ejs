@@ -171,6 +171,12 @@
                     <div class="sm:px-4 p-2.5 pt-0">
                         <p class="font-normal" style="word-wrap: break-word;"> <%= data1[i].content %> </p>
 
+                        <% if (data1[i].document_name !== 'None' && data1[i].document_data !== 'None') { %>
+                        <a href="/statuspost/file?id=<%= data1[i].id %> " target="_blank">
+                            File: <%= data1[i].document_name %>
+                        </a>
+                        <% } %>
+
                         <% if (data1[i].url !== 'None') { %>
                         <a href="<%= data1[i].url %>"> 
                             <figure class="figure mt-3">

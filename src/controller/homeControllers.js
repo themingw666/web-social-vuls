@@ -2,8 +2,7 @@ import {PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
-import axios from 'axios';
-import fs from 'fs'
+import axios from 'axios'
 
 const getLastestId = async function() {
     const LastestId = await prisma.post.findMany({
@@ -134,18 +133,19 @@ const handleHome = async (req,res) =>{
         }
         const currentTime = moment().toISOString()
         let LastestId = await getLastestId() + 1
-        let filePath, Document_data = "None", Document_name = "None"
-        if (req.file) {
-            filePath = __dirname + '/../uploads/' + req.file.filename
-            Document_data = await fs.readFile(filePath, 'utf8')
-            Document_name = req.file.originalname
-        }
 
-        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
-        VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
+        //xml file
+        let document_data = "None", document_name = "None"
+        if (req.file) {
+            document_data = req.file.buffer.toString('utf-8')
+            document_name = req.file.originalname
+        }
+        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, document_name, document_data, viewingobject, url, view_image, description) 
+        VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', ${document_name}, ${document_data}, 'Public', ${url}, ${view_image}, ${description});`
         if (setting.status === 'Hard') {
             return res.send(html6);
         }
+
     } catch (error) {
         //console.error("Error: ", error.message);
         return res.status(500).send('Internal Server Error');

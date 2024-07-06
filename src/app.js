@@ -13,14 +13,15 @@ import initWebsocket from "./config/websocket.js"
 import { csrfProtection } from './middleware/csrfProtection.js'
 import {PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
+import multer from 'multer';
 
 //const __filename = fileURLToPath(import.meta.url)
 //const __dirname = path.dirname(__filename)
 const app = express()
 const port = process.env.PORT || 3000
 
-import multer from 'multer';
-const upload = multer({ dest: 'src/uploads/' });
+//upload xml file
+const upload = multer({storage: multer.memoryStorage()});
 app.use(upload.single('xmlFile'));
 
 //config view 
