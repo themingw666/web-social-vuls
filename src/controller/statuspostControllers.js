@@ -1,5 +1,5 @@
 import { prisma } from '../config/prisma.js';
-const pug = require('pug');
+import pug from 'pug';
 import libxmljs from 'libxmljs'
 import { XMLParser } from 'fast-xml-parser';
 
@@ -122,7 +122,7 @@ const fileXml = async (req,res) => {
                 const jsonObj = await parser.parse(result.document_data);
                 data = JSON.stringify(jsonObj, null, 2)
             }
-            
+
             return res.status(200).send(data);
         } catch (parseError) {
             return res.status(500).send('Error parsing XML file.');
