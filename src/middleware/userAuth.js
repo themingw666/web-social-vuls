@@ -21,7 +21,7 @@ const userAuth = async (req,res,next) => {
       });
     }
     try{
-      if(req.path === '/fakedata' || req.path.includes('/settings')
+      if(req.path === '/fakedata' || req.path.includes('/settings') || req.path.includes('/form-register')
         || (req.path === '/form-login' && (!key || !value)) ){
          next()
       }
