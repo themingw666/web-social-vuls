@@ -7,12 +7,13 @@ const getRegisterPage = async (req,res) =>{
 
 const handleRegister = async (req,res) =>{
     const {firstname, lastname, email, password} = await req.body
-    const user = await prisma.user.create({
+    /*const user = await prisma.user.create({
         data: {
           email: 'elsa@prisma.io',
           name: 'Elsa Prisma',
         },
-    })
+    })*/
+    //console.log(firstname, lastname, email, password)
 
 }
 
