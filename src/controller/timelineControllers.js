@@ -31,7 +31,7 @@ async function getTimelinePage(req,res){
             
             //data status no comment (handle XSS vul)
             let data4 = await prisma.$queryRaw`
-            SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.authorid=${id1} ORDER BY post.id DESC`
+            SELECT id FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.authorid=${id1} ORDER BY post.id DESC`
             
              //my data (name + avatar)
             let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`
@@ -104,7 +104,7 @@ async function getTimelinePage(req,res){
             
             //data status no comment (handle XSS vul)
             let data4 = await prisma.$queryRaw`
-            SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.authorid=${id1} ORDER BY post.id DESC`
+            SELECT id FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE post.authorid=${id1} ORDER BY post.id DESC`
             
             //my data (name + avatar)
             let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`

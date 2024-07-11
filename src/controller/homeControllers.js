@@ -20,19 +20,13 @@ const getLastestId = async function() {
 
 const getHomePage = async (req,res) => {
     try {
-        
-    } catch (error) {
-        
-    }
-
-    try {
         //data status have comment
         let data1 = await prisma.$queryRaw`
         SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
         
         //data status no comment (handle XSS vul)
         let data4 = await prisma.$queryRaw`
-        SELECT * FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
+        SELECT id FROM \"post\" INNER JOIN \"user_info\" ON post.authorid=user_info.userid WHERE viewingobject='Public' ORDER BY post.id DESC`
         
         //my data (name + avatar)
         let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`
