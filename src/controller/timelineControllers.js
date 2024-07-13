@@ -9,7 +9,7 @@ async function getTimelinePage(req,res){
     }
 
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
-    if (setting.status === 'Easy'){
+    if (setting.status === 'Medium'){
         try {
             const result = await prisma.$queryRawUnsafe(`SELECT * FROM \"user_info\" WHERE userid = '${id}'`)
             const blacklist = ['select', 'SELECT', 'union', 'UNION', 'drop', 'DROP', 'OR', 'and', 'AND', 'substring', 'SUBSTRING', 'pg_sleep', 'PG_SLEEP', '-', '#']
