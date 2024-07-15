@@ -37,7 +37,7 @@
                     <ion-icon name="image" class="text-base"></ion-icon>  
                     Document 
                 </button>
-                <input type="file" id="documentInput" name="xmlfile" style="display: none;" accept=".xml,.txt,.csv" onchange="handleFileChange(event)">
+                <input type="file" id="documentInput" name="xmlfile" style="display: none;" accept=".xml,.txt,.docx" onchange="handleFileChange(event)">
 
                 <button type="button" class="flex items-center gap-1.5 bg-orange-50 text-orange-600 rounded-full py-1 px-2 border-2 border-orange-100 dark:bg-yellow-950 dark:border-yellow-900">  
                     <ion-icon name="happy" class="text-base"></ion-icon>  
@@ -122,23 +122,6 @@
             .catch(error => {
                 console.error('Lỗi khi gửi yêu cầu:', error);
             });
-
-            /*fetch('/feed', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: contentstatus, Input: imageInput }),
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });*/
 
             const closeButton = document.querySelector('#create-status .uk-modal-close');
             closeButton.click();

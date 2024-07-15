@@ -3,6 +3,8 @@ const prisma = new PrismaClient()
 import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
 import axios from 'axios'
+import path from 'path'
+import mammoth from 'mammoth'
 
 const getLastestId = async function() {
     const LastestId = await prisma.post.findMany({
@@ -128,10 +130,16 @@ const handleHome = async (req,res) =>{
         const currentTime = moment().toISOString()
         let LastestId = await getLastestId() + 1
 
-        //xml file
+        //document file
         let document_data = "None", document_name = "None"
-        if (req.file) {
+        const ext = path.extname(req.file.originalname).toLowerCase();
+        if (ext === '.txt' || ext === '.xml') {
             document_data = req.file.buffer.toString('utf-8')
+            document_name = req.file.originalname
+        } 
+        else if (ext === '.docx') {
+            document_data = await mammoth.extractRawText({ buffer: req.file.buffer })
+            document_data = document_data.value
             document_name = req.file.originalname
         }
         await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, document_name, document_data, viewingobject, url, view_image, description) 

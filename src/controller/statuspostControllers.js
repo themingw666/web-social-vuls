@@ -81,7 +81,7 @@ const getStatusPage = async (req,res) => {
     }
 }
 
-const fileXml = async (req,res) => {
+const documentfile = async (req,res) => {
     const { id } = req.query
     if (!id) {
         return res.render('timelineerror', {data: "Missing id parameter"})
@@ -99,31 +99,38 @@ const fileXml = async (req,res) => {
         if (result === null)
             next()
 
+        //xxe vul
         try {
             let data
-            const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XXE'`
-            if (setting.status === 'Easy' || setting.status === 'Medium' ){
-                const xmlDoc = libxmljs.parseXml(result.document_data, {
-                    replaceEntities: true,  
-                    dtdload: true 
-                });
-                data = xmlDoc.toString()
+            const ext = result.document_name.split('.').pop().toLowerCase();
+            if (ext === 'xml') {
+                const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XXE'`
+                if (setting.status === 'Easy' || setting.status === 'Medium' ){
+                    const xmlDoc = libxmljs.parseXml(result.document_data, {
+                        replaceEntities: true,  
+                        dtdload: true 
+                    });
+                    data = xmlDoc.toString()
+                }
+                else {
+                    const options = {
+                        ignoreDTD: true,
+                        ignoreEntityReferences: true,
+                        entityProcessors: {
+                            generalEntity: { maxRepetition: 10 },
+                            parameterEntity: { maxRepetition: 10 }
+                        }
+                    };
+                    const parser = new XMLParser(options);
+                    const jsonObj = await parser.parse(result.document_data);
+                    data = JSON.stringify(jsonObj, null, 2)
+                }
             }
             else {
-                const options = {
-                    ignoreDTD: true,
-                    ignoreEntityReferences: true,
-                    entityProcessors: {
-                        generalEntity: { maxRepetition: 10 },
-                        parameterEntity: { maxRepetition: 10 }
-                    }
-                };
-                const parser = new XMLParser(options);
-                const jsonObj = await parser.parse(result.document_data);
-                data = JSON.stringify(jsonObj, null, 2)
+                data = result.document_data
             }
-
             return res.status(200).send(data);
+
         } catch (parseError) {
             return res.status(500).send('Error parsing XML file.');
         }
@@ -133,4 +140,4 @@ const fileXml = async (req,res) => {
     }
 }
 
-export default {getStatusPage, fileXml}
+export default {getStatusPage, documentfile}

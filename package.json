@@ -38,6 +38,7 @@
     "jsonwebtoken": "^8.0.1",
     "jwk-to-pem": "^2.0.5",
     "libxmljs": "^1.0.11",
+    "mammoth": "^1.8.0",
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "moment-timezone": "^0.5.45",
