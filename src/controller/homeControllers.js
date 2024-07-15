@@ -128,19 +128,21 @@ const handleHome = async (req,res) =>{
             }
         }
         const currentTime = moment().toISOString()
-        let LastestId = await getLastestId() + 1
+        const LastestId = await getLastestId() + 1
 
         //document file
         let document_data = "None", document_name = "None"
-        const ext = path.extname(req.file.originalname).toLowerCase();
-        if (ext === '.txt' || ext === '.xml') {
-            document_data = req.file.buffer.toString('utf-8')
-            document_name = req.file.originalname
-        } 
-        else if (ext === '.docx') {
-            document_data = await mammoth.extractRawText({ buffer: req.file.buffer })
-            document_data = document_data.value
-            document_name = req.file.originalname
+        if (req.file) {
+            const ext = path.extname(req.file.originalname).toLowerCase();
+            if (ext === '.txt' || ext === '.xml') {
+                document_data = req.file.buffer.toString('utf-8')
+                document_name = req.file.originalname
+            } 
+            else if (ext === '.docx') {
+                document_data = await mammoth.extractRawText({ buffer: req.file.buffer })
+                document_data = document_data.value
+                document_name = req.file.originalname
+            }
         }
         await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, document_name, document_data, viewingobject, url, view_image, description) 
         VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', ${document_name}, ${document_data}, 'Public', ${url}, ${view_image}, ${description});`

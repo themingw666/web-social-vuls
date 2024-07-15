@@ -37,7 +37,7 @@
                     <ion-icon name="image" class="text-base"></ion-icon>  
                     Document 
                 </button>
-                <input type="file" id="documentInput" name="xmlfile" style="display: none;" accept=".xml,.txt,.docx" onchange="handleFileChange(event)">
+                <input type="file" id="documentInput" name="docfile" style="display: none;" accept=".xml,.txt,.docx" onchange="handleFileChange(event)">
 
                 <button type="button" class="flex items-center gap-1.5 bg-orange-50 text-orange-600 rounded-full py-1 px-2 border-2 border-orange-100 dark:bg-yellow-950 dark:border-yellow-900">  
                     <ion-icon name="happy" class="text-base"></ion-icon>  
@@ -109,7 +109,7 @@
             const fileInput = document.getElementById('documentInput').files[0];
             const formData = new FormData();
             formData.append('contentstatus', contentStatus);
-            formData.append('xmlFile', fileInput);
+            formData.append('docfile', fileInput);
 
             fetch('/feed', {
                 method: 'POST',

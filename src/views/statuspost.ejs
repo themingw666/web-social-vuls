@@ -125,7 +125,7 @@
                                 <a href="/timeline?id=<%= value.authorid %> "> <img src="<%= value.avatar %>" alt="" class="w-9 h-9 rounded-full"> </a> 
                                 <div class="flex-1">
                                     <a href="/timeline?id=<%= value.authorid %> "> <h4 class="text-black dark:text-white"> <%= value.firstname %> <%= value.lastname %> </h4> </a> 
-                                    <a href="/statuspost?id=<%= value.id %> "> <div class="text-xs text-gray-500 dark:text-white/80"> <%= value.post_time %> </div> </a>
+                                    <a href="/statuspost/<%= value.id %> "> <div class="text-xs text-gray-500 dark:text-white/80"> <%= value.post_time %> </div> </a>
                                 </div>
 
                                 <div class="-mr-1">
@@ -147,7 +147,7 @@
                                 <p class="font-normal" style="word-wrap: break-word;"> <%= value.content %> </p>
                                 
                                 <% if (value.document_name !== 'None' && value.document_data !== 'None') { %>
-                                <a href="/statuspost/file?id=<%= value.id %> " target="_blank">
+                                <a href="/statuspost/file/<%= value.id %> " target="_blank">
                                     File: <%= value.document_name %>
                                 </a>
                                 <% } %>

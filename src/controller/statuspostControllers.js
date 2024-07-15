@@ -4,7 +4,7 @@ import libxmljs from 'libxmljs'
 import { XMLParser } from 'fast-xml-parser';
 
 const getStatusPage = async (req,res) => {
-    const { id } = req.query
+    const id = req.params.id
     if (!id) {
         return res.render('timelineerror', {data: "Missing id parameter"})
     }
@@ -82,7 +82,7 @@ const getStatusPage = async (req,res) => {
 }
 
 const documentfile = async (req,res) => {
-    const { id } = req.query
+    const id = req.params.id
     if (!id) {
         return res.render('timelineerror', {data: "Missing id parameter"})
     }
