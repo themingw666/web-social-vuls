@@ -43,13 +43,12 @@ model post {
   feeling       String
   image         String
   video         String
-  document_name String
-  document_data String
   viewingobject String
   url           String
   view_image    String
   description   String
   comments      post_comment[]
+  docs          document[]
   author        user           @relation(fields: [authorid], references: [id])
 }
 
@@ -60,6 +59,15 @@ model post_comment {
   content   String
   comment   post   @relation(fields: [postid], references: [id])
   author    user   @relation(fields: [authorid], references: [id])
+}
+
+model document {
+  documentid    Int    @id @default(autoincrement())
+  document_name String
+  document_data String
+  document_ext  String
+  postid        Int
+  doc           post   @relation(fields: [postid], references: [id])
 }
 
 model story {

@@ -12,96 +12,100 @@
     {"id":10, "username" : "chloeclem","email" :"chloeclem@gmail.com","password":"0192023a7bbd73250516f069df18b500","passwordnotsecret":"admin123"},
     {"id":11, "username" : "doccodung","email" :"doccodung@gmail.com","password":"0192023a7bbd73250516f069df18b500","passwordnotsecret":"admin123"},
     {"id":12, "username" : "cocohieu","email" :"cocohieu@gmail.com","password":"0192023a7bbd73250516f069df18b500","passwordnotsecret":"admin123"}
- ],
- "user_info" : [
-   {"firstname" : "Đặng Ngọc","lastname" :"Khánh","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/oFaVY7j.png","userid":1,"bio":"Tôi có một thói quen lạ lùng là thích khám phá mọi góc khuất trong siêu thị. Những lần đi mua sắm của tôi thường biến thành cuộc săn tìm những món ăn độc đáo và các sản phẩm mới lạ. Mỗi khi tìm thấy một loại snack mới hay một loại gia vị lạ, tôi cảm thấy như mình vừa khám phá ra một kho báu bí mật. Đôi khi tôi tự hỏi, liệu mình có thể trở thành một nhà phê bình sản phẩm siêu thị chuyên nghiệp không nhỉ?"},
-   {"firstname" : "Dương Quang","lastname" :"Hào","university":"PTIT","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/SujpfSJ.png","userid":2,"bio":"Trong các chuyến du lịch, tôi thường bị cuốn hút bởi những con đường kỳ lạ và ít người biết đến. Thay vì những điểm tham quan nổi tiếng, tôi lại thấy vui khi lạc vào những ngõ nhỏ, nơi mà mỗi góc phố đều có câu chuyện riêng. Một lần, tôi đã tìm thấy một quán cà phê bí ẩn với thức uống lạ đến mức tôi không biết nó là trà hay sinh tố!"},
-   {"firstname" : "Lê","lastname" :"Trọng ","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/vNwRkQf.png","userid":5,"bio":"Không gì làm tôi phấn khích hơn là việc khám phá những thiết bị công nghệ cổ điển. Từ chiếc máy đánh chữ cổ xưa đến máy nghe nhạc cassette, tôi yêu thích cảm giác đưa chúng trở lại cuộc sống. Có những lần, tôi đã dành hàng giờ để tìm kiếm băng từ cũ chỉ để nghe lại những bài hát từ thập niên 80. Đôi khi, tôi nghĩ rằng mình đã được sinh ra trong thời kỳ sai!"},
-   {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","userid":666666,"bio":"Tôi luôn tin rằng cuộc sống đầy những cuộc gặp gỡ bất ngờ thú vị. Mỗi khi ra ngoài, tôi thích trò chuyện với những người lạ và nghe câu chuyện của họ. Có lần, tôi đã kết bạn với một chú chó trong công viên và cuối cùng, nó đã dẫn tôi đến chủ nhân của mình, người đã trở thành một trong những người bạn tốt nhất của tôi. Thật kỳ diệu phải không?"},
-   {"firstname" : "Đặng","lastname" :"Phúc","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/q7bnxek.png","userid":4,"bio":"Mỗi khi ra ngoài, tôi luôn tìm kiếm những địa điểm độc đáo để chụp ảnh tự sướng. Đó có thể là một bức tường graffiti sáng tạo hay một cây cầu cổ kính ít ai biết đến. Tôi thậm chí đã leo lên đỉnh một ngọn đồi chỉ để có được bức ảnh hoàn hảo. Những góc chụp kỳ lạ và không ngờ tới luôn là phần thưởng lớn nhất trong cuộc hành trình của tôi."},
-   {"firstname" : "Trần Thanh","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","userid":6,"bio":"Tôi có một tài năng kỳ lạ là đặt tên cho món ăn. Mỗi khi nấu nướng, tôi thường tạo ra những cái tên hài hước cho các món ăn của mình, như “Bánh Mì Hạt Điều Bay Cao” hay “Mì Ý Nhảy Múa Dưới Ánh Trăng”. Tôi thích cách những cái tên vui nhộn này khiến mọi người cười và tạo ra một bầu không khí vui vẻ quanh bàn ăn."},
-   {"firstname" : "老","lastname" :"六","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/ALmaNhj.jpeg","userid":7,"bio":"Tôi có niềm vui nhỏ bé là tạo ra những trò đùa đơn giản trong cuộc sống hàng ngày. Đôi khi, tôi giấu một con lật đật nhỏ vào trong giày của đồng nghiệp hoặc làm cho bạn bè bất ngờ bằng một chú heo đất đầy kẹo. Sự hạnh phúc đến từ những khoảnh khắc này khiến tôi cảm thấy cuộc sống thật tươi đẹp và đầy niềm vui."},
-   {"firstname" : "Anh Da","lastname" :"Đen","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/tP9aCYs.png","userid":8,"bio":"Tôi luôn bị cuốn hút bởi những trò chơi điện tử cổ điển từ thời thơ ấu. Mỗi khi có cơ hội, tôi lại ngồi xuống trước màn hình và chơi lại những tựa game mà tôi yêu thích từ ngày còn bé. Có lần, tôi đã thức suốt đêm để đánh bại con rồng cuối cùng trong một game 8-bit mà tôi từng không thể vượt qua khi còn nhỏ. Đôi khi, hoài niệm thật là tuyệt vời!"},
-   {"firstname" : "Thái Thị","lastname" :"Thanh Nga","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/6fYEH7o.jpeg","userid":9,"bio":"Tôi có một sở thích lạ lùng là chỉnh sửa ảnh với Photoshop theo những cách hài hước. Những bức ảnh bình thường có thể biến thành các tác phẩm nghệ thuật vui nhộn với đầu người và thân mèo hay những cảnh tượng siêu thực không tưởng. Mỗi lần bạn bè thấy tác phẩm của tôi, họ không thể nhịn cười, và tôi thì vui vẻ vì đã mang lại niềm vui cho họ."},
-   {"firstname" : "Chloe","lastname" :"Clem","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/plMoMhL.png","userid":10,"bio":"Tôi có niềm đam mê kỳ lạ với các chương trình truyền hình thực tế. Những pha kịch tính và drama luôn khiến tôi không thể rời mắt khỏi màn hình. Tôi thường xuyên theo dõi các cuộc thi nấu ăn hoặc những show tìm kiếm tài năng và cố gắng đoán xem ai sẽ là người chiến thắng. Đôi khi, tôi cảm thấy mình như một nhà phê bình truyền hình chuyên nghiệp đang bình luận về các thí sinh vậy!"},
-   {"firstname" : "hiếu","lastname" :"Cô Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/lWz8iBn.jpeg","userid":12,"bio":"Tôi luôn thích thú với việc thực hiện những thí nghiệm khoa học vui nhộn tại nhà. Từ việc tạo ra những phản ứng hóa học kỳ lạ cho đến việc làm đá tan chảy bằng cách nào đó không bình thường, tôi luôn tìm thấy niềm vui trong việc khám phá khoa học. Đôi khi, nhà bếp của tôi trông giống như một phòng thí nghiệm điên rồ, nhưng điều đó làm tôi cảm thấy như mình là một nhà khoa học thực thụ."},
-   {"firstname" : "dung","lastname" :"Độc Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/05iLZJy.jpeg","userid":11,"bio":"Tôi thích lang thang trên chiếc xe đạp của mình và khám phá những con đường ít ai biết đến. Những chuyến đi của tôi thường dẫn đến những nơi bí ẩn, như một quán cà phê nhỏ nằm trong rừng hay một cánh đồng hoa bất tận. Đôi khi, tôi kết thúc chuyến đi của mình ở giữa nơi không có sóng điện thoại, nhưng đó là lúc tôi cảm thấy mình tự do nhất, đắm chìm trong thiên nhiên và niềm vui bất ngờ."}
- ],
- "post" : [
-  {"id":1,"authorid" :666666,"content" :"Chào cả nhà mình là bệu đây!","image": "None","video": "None", "document_name": "xxe.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":2,"authorid" :10,"content" :"mmmmmmmmmmmm!!","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":3,"authorid" :7,"content" :"helloworld(“print”)","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":4,"authorid" :666666,"content" :"https://www.youtube.com/watch?v=UcZqu2fgesc","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=UcZqu2fgesc","view_image": "https://i.ytimg.com/vi/UcZqu2fgesc/maxresdefault.jpg","description": "歌詞：https://www.kugeci.com/song/qm5YIn6v歐陽朵 - 失去才懂作詞：歐陽朵作曲：歐陽朵或許你腳步太快她出現的太意外我沒有預料陌生的傷害黑夜裡無聲的對白寂寞的我在發呆你永遠不懂我有多失落她長得太可愛氣質還有點呆不是小女神卻讓你格外的喜歡我多難堪我多不安這種背叛都怪我自己沒有太早的..."},
-  {"id":6,"authorid" :2,"content" :"Những thằng khác ngại tán em, .. tại ngán anh!!","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":7,"authorid" :5,"content" :"Các bạn vào like, share video và subscribe cho channel của mình nha, cảm ơn các bạn rất nhiều","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://youtube.com/","view_image": "https://www.youtube.com/img/desktop/yt_1200.png","description": "Thưởng thức video và nhạc bạn yêu thích, tải nội dung do bạn sáng tạo lên và chia sẻ nội dung đó với gia đình, bạn bè cũng như mọi người trên YouTube."},
-  {"id":8,"authorid" :4,"content" :"Hình như tôi chiều các em quá, các em hư đúng không ? ?","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":9,"authorid" :1,"content" :"https://www.youtube.com/watch?v=poyi2a5pQsQ","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=poyi2a5pQsQ","view_image": "https://i.ytimg.com/vi/poyi2a5pQsQ/maxresdefault.jpg","description": "Welcome to Việt Mix TVNONSTOP 2024 MIXTAPE | NHẠC TRẺ REMIX 2024 HAY NHẤT HIỆN NAY | NONSTOP 2024 VINAHOUSE BASS CỰC MẠNH #nonstop #vinahouse #nhactreremix📸..."},
-  {"id":10,"authorid" :6,"content" :"Mọi người lưu ý nha https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","view_image": "http://viettelidc.com.vn//uploadimage/Root/root/21-01-3-cach-phong-chong-ransomware-tan-cong-vo-cung-hieu-qua.png","description": "Công ty TNHH Viettel - CHT"},
-  {"id":11,"authorid" :666666,"content" :"“Người bi quan nhìn thấy khó khăn ở mọi cơ hội. Người lạc quan nhìn thấy cơ hội ở mọi khó khăn.”","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":12,"authorid" :9,"content" :"tus đc 100 tym Nga sẽ livestream review mực bento nha m.n","image": "None","video": "None", "document_name": "None", "document_data": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
-  {"id":13,"authorid" :666666,"content" :"Hello mọi người, mình vừa lấy được 1 số secret data từ công ty đối thủ nên share cho mọi người xem đây ^ ^","image": "None","video": "None", "document_name": "secret.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"}
-],
-"post_comment" : [
- {"authorid" :666666,"postid":12,"content" :"mọi người thả tym đi!!"},
- {"authorid" :666666,"postid":12,"content" :"<3 <3 <3"},
- {"authorid" :1,"postid":6,"content" :"gắt!!!"},
- {"authorid" :666666,"postid":6,"content" :"kHá QuÁ"},
- {"authorid" :666666,"postid":7,"content" :"<3 <3"},
- {"authorid" :2,"postid":8,"content" :"bao nhiêu em? cho con số cụ thể coi"},
- {"authorid" :2,"postid":11,"content" :"hay quá"},
- {"authorid" :4,"postid":11,"content" :"tuyệt vời!!"}
-],
-"photo" : [
-  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
-  {"url" : "https://plus.unsplash.com/premium_photo-1675337267945-3b2fff5344a0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
-  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
-  {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
-  {"url" : "https://images.unsplash.com/photo-1710878872223-9beab35c04fc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
-  {"url" : "https://images.unsplash.com/photo-1682687220801-eef408f95d71?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-],
-"video" : [
-  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
-  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
-  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
-  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
-  {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"}
-],
- "vulnerable": [
-   {"id": 1, "name": "SQL Injection", "status": "None"},
-   {"id": 2, "name": "SSRF", "status": "None"},
-   {"id": 3, "name": "XSS", "status": "None"},
-   {"id": 4, "name": "CSRF", "status": "None"},
-   {"id": 5, "name": "Broken Authentication", "status": "None"},
-   {"id": 6, "name": "Path Traversal", "status": "None"},
-   {"id": 7, "name": "HTTP Smuggling", "status": "None"},
-   {"id": 8, "name": "SSTI", "status": "None"},
-   {"id": 9, "name": "JWT", "status": "None"},
-   {"id": 10, "name": "XXE", "status": "None"},
-   {"id": 11, "name": "File Upload Vuls", "status": "None"},
-   {"id": 12, "name": "OS Command Injection", "status": "None"},
-   {"id": 13, "name": "Deserialization", "status": "None"},
-   {"id": 14, "name": "IDOR", "status": "None"}
- ],
- "message" : [
-   {"id":1,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Cuộc sống em ổn không" , "type" : "text"},
-   {"id":2,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Có giống em hi vọng" , "type" : "text"},
-   {"id":3,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Thấy em khóc nhào" , "type" : "text"},
-   {"id":4,"userSender_id" : 2 , "userRecipient_id" : 1 , "content" : "Cứ gọi là ok anh ơi" , "type" : "text"},
-   {"id":5,"userSender_id" : 1 , "userRecipient_id" : 6 , "content" : "Cho em vay 20 triệu tết em trả" , "type" : "text"},
-   {"id":6,"userSender_id" : 6 , "userRecipient_id" : 1 , "content" : "Tin chuẩn chưa" , "type" : "text"}
- ],
- "roles" : [
-  {"id":0,"role_name":"user"},
-  {"id":1,"role_name":"admin"}
- ],
- "permissions" : [
-  {"id":0,"per_name":"view"},
-  {"id":1,"per_name":"delete_user"}
- ],
- "role_permission" : [
-  {"role_id" :1 , "per_id":1}
- ],
- "user_role" : [
-  {"user_id":1,"role_id":1}
- ]
+  ],
+  "user_info" : [
+    {"firstname" : "Đặng Ngọc","lastname" :"Khánh","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/oFaVY7j.png","userid":1,"bio":"Tôi có một thói quen lạ lùng là thích khám phá mọi góc khuất trong siêu thị. Những lần đi mua sắm của tôi thường biến thành cuộc săn tìm những món ăn độc đáo và các sản phẩm mới lạ. Mỗi khi tìm thấy một loại snack mới hay một loại gia vị lạ, tôi cảm thấy như mình vừa khám phá ra một kho báu bí mật. Đôi khi tôi tự hỏi, liệu mình có thể trở thành một nhà phê bình sản phẩm siêu thị chuyên nghiệp không nhỉ?"},
+    {"firstname" : "Dương Quang","lastname" :"Hào","university":"PTIT","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/SujpfSJ.png","userid":2,"bio":"Trong các chuyến du lịch, tôi thường bị cuốn hút bởi những con đường kỳ lạ và ít người biết đến. Thay vì những điểm tham quan nổi tiếng, tôi lại thấy vui khi lạc vào những ngõ nhỏ, nơi mà mỗi góc phố đều có câu chuyện riêng. Một lần, tôi đã tìm thấy một quán cà phê bí ẩn với thức uống lạ đến mức tôi không biết nó là trà hay sinh tố!"},
+    {"firstname" : "Lê","lastname" :"Trọng ","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/vNwRkQf.png","userid":5,"bio":"Không gì làm tôi phấn khích hơn là việc khám phá những thiết bị công nghệ cổ điển. Từ chiếc máy đánh chữ cổ xưa đến máy nghe nhạc cassette, tôi yêu thích cảm giác đưa chúng trở lại cuộc sống. Có những lần, tôi đã dành hàng giờ để tìm kiếm băng từ cũ chỉ để nghe lại những bài hát từ thập niên 80. Đôi khi, tôi nghĩ rằng mình đã được sinh ra trong thời kỳ sai!"},
+    {"firstname" : "Nguyễn Thế","lastname" :"Minh","university":"HUTECH","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/4JJLPWi.png","userid":666666,"bio":"Tôi luôn tin rằng cuộc sống đầy những cuộc gặp gỡ bất ngờ thú vị. Mỗi khi ra ngoài, tôi thích trò chuyện với những người lạ và nghe câu chuyện của họ. Có lần, tôi đã kết bạn với một chú chó trong công viên và cuối cùng, nó đã dẫn tôi đến chủ nhân của mình, người đã trở thành một trong những người bạn tốt nhất của tôi. Thật kỳ diệu phải không?"},
+    {"firstname" : "Đặng","lastname" :"Phúc","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/q7bnxek.png","userid":4,"bio":"Mỗi khi ra ngoài, tôi luôn tìm kiếm những địa điểm độc đáo để chụp ảnh tự sướng. Đó có thể là một bức tường graffiti sáng tạo hay một cây cầu cổ kính ít ai biết đến. Tôi thậm chí đã leo lên đỉnh một ngọn đồi chỉ để có được bức ảnh hoàn hảo. Những góc chụp kỳ lạ và không ngờ tới luôn là phần thưởng lớn nhất trong cuộc hành trình của tôi."},
+    {"firstname" : "Trần Thanh","lastname" :"Tuấn","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/hsUs5Sz.png","userid":6,"bio":"Tôi có một tài năng kỳ lạ là đặt tên cho món ăn. Mỗi khi nấu nướng, tôi thường tạo ra những cái tên hài hước cho các món ăn của mình, như “Bánh Mì Hạt Điều Bay Cao” hay “Mì Ý Nhảy Múa Dưới Ánh Trăng”. Tôi thích cách những cái tên vui nhộn này khiến mọi người cười và tạo ra một bầu không khí vui vẻ quanh bàn ăn."},
+    {"firstname" : "老","lastname" :"六","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/ALmaNhj.jpeg","userid":7,"bio":"Tôi có niềm vui nhỏ bé là tạo ra những trò đùa đơn giản trong cuộc sống hàng ngày. Đôi khi, tôi giấu một con lật đật nhỏ vào trong giày của đồng nghiệp hoặc làm cho bạn bè bất ngờ bằng một chú heo đất đầy kẹo. Sự hạnh phúc đến từ những khoảnh khắc này khiến tôi cảm thấy cuộc sống thật tươi đẹp và đầy niềm vui."},
+    {"firstname" : "Anh Da","lastname" :"Đen","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/tP9aCYs.png","userid":8,"bio":"Tôi luôn bị cuốn hút bởi những trò chơi điện tử cổ điển từ thời thơ ấu. Mỗi khi có cơ hội, tôi lại ngồi xuống trước màn hình và chơi lại những tựa game mà tôi yêu thích từ ngày còn bé. Có lần, tôi đã thức suốt đêm để đánh bại con rồng cuối cùng trong một game 8-bit mà tôi từng không thể vượt qua khi còn nhỏ. Đôi khi, hoài niệm thật là tuyệt vời!"},
+    {"firstname" : "Thái Thị","lastname" :"Thanh Nga","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/6fYEH7o.jpeg","userid":9,"bio":"Tôi có một sở thích lạ lùng là chỉnh sửa ảnh với Photoshop theo những cách hài hước. Những bức ảnh bình thường có thể biến thành các tác phẩm nghệ thuật vui nhộn với đầu người và thân mèo hay những cảnh tượng siêu thực không tưởng. Mỗi lần bạn bè thấy tác phẩm của tôi, họ không thể nhịn cười, và tôi thì vui vẻ vì đã mang lại niềm vui cho họ."},
+    {"firstname" : "Chloe","lastname" :"Clem","university":"FPTU","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/plMoMhL.png","userid":10,"bio":"Tôi có niềm đam mê kỳ lạ với các chương trình truyền hình thực tế. Những pha kịch tính và drama luôn khiến tôi không thể rời mắt khỏi màn hình. Tôi thường xuyên theo dõi các cuộc thi nấu ăn hoặc những show tìm kiếm tài năng và cố gắng đoán xem ai sẽ là người chiến thắng. Đôi khi, tôi cảm thấy mình như một nhà phê bình truyền hình chuyên nghiệp đang bình luận về các thí sinh vậy!"},
+    {"firstname" : "hiếu","lastname" :"Cô Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/lWz8iBn.jpeg","userid":12,"bio":"Tôi luôn thích thú với việc thực hiện những thí nghiệm khoa học vui nhộn tại nhà. Từ việc tạo ra những phản ứng hóa học kỳ lạ cho đến việc làm đá tan chảy bằng cách nào đó không bình thường, tôi luôn tìm thấy niềm vui trong việc khám phá khoa học. Đôi khi, nhà bếp của tôi trông giống như một phòng thí nghiệm điên rồ, nhưng điều đó làm tôi cảm thấy như mình là một nhà khoa học thực thụ."},
+    {"firstname" : "dung","lastname" :"Độc Cô","university":"KMA","live":"Hà Nội","job":"Sinh viên","avatar":"https://i.imgur.com/05iLZJy.jpeg","userid":11,"bio":"Tôi thích lang thang trên chiếc xe đạp của mình và khám phá những con đường ít ai biết đến. Những chuyến đi của tôi thường dẫn đến những nơi bí ẩn, như một quán cà phê nhỏ nằm trong rừng hay một cánh đồng hoa bất tận. Đôi khi, tôi kết thúc chuyến đi của mình ở giữa nơi không có sóng điện thoại, nhưng đó là lúc tôi cảm thấy mình tự do nhất, đắm chìm trong thiên nhiên và niềm vui bất ngờ."}
+  ],
+  "post" : [
+    {"id":1,"authorid" :666666,"content" :"Chào cả nhà mình là bệu đây!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":2,"authorid" :10,"content" :"mmmmmmmmmmmm!!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":3,"authorid" :7,"content" :"helloworld(“print”)","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":4,"authorid" :666666,"content" :"https://www.youtube.com/watch?v=UcZqu2fgesc","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=UcZqu2fgesc","view_image": "https://i.ytimg.com/vi/UcZqu2fgesc/maxresdefault.jpg","description": "歌詞：https://www.kugeci.com/song/qm5YIn6v歐陽朵 - 失去才懂作詞：歐陽朵作曲：歐陽朵或許你腳步太快她出現的太意外我沒有預料陌生的傷害黑夜裡無聲的對白寂寞的我在發呆你永遠不懂我有多失落她長得太可愛氣質還有點呆不是小女神卻讓你格外的喜歡我多難堪我多不安這種背叛都怪我自己沒有太早的..."},
+    {"id":6,"authorid" :2,"content" :"Những thằng khác ngại tán em, .. tại ngán anh!!","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":7,"authorid" :5,"content" :"Các bạn vào like, share video và subscribe cho channel của mình nha, cảm ơn các bạn rất nhiều","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://youtube.com/","view_image": "https://www.youtube.com/img/desktop/yt_1200.png","description": "Thưởng thức video và nhạc bạn yêu thích, tải nội dung do bạn sáng tạo lên và chia sẻ nội dung đó với gia đình, bạn bè cũng như mọi người trên YouTube."},
+    {"id":8,"authorid" :4,"content" :"Hình như tôi chiều các em quá, các em hư đúng không ? ?","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":9,"authorid" :1,"content" :"https://www.youtube.com/watch?v=poyi2a5pQsQ","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://www.youtube.com/watch?v=poyi2a5pQsQ","view_image": "https://i.ytimg.com/vi/poyi2a5pQsQ/maxresdefault.jpg","description": "Welcome to Việt Mix TVNONSTOP 2024 MIXTAPE | NHẠC TRẺ REMIX 2024 HAY NHẤT HIỆN NAY | NONSTOP 2024 VINAHOUSE BASS CỰC MẠNH #nonstop #vinahouse #nhactreremix📸..."},
+    {"id":10,"authorid" :6,"content" :"Mọi người lưu ý nha https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"https://viettelidc.com.vn/tin-tuc/goi-y-3-cach-phong-chong-ransomware-hieu-qua-ma-nguoi-dung-khong-nen-bo-qua-3014","view_image": "http://viettelidc.com.vn//uploadimage/Root/root/21-01-3-cach-phong-chong-ransomware-tan-cong-vo-cung-hieu-qua.png","description": "Công ty TNHH Viettel - CHT"},
+    {"id":11,"authorid" :666666,"content" :"“Người bi quan nhìn thấy khó khăn ở mọi cơ hội. Người lạc quan nhìn thấy cơ hội ở mọi khó khăn.”","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":12,"authorid" :9,"content" :"tus đc 100 tym Nga sẽ livestream review mực bento nha m.n","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"},
+    {"id":13,"authorid" :666666,"content" :"Hello mọi người, mình vừa lấy được 1 số secret data từ công ty đối thủ nên share cho mọi người xem đây ^ ^","image": "None","video": "None","feeling": "None","checkin": "None","viewingobject": "Public","url":"None","view_image": "None","description": "None"}
+  ],
+  "post_comment" : [
+    {"authorid" :666666,"postid":12,"content" :"mọi người thả tym đi!!"},
+    {"authorid" :666666,"postid":12,"content" :"<3 <3 <3"},
+    {"authorid" :1,"postid":6,"content" :"gắt!!!"},
+    {"authorid" :666666,"postid":6,"content" :"kHá QuÁ"},
+    {"authorid" :666666,"postid":7,"content" :"<3 <3"},
+    {"authorid" :2,"postid":8,"content" :"bao nhiêu em? cho con số cụ thể coi"},
+    {"authorid" :2,"postid":11,"content" :"hay quá"},
+    {"authorid" :4,"postid":11,"content" :"tuyệt vời!!"}
+  ],
+  "document" : [
+    {"postid":1,"document_name" :"xxe.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml"},
+    {"postid":13,"document_name" :"secret.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml"}
+  ],
+  "photo" : [
+    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+    {"url" : "https://plus.unsplash.com/premium_photo-1675337267945-3b2fff5344a0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+    {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+    {"url" : "https://images.unsplash.com/photo-1710878872223-9beab35c04fc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+    {"url" : "https://images.unsplash.com/photo-1682687220801-eef408f95d71?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+  ],
+  "video" : [
+    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"},
+    {"url" :"https://www.youtube.com/live/dQ0-n-0EyQY?si=pdcs7kj_iL3xLW4z"}
+  ],
+  "vulnerable": [
+    {"id": 1, "name": "SQL Injection", "status": "None"},
+    {"id": 2, "name": "SSRF", "status": "None"},
+    {"id": 3, "name": "XSS", "status": "None"},
+    {"id": 4, "name": "CSRF", "status": "None"},
+    {"id": 5, "name": "Broken Authentication", "status": "None"},
+    {"id": 6, "name": "Path Traversal", "status": "None"},
+    {"id": 7, "name": "HTTP Smuggling", "status": "None"},
+    {"id": 8, "name": "SSTI", "status": "None"},
+    {"id": 9, "name": "JWT", "status": "None"},
+    {"id": 10, "name": "XXE", "status": "None"},
+    {"id": 11, "name": "File Upload Vuls", "status": "None"},
+    {"id": 12, "name": "OS Command Injection", "status": "None"},
+    {"id": 13, "name": "Deserialization", "status": "None"},
+    {"id": 14, "name": "IDOR", "status": "None"}
+  ],
+  "message" : [
+    {"id":1,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Cuộc sống em ổn không" , "type" : "text"},
+    {"id":2,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Có giống em hi vọng" , "type" : "text"},
+    {"id":3,"userSender_id" : 1 , "userRecipient_id" : 2 , "content" : "Thấy em khóc nhào" , "type" : "text"},
+    {"id":4,"userSender_id" : 2 , "userRecipient_id" : 1 , "content" : "Cứ gọi là ok anh ơi" , "type" : "text"},
+    {"id":5,"userSender_id" : 1 , "userRecipient_id" : 6 , "content" : "Cho em vay 20 triệu tết em trả" , "type" : "text"},
+    {"id":6,"userSender_id" : 6 , "userRecipient_id" : 1 , "content" : "Tin chuẩn chưa" , "type" : "text"}
+  ],
+  "roles" : [
+    {"id":0,"role_name":"user"},
+    {"id":1,"role_name":"admin"}
+  ],
+  "permissions" : [
+    {"id":0,"per_name":"view"},
+    {"id":1,"per_name":"delete_user"}
+  ],
+  "role_permission" : [
+    {"role_id" :1 , "per_id":1}
+  ],
+  "user_role" : [
+    {"user_id":1,"role_id":1}
+  ]
 }

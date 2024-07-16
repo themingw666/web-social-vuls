@@ -21,6 +21,7 @@ async function main() {
         await prisma.message.deleteMany();
         await prisma.video.deleteMany();
         await prisma.photo.deleteMany();
+        await prisma.document.deleteMany();
         await prisma.post_comment.deleteMany();
         await prisma.post.deleteMany();
         await prisma.user_info.deleteMany();
@@ -55,6 +56,11 @@ async function main() {
     const createManyPostComment = await prisma.post_comment.createMany(
         {
             data:data['post_comment']
+        }
+    )
+    const createManyDocument = await prisma.document.createMany(
+        {
+            data:data['document']
         }
     )
     const createManyPhoto =  await prisma.photo.createMany(

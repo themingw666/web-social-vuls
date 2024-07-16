@@ -3,8 +3,8 @@ const prisma = new PrismaClient()
 import ogs from 'open-graph-scraper';
 import moment from 'moment-timezone';
 import axios from 'axios'
-import path from 'path'
 import mammoth from 'mammoth'
+import mime from 'mime-types'
 
 const getLastestId = async function() {
     const LastestId = await prisma.post.findMany({
@@ -19,6 +19,20 @@ const getLastestId = async function() {
       return 1;
     }
 }
+
+/*const getLastestId = async function() {
+    const LastestId = await prisma.post.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+      take: 1,
+    });
+    if (LastestId.length > 0) {
+      return LastestId[0].id;
+    } else {
+      return 1;
+    }
+}*/
 
 const getHomePage = async (req,res) => {
     try {
@@ -40,6 +54,14 @@ const getHomePage = async (req,res) => {
             SELECT * FROM "post_comment" INNER JOIN "user_info" ON post_comment.authorid=user_info.userid WHERE postid=${data1[i].id} ORDER BY commentid ASC`
             if (data3[0]){
                 data1[i].comment = data3
+            }
+        }
+        //code fetch document data
+        for (let i = 0; i < data1.length; ++i) {
+            let data3 = await prisma.$queryRaw`
+            SELECT * FROM "document" INNER JOIN "post" ON document.postid=post.id WHERE postid=${data1[i].id} ORDER BY documentid ASC`
+            if (data3[0]){
+                data1[i].document = data3
             }
         }
 
@@ -131,21 +153,26 @@ const handleHome = async (req,res) =>{
         const LastestId = await getLastestId() + 1
 
         //document file
-        let document_data = "None", document_name = "None"
-        if (req.file) {
-            const ext = path.extname(req.file.originalname).toLowerCase();
-            if (ext === '.txt' || ext === '.xml') {
-                document_data = req.file.buffer.toString('utf-8')
-                document_name = req.file.originalname
+        let document_data = null, document_name = null, document_ext = null
+        if (req.files['docfile']) {
+            const file = req.files['docfile'][0]
+            document_name = file.originalname
+            document_ext = mime.extension(file.mimetype)
+            if (document_ext === 'txt' || document_ext === 'xml') {
+                document_data = file.buffer.toString('utf-8')
             } 
-            else if (ext === '.docx') {
-                document_data = await mammoth.extractRawText({ buffer: req.file.buffer })
+            else if (document_ext === 'doc' || document_ext === 'docx') {
+                document_data = await mammoth.extractRawText({ buffer: file.buffer })
                 document_data = document_data.value
-                document_name = req.file.originalname
             }
         }
-        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, document_name, document_data, viewingobject, url, view_image, description) 
-        VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', ${document_name}, ${document_data}, 'Public', ${url}, ${view_image}, ${description});`
+        /*if (req.files['imagefile']) {
+            console.log(req.files['imagefile'])
+        }*/
+        await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
+        VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
+        await prisma.$queryRaw`INSERT INTO \"document\" (postid, document_name, document_data, document_ext)
+        VALUES (${LastestId}, ${document_name}, ${document_data}, ${document_ext});`
         if (setting.status === 'Hard') {
             return res.send(html6);
         }

@@ -44,6 +44,14 @@ const getStatusPage = async (req,res) => {
                 }
             }
         }
+        //code fetch document data
+        for (let i = 0; i < data1.length; ++i) {
+            let data3 = await prisma.$queryRaw`
+            SELECT * FROM "document" INNER JOIN "post" ON document.postid=post.id WHERE postid=${data1[i].id} ORDER BY documentid ASC`
+            if (data3[0]){
+                data1[i].document = data3
+            }
+        }
 
         //handle time
         const now = new Date()
@@ -91,9 +99,9 @@ const documentfile = async (req,res) => {
         return res.render('timelineerror', {data: "id is not valid"})
 
     try {
-        const result = await prisma.post.findUnique({
+        const result = await prisma.document.findUnique({
             where: {
-            id: id1,
+            documentid: id1,
             },
         })
         if (result === null)
@@ -102,8 +110,7 @@ const documentfile = async (req,res) => {
         //xxe vul
         try {
             let data
-            const ext = result.document_name.split('.').pop().toLowerCase();
-            if (ext === 'xml') {
+            if (result.document_ext === 'xml') {
                 const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XXE'`
                 if (setting.status === 'Easy' || setting.status === 'Medium' ){
                     const xmlDoc = libxmljs.parseXml(result.document_data, {

@@ -44,6 +44,14 @@ async function getTimelinePage(req,res){
                 if (data3[0])
                     data1[i].comment = data3
             }
+            //code fetch document data
+            for (let i = 0; i < data1.length; ++i) {
+                let data3 = await prisma.$queryRaw`
+                SELECT * FROM "document" INNER JOIN "post" ON document.postid=post.id WHERE postid=${data1[i].id} ORDER BY documentid ASC`
+                if (data3[0]){
+                    data1[i].document = data3
+                }
+            }
 
             //handle time
             const now = new Date()
@@ -116,6 +124,14 @@ async function getTimelinePage(req,res){
                 SELECT * FROM "post_comment" INNER JOIN "user_info" ON post_comment.authorid=user_info.userid WHERE postid=${data1[i].id} ORDER BY commentid ASC`
                 if (data3[0])
                     data1[i].comment = data3
+            }
+            //code fetch document data
+            for (let i = 0; i < data1.length; ++i) {
+                let data3 = await prisma.$queryRaw`
+                SELECT * FROM "document" INNER JOIN "post" ON document.postid=post.id WHERE postid=${data1[i].id} ORDER BY documentid ASC`
+                if (data3[0]){
+                    data1[i].document = data3
+                }
             }
 
             //handle time

@@ -8,6 +8,6 @@ const upload = multer({storage: multer.memoryStorage()});
 //const upload = multer({ dest: 'uploads/' });
 
 Route.get("/",homeController.getHomePage)
-Route.post("/",upload.single('docfile'),homeController.handleHome)
+Route.post("/",upload.fields([{ name: 'docfile' }, { name: 'imagefile' }]),homeController.handleHome)
 
 export default Route

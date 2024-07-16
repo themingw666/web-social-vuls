@@ -172,10 +172,12 @@
                         <div class="sm:px-4 p-2.5 pt-0">
                             <p class="font-normal" style="word-wrap: break-word;"> <%= value.content %> </p>
                             
-                            <% if (value.document_name !== 'None' && value.document_data !== 'None') { %>
-                            <a href="/statuspost/file/<%= value.id %> " target="_blank">
-                                File: <%= value.document_name %>
+                            <% if (value.document) { %>
+                            <% for (const value1 of value.document) { %>
+                            <a href="/statuspost/file/<%= value1.documentid %> " target="_blank">
+                                File: <%= value1.document_name %>
                             </a>
+                            <% } %>
                             <% } %>
 
                             <% if (value.url !== 'None') { %>
