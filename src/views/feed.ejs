@@ -17,9 +17,8 @@
                     
                         <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
                             <li class="md:pr-3" uk-scrollspy-class="uk-animation-fade">
-                                <div class="md:w-16 md:h-16 w-12 h-12 rounded-full relative border-2 border-dashed grid place-items-center bg-slate-200 border-slate-300 dark:border-slate-700 dark:bg-dark2 shrink-0"
-                                        uk-toggle="target: #create-story">
-                                    <p style="font-size: 20px;">+</p>
+                                <div class="md:w-16 md:h-16 w-12 h-12 rounded-full relative border-2 border-dashed grid place-items-center bg-slate-200 border-slate-300 dark:border-slate-700 dark:bg-dark2 shrink-0" uk-toggle="target: #create-story" tabindex="0" aria-expanded="false">
+                                    <ion-icon name="camera" class="text-2xl md hydrated" role="img" aria-label="camera"></ion-icon>
                                 </div>
                             </li>
                             <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300">
@@ -193,7 +192,7 @@
                     <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
                         <div>
                             <div class="flex items-center gap-2.5">
-                                <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700"> <i class="fa-solid fa-heart-circle-bolt" style="font-size:20px"></i> </button>
+                                <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700"> <ion-icon class="text-lg md hydrated" name="heart" role="img" aria-label="heart"></ion-icon> </button>
                                 <a href="#">0</a>
                             </div>
                             <div    class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl"
@@ -211,7 +210,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700"> <i style="font-size:20px" class="fa-solid fa-comment"></i> </button>
+                            <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700"> <ion-icon class="text-lg md hydrated" name="chatbubble-ellipses" role="img" aria-label="chatbubble ellipses"></ion-icon> </button>
                             <span>0</span>
                         </div>
                         <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="paper-plane-outline"></ion-icon> </button>
