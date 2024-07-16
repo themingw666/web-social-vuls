@@ -171,11 +171,19 @@
                         <p class="font-normal" style="word-wrap: break-word;"> <%= data1[i].content %> </p>
 
                         <% if (data1[i].document) { %>
-                        <% for (const value1 of data1[i].document) { %>
-                        <a href="/statuspost/file/<%= value1.documentid %> " target="_blank">
-                            File: <%= value1.document_name %>
-                        </a>
-                        <% } %>
+                            <% if (data1[i].document[0].document_filename === "None") { %>
+                                <% for (const value1 of data1[i].document) { %>
+                                <a href="/statuspost/file?id=<%= value1.documentid %> " target="_blank">
+                                    File: <%= value1.document_name %>
+                                </a>
+                                <% } %>
+                            <% } else { %>
+                                <% for (const value1 of data1[i].document) { %>
+                                <a href="/statuspost/file?id=<%= value1.document_filename %> " target="_blank">
+                                    File: <%= value1.document_name %>
+                                </a>
+                                <% } %>
+                            <% } %>
                         <% } %>
 
                         <% if (data1[i].url !== 'None') { %>

@@ -148,7 +148,7 @@
 
                                 <% if (value.document) { %>
                                 <% for (const value1 of value.document) { %>
-                                <a href="/statuspost/file/<%= value1.documentid %> " target="_blank">
+                                <a href="/statuspost/file?id=<%= value1.documentid %> " target="_blank">
                                     File: <%= value1.document_name %>
                                 </a>
                                 <% } %>

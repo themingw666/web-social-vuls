@@ -5,6 +5,11 @@ import moment from 'moment-timezone';
 import axios from 'axios'
 import mammoth from 'mammoth'
 import mime from 'mime-types'
+import path from "path"
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import fs from 'fs/promises'
 
 const getLastestId = async function() {
     const LastestId = await prisma.post.findMany({
@@ -153,26 +158,48 @@ const handleHome = async (req,res) =>{
         const LastestId = await getLastestId() + 1
 
         //document file
-        let document_data = null, document_name = null, document_ext = null
-        if (req.files['docfile']) {
-            const file = req.files['docfile'][0]
-            document_name = file.originalname
-            document_ext = mime.extension(file.mimetype)
-            if (document_ext === 'txt' || document_ext === 'xml') {
-                document_data = file.buffer.toString('utf-8')
-            } 
-            else if (document_ext === 'doc' || document_ext === 'docx') {
-                document_data = await mammoth.extractRawText({ buffer: file.buffer })
-                document_data = document_data.value
+        let document_data = null, document_name = null, document_ext = null, document_filename = "None"
+        
+        const [setting1] = await prisma.$queryRaw`Select status from vulnerable where name='OS Command Injection'`
+        //os command
+        if (setting1.status === 'Easy' || setting.status === 'Medium') {
+            if (req.files['docfile']) {
+                const file = req.files['docfile'][0]
+                document_filename = file.filename
+                document_name = file.originalname
+                document_ext = mime.extension(file.mimetype)
+                if (document_ext === 'txt' || document_ext === 'xml') {
+                    document_data = "None"
+                } 
+                else if (document_ext === 'doc' || document_ext === 'docx') {
+                    const path6 = path.join(__dirname, '../../uploads', document_filename)
+                    document_data = "None"
+                    document_data = await mammoth.extractRawText({ path: path6 })
+                    document_data = document_data.value
+                    await fs.writeFile(path6, document_data)
+                    document_data = "None"
+                }
             }
         }
-        /*if (req.files['imagefile']) {
-            console.log(req.files['imagefile'])
-        }*/
+        else {
+            if (req.files['docfile']) {
+                const file = req.files['docfile'][0]
+                document_name = file.originalname
+                document_ext = mime.extension(file.mimetype)
+                if (document_ext === 'txt' || document_ext === 'xml') {
+                    document_data = file.buffer.toString('utf-8')
+                } 
+                else if (document_ext === 'doc' || document_ext === 'docx') {
+                    document_data = await mammoth.extractRawText({ buffer: file.buffer })
+                    document_data = document_data.value
+                }
+            }
+        }
+        
         await prisma.$queryRaw`INSERT INTO \"post\" (id, authorid, content, create_at, feeling, checkin, image, video, viewingobject, url, view_image, description) 
         VALUES (${LastestId}, ${req.decoded.id}, ${content}, ${currentTime}, 'None', 'None', 'None', 'None', 'Public', ${url}, ${view_image}, ${description});`
-        await prisma.$queryRaw`INSERT INTO \"document\" (postid, document_name, document_data, document_ext)
-        VALUES (${LastestId}, ${document_name}, ${document_data}, ${document_ext});`
+        await prisma.$queryRaw`INSERT INTO \"document\" (postid, document_name, document_data, document_ext, document_filename)
+        VALUES (${LastestId}, ${document_name}, ${document_data}, ${document_ext}, ${document_filename});`
         if (setting.status === 'Hard') {
             return res.send(html6);
         }

@@ -2,6 +2,11 @@ import { prisma } from '../config/prisma.js';
 import pug from 'pug';
 import libxmljs from 'libxmljs'
 import { XMLParser } from 'fast-xml-parser';
+import path from "path"
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import { exec } from 'child_process';
 
 const getStatusPage = async (req,res) => {
     const id = req.params.id
@@ -90,60 +95,80 @@ const getStatusPage = async (req,res) => {
 }
 
 const documentfile = async (req,res) => {
-    const id = req.params.id
+    const { id } = req.query
     if (!id) {
         return res.render('timelineerror', {data: "Missing id parameter"})
     }
-    const id1 = Number(id)
-    if (isNaN(id1))
-        return res.render('timelineerror', {data: "id is not valid"})
+    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='OS Command Injection'`
+    
+    //os command
+    if (setting.status === 'Easy' || setting.status === 'Medium') {
+        
+        const filePath = path.join(__dirname, '../../uploads/').replace(/ /g, '\\ ')
+        exec(`cat ${filePath}${id}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Lỗi: ${error.message}`);
+                return res.status(500).send('Internal Server Error');
+            }
+            if (stderr) {
+                console.error(`Lỗi stderr: ${stderr}`);
+                return res.status(500).send('Internal Server Error');
+            }
+            return res.status(200).send(stdout)
+        });
+    }
+    else {
+        const id1 = Number(id)
+        if (isNaN(id1))
+            return res.render('timelineerror', {data: "id is not valid"})
 
-    try {
-        const result = await prisma.document.findUnique({
-            where: {
-            documentid: id1,
-            },
-        })
-        if (result === null)
-            next()
-
-        //xxe vul
         try {
-            let data
-            if (result.document_ext === 'xml') {
-                const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XXE'`
-                if (setting.status === 'Easy' || setting.status === 'Medium' ){
-                    const xmlDoc = libxmljs.parseXml(result.document_data, {
-                        replaceEntities: true,  
-                        dtdload: true 
-                    });
-                    data = xmlDoc.toString()
+            const result = await prisma.document.findUnique({
+                where: {
+                documentid: id1,
+                },
+            })
+            if (result === null)
+                next()
+
+            //xxe vul
+            try {
+                let data
+                if (result.document_ext === 'xml') {
+                    const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='XXE'`
+                    if (setting.status !== 'None' ){
+                        const xmlDoc = libxmljs.parseXml(result.document_data, {
+                            replaceEntities: true,  
+                            dtdload: true 
+                        });
+                        data = xmlDoc.toString()
+                    }
+                    else {
+                        const options = {
+                            ignoreDTD: true,
+                            ignoreEntityReferences: true,
+                            entityProcessors: {
+                                generalEntity: { maxRepetition: 10 },
+                                parameterEntity: { maxRepetition: 10 }
+                            }
+                        };
+                        const parser = new XMLParser(options);
+                        const jsonObj = await parser.parse(result.document_data);
+                        data = JSON.stringify(jsonObj, null, 2)
+                    }
                 }
                 else {
-                    const options = {
-                        ignoreDTD: true,
-                        ignoreEntityReferences: true,
-                        entityProcessors: {
-                            generalEntity: { maxRepetition: 10 },
-                            parameterEntity: { maxRepetition: 10 }
-                        }
-                    };
-                    const parser = new XMLParser(options);
-                    const jsonObj = await parser.parse(result.document_data);
-                    data = JSON.stringify(jsonObj, null, 2)
+                    data = result.document_data
                 }
-            }
-            else {
-                data = result.document_data
-            }
-            return res.status(200).send(data);
+                return res.status(200).send(data);
 
-        } catch (parseError) {
-            return res.status(500).send('Error parsing XML file.');
+            } catch (parseError) {
+                return res.status(500).send('Error parsing XML file.');
+            }
+
+        } catch (error) {
+            return res.render('timelineerror', {data: "File not found"})
         }
-
-    } catch (error) {
-        return res.render('timelineerror', {data: "File not found"})
     }
 }
 

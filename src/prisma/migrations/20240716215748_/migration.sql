@@ -31,8 +31,6 @@ CREATE TABLE "post" (
     "feeling" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "video" TEXT NOT NULL,
-    "document_name" TEXT NOT NULL,
-    "document_data" TEXT NOT NULL,
     "viewingobject" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "view_image" TEXT NOT NULL,
@@ -49,6 +47,18 @@ CREATE TABLE "post_comment" (
     "content" TEXT NOT NULL,
 
     CONSTRAINT "post_comment_pkey" PRIMARY KEY ("commentid")
+);
+
+-- CreateTable
+CREATE TABLE "document" (
+    "documentid" SERIAL NOT NULL,
+    "document_name" TEXT NOT NULL,
+    "document_data" TEXT NOT NULL,
+    "document_ext" TEXT NOT NULL,
+    "document_filename" TEXT NOT NULL,
+    "postid" INTEGER NOT NULL,
+
+    CONSTRAINT "document_pkey" PRIMARY KEY ("documentid")
 );
 
 -- CreateTable
@@ -149,6 +159,9 @@ ALTER TABLE "post_comment" ADD CONSTRAINT "post_comment_postid_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "post_comment" ADD CONSTRAINT "post_comment_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "document" ADD CONSTRAINT "document_postid_fkey" FOREIGN KEY ("postid") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "story" ADD CONSTRAINT "story_authorid_fkey" FOREIGN KEY ("authorid") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -52,8 +52,8 @@
     {"authorid" :4,"postid":11,"content" :"tuyệt vời!!"}
   ],
   "document" : [
-    {"postid":1,"document_name" :"xxe.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml"},
-    {"postid":13,"document_name" :"secret.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml"}
+    {"postid":1,"document_name" :"xxe.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml", "document_filename":"None"},
+    {"postid":13,"document_name" :"secret.xml", "document_data": "<?xml version=\"1.0\"?>\n<!DOCTYPE foo [ <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> ]>\n<root>\n    <option>&xxe;</option>\n</root>", "document_ext": "text/xml", "document_filename":"None"}
   ],
   "photo" : [
     {"url" : "https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},

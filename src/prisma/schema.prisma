@@ -66,6 +66,7 @@ model document {
   document_name String
   document_data String
   document_ext  String
+  document_filename String
   postid        Int
   doc           post   @relation(fields: [postid], references: [id])
 }
