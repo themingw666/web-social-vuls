@@ -5,8 +5,8 @@ while ! npx prisma migrate dev 2>&1; do
     sleep 3
 done
 
-echo "App is running....."
-
+echo "Fakedata and run app"
+node ./src/helper/initdata.js
 node ./node_modules/.bin/babel-node ./src/app.js
 
 sleep 3

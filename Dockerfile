@@ -4,7 +4,7 @@ WORKDIR /usr/app
 
 COPY . .
 
-RUN npm install --package-lock --omit=dev
+RUN npm install
 
 RUN npm update
 

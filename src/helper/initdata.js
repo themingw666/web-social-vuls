@@ -105,6 +105,8 @@ async function main() {
     )
     let datapro = JSON.stringify(data['user']) + JSON.stringify(data['user_info']) + JSON.stringify(data['post']) + JSON.stringify(data['photo']) + JSON.stringify(data['video']) + JSON.stringify(data['vulnerable']); 
     return datapro
-} 
+}
+
+main()
 
 export {main}

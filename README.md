@@ -65,4 +65,11 @@ Go to: [localhost:80/settings](http:localhost:80/settings)
 - Easy, Hard: Update bio function - http://localhost:80/setting
 - Hard: Comment status post only function - http://localhost:80/statuspost?id=12
 
+### XXE
+- Easy, Medium, Hard: Post xml file
+
+### OS Command Injection
+- Easy, Medium: Post document file
+- Hard: Update email function - http://localhost:80/setting
+
 <!-- Enable babel: "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js" -->

@@ -21,7 +21,7 @@ const userAuth = async (req,res,next) => {
       });
     }
     try{
-      if(req.path === '/fakedata' || req.path.includes('/settings') || req.path.includes('/form-register')
+      if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/form-register')
         || (req.path === '/form-login' && (!key || !value)) ){
          next()
       }
@@ -41,7 +41,7 @@ const userAuth = async (req,res,next) => {
               url = header.jku
             }
             else {
-              url = "http://localhost:3000/.well-known/jwks.json"
+              url = `http://localhost:${process.env.PORT}/.well-known/jwks.json`
             }
             await axios.get(url)
               .then(response => {
