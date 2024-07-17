@@ -1,23 +1,68 @@
+### My website: 
+- [167.71.204.247](http://167.71.204.247)
+    - Email: minhdz@gmail.com
+    - Password: admin123
+
+- Reset data: [167.71.204.247:80/fakedata666666888888](http:167.71.204.247:80/fakedata666666888888)
 
 ## Installation
 
-### Step 1
+### Step 1 - Clone project
 ```
-git clone git@github.com:pentest-khoa-02/Group1.git
+git clone https://github.com/themingw666/web-social-vuls.git
 ```
 
-### Step 2
+### Step 2 - Run docker
 Running
 ```
-docker-compose up --build
+docker compose up --build
 ```
 
-### Step 3
-Go to: [localhost:3000/fakedata](http:localhost:3000/fakedata)
+### Step 3 - Reset data
+Go to: [localhost:80/fakedata666666888888](http:localhost:80/fakedata666666888888)
 
-### Step 4
-Go to: [localhost:3000/settings](http:localhost:3000/settings)
+### Step 4 - Choose the vulnerability
+Go to: [localhost:80/settings](http:localhost:80/settings)
 
-![Alt text](src/public/assets/images/image.png)
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image.png" width="666px">
+</p>
+
+## Review website and vulnerabilities
+
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image2.png" width="666px">
+</p>
+
+<p align="center">
+<img src="https://github.com/themingw666/web-social-vuls/blob/main/src/public/assets/image1.png" width="666px">
+</p>
+
+### SQL Injection
+- Easy: Search function - http://localhost:80/search?name=minh
+- Medium: Timeline page - http://localhost:80/timeline?id=666666
+- Hard: Login function - http://localhost:80/form-login
+
+### JWT
+- Easy, Medium, Hard: Authentication function
+
+### SSRF
+- Easy, Medium: Export profile function - http://localhost:80/timeline?id=666666
+- Hard: Post status function
+
+### XSS
+- Easy: Chat function - http://localhost:80/messages
+- Medium, Hard: Comment status function
+
+### Broken Authentication
+- Easy, Medium: Setting function - http://localhost:80/setting?id=666666
+- Hard: /admin Route
+
+### CSRF
+- Easy, Medium, Hard: Update email function - http://localhost:80/setting
+
+### SSTI
+- Easy, Hard: Update bio function - http://localhost:80/setting
+- Hard: Comment status post only function - http://localhost:80/statuspost?id=12
 
 <!-- Enable babel: "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js" -->
