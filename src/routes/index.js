@@ -39,6 +39,7 @@ import commentpostRoute from "./commentpostRoute.js"
 import adminRoute from "./admin-panelRoute.js"
 import Adminmiddlware from "../middleware/isAdmin.js"
 import registerRoute from "./registerRoute.js"
+import forgotpasswordRoute from "./forgotpasswordRoute.js"
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -80,6 +81,7 @@ Route.use("/messageDetail", messageDetailRoute)
 Route.use("/statuspost", statuspostRoute)
 Route.use("/commentpost", commentpostRoute)
 Route.use("/admin",adminRoute)
+Route.use("/forgot-password",forgotpasswordRoute)
 Route.use("/", feedRoute)
 
 export default Route

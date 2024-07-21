@@ -116,7 +116,7 @@ async function getTimelinePage(req,res){
             
             //my data (name + avatar)
             let data2 = await prisma.$queryRaw`SELECT * FROM \"user_info\" WHERE userid=${req.decoded.id}`
-            
+
             //code fetch comment data
             for (let i = 0; i < data1.length; ++i) {
                 //data3 is comment (add data3 to data1)

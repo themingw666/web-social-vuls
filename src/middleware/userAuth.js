@@ -21,7 +21,7 @@ const userAuth = async (req,res,next) => {
       });
     }
     try{
-      if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/form-register')
+      if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/form-register') || req.path.includes('/forgot-password')
         || (req.path === '/form-login' && (!key || !value)) ){
          next()
       }
@@ -77,6 +77,7 @@ const userAuth = async (req,res,next) => {
           if (result !== null){
               next()
           }
+          else return res.clearCookie('jwt').redirect('/form-login')
       }
     } catch (error) {
         return res.clearCookie('jwt').redirect('/form-login')
