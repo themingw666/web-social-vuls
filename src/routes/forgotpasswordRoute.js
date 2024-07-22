@@ -21,6 +21,7 @@ Route.post('/vertify', dataMiddleware, forgotpasswordController.handle_vertify)
 Route.get('/reset', dataMiddleware, forgotpasswordController.index_reset)
 Route.post('/reset', dataMiddleware, forgotpasswordController.handle_reset)
 Route.post('/check', forgotpasswordController.check)
+Route.get('/checkout',forgotpasswordController.checkout)
 Route.get('/',forgotpasswordController.index)
 Route.post('/', dataMiddleware, forgotpasswordController.handle)
 
