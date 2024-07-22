@@ -11,6 +11,9 @@ const handle = async (req,res) => {
 }
 
 const index_vertify = async (req,res) => {
+    if (!req.session.email) {
+        return res.redirect('/form-login')
+    }
     return res.render('forgot-password-vertify', { layout: false })
 }
 
@@ -26,6 +29,9 @@ const handle_vertify = async (req,res) => {
 }
 
 const index_reset = async (req,res) => {
+    if (!req.session.email) {
+        return res.redirect('/form-login')
+    }
     return res.render('forgot-password-reset', { layout: false })
 }
 
@@ -33,7 +39,6 @@ const handle_reset = async (req,res) => {
     try {
         //change password
         const email = req.session.email;
-        req.session.email = null;
         const password = req.body.password;
         await prisma.user.update({
             where: {
@@ -53,6 +58,10 @@ const handle_reset = async (req,res) => {
 }
 
 const checkout = async (req,res) => {
+    if (!req.session.email) {
+        return res.redirect('/form-login')
+    }
+    delete req.session.email
     return res.render('forgot-password-checkout', { layout: false })
 }
 

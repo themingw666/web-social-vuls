@@ -22,7 +22,6 @@ const getLastestId = async function() {
 }
 
 const handleRegister = async (req,res) =>{
-    
     try {
         const LastestId = await getLastestId() + 1
         const {firstname, lastname, email, username, password} = await req.body
@@ -32,7 +31,8 @@ const handleRegister = async (req,res) =>{
         //console.log(faker.company.name(), faker.location.city(), faker.person.jobTitle(), faker.lorem.sentence())
         await prisma.$queryRaw`INSERT INTO \"user_info\" (firstname, lastname, university, live, job, avatar, userid, bio)
         VALUES (${firstname}, ${lastname}, ${faker.company.name()}, ${faker.location.city()}, ${faker.person.jobTitle()}, 'https://i.imgur.com/g66u9dV.jpeg', ${LastestId} ,${faker.lorem.sentence()})`
-        return res.redirect('/login')
+        
+        return res.redirect('/form-register/checkout')
 
     } catch (err) {
         return res.status(500).send({ error: 'Internal Server Error' });
@@ -40,7 +40,7 @@ const handleRegister = async (req,res) =>{
 
 }
 
-const checkemail = async (req,res) =>{
+const checkdata = async (req,res) =>{
     try {
         const { email, username } = req.body;
         const data1 = await prisma.user.findUnique({
@@ -63,4 +63,12 @@ const checkemail = async (req,res) =>{
     }
 }
 
-export default {getRegisterPage, handleRegister, checkemail}
+const checkout = async (req,res) =>{
+    if (!req.session.email) {
+        return res.redirect('/form-login')
+    }
+    delete req.session.email
+    return res.render('form-register-checkout', { layout: false })
+}
+
+export default {getRegisterPage, handleRegister, checkdata, checkout}
