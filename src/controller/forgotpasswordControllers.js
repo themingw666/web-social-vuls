@@ -7,6 +7,9 @@ const index = async (req,res) => {
 }
 
 const handle = async (req,res) => {
+    if (req.session.captcha) {
+        delete req.session.captcha
+    }
     return res.redirect('/forgot-password/vertify')
 }
 
@@ -54,7 +57,6 @@ const handle_reset = async (req,res) => {
     } catch (error) {
         return res.status(500).send('Internal Server Error');
     }
-    
 }
 
 const checkout = async (req,res) => {
@@ -73,9 +75,9 @@ const check = async (req,res) => {
             email: email,
             },
         })
-        
-        const emailExists = (data !== null)
-        return res.json({ emailExists: emailExists });
+        const emailExists = (data === null)
+        const captchaExists = (req.body.captcha !== req.session.captcha)
+        return res.json({ emailExists: emailExists, captchaExists: captchaExists });
 
     } catch (err) {
         console.error(err);

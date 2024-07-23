@@ -23,6 +23,9 @@ const getLastestId = async function() {
 
 const handleRegister = async (req,res) =>{
     try {
+        if (req.session.captcha) {
+            delete req.session.captcha
+        }
         const LastestId = await getLastestId() + 1
         const {firstname, lastname, email, username, password} = await req.body
         await prisma.$queryRaw`INSERT INTO \"user\" (id, username, email, password, passwordnotsecret)
@@ -38,17 +41,17 @@ const handleRegister = async (req,res) =>{
 
 }
 
-const checkdata = async (req,res) =>{
+const check = async (req,res) =>{
     try {
         const { email, username } = req.body;
         const data1 = await prisma.user.findUnique({
             where: {
-            email: email,
+                email: email,
             },
         })
         const data2 = await prisma.user.findUnique({
             where: {
-            username: username,
+                username: username,
             },
         })
         const emailExists = (data1 !== null)
@@ -70,4 +73,4 @@ const checkout = async (req,res) =>{
     return res.render('register-checkout', { layout: false })
 }
 
-export default {getRegisterPage, handleRegister, checkdata, checkout}
+export default {getRegisterPage, handleRegister, check, checkout}

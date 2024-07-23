@@ -22,7 +22,7 @@ const userAuth = async (req,res,next) => {
     }
     try{
       if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/register') || req.path.includes('/forgot-password')
-        || req.path === '/captcha' || (req.path.includes('/login') && (!key || !value)) ){
+        || req.path === '/captcha' || req.path.includes('/check-data') || (req.path.includes('/login') && (!key || !value)) ){
          next()
       }
        else {

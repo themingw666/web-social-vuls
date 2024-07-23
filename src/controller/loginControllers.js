@@ -16,8 +16,12 @@ const getLoginPage = async (req,res) =>{
 }
 
 const handleLogin = async (req,res) =>{
-    const {email,password,rememberme} = await req.body
-    try{
+    try {
+      const {email,password,rememberme} = await req.body
+      if (req.session.captcha) {
+        delete req.session.captcha
+      }
+
       //check setting 
       const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='SQL Injection'`
       let result
@@ -28,11 +32,7 @@ const handleLogin = async (req,res) =>{
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 
-      let error
-      if (req.body.captcha !== req.session.captcha) {
-        return res.render('login', { layout: false , error: {message : "Incorrect CAPTCHA, please try again."}})
-      }
-      else if (result.length == 0 || md5(password) !== result[0].password) {
+      if (result.length == 0 || md5(password) !== result[0].password) {
         return res.render('login', { layout: false , error: {message : "Email or Password is incorrect !"}})
       }
       else {
@@ -99,8 +99,20 @@ const handleLogin = async (req,res) =>{
       const error = {
         message : "Email or Password is incorrect !"
     }
-   return res.render('login', { layout: false ,error:error})
+    return res.render('login', { layout: false ,error:error})
     }
 }
 
-export default {getLoginPage, handleLogin}
+const check = async (req,res) =>{
+  try {
+      const captchaExists = (req.body.captcha !== req.session.captcha)
+      delete req.session.captcha
+      return res.json({ captchaExists: captchaExists });
+
+  } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+export default {getLoginPage, handleLogin, check}

@@ -9,7 +9,7 @@ const dataMiddleware = (req, res, next) => {
     next();
 };
 
-Route.post("/check-data",registerController.checkdata)
+Route.post("/check-data",registerController.check)
 Route.get("/checkout", dataMiddleware, registerController.checkout)
 Route.get("/",registerController.getRegisterPage)
 Route.post("/", dataMiddleware, registerController.handleRegister)

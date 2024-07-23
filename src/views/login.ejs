@@ -31,8 +31,8 @@
       <div class="w-full lg:max-w-sm mx-auto space-y-10" uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
 
         <!-- logo image-->
-        <a href="#"> <img src="/assets/images/logo.png" class="w-28 absolute top-10 left-10 dark:hidden" alt=""></a>
-        <a href="#"> <img src="/assets/images/logo-light.png" class="w-28 absolute top-10 left-10 hidden dark:!block" alt=""></a>
+        <a href="/"> <img src="/assets/images/logo.png" class="w-28 absolute top-10 left-10 dark:hidden" alt=""></a>
+        <a href="/"> <img src="/assets/images/logo-light.png" class="w-28 absolute top-10 left-10 hidden dark:!block" alt=""></a>
 
         <!-- logo icon optional -->
         <div class="hidden">
@@ -103,6 +103,10 @@
                 <label for="captcha" class=""></label>
                 <div class="mt-2.5">
                   <input id="captcha" name="captcha" type="text" placeholder="Enter CAPTCHA" required maxlength="4" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+                  <!-- Error Message -->
+                  <div id="captcha-error" class="error-message" style="color: red; display: none; margin-top: 0.5rem;">
+                    Incorrect CAPTCHA, please try again.
+                  </div>
                 </div>
             </div>
           </div>
@@ -125,7 +129,40 @@
             <button type="submit" class="button bg-primary text-white w-full">Sign in</button>
           </div>
 
-         
+          <script>
+            document.getElementById('loginForm').addEventListener('submit', validateForm);
+        
+            function validateForm(event) {
+              event.preventDefault();
+        
+              var captcha = document.getElementById('captcha').value;
+              var captchaError = document.getElementById('captcha-error');
+
+              if (captcha) {
+                fetch('/login/check-data', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ captcha:captcha })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.captchaExists) {
+                    captchaError.style.display = 'block';
+                    document.getElementById('captchaImg').src = '/captcha?' + new Date().getTime();
+                    return
+                  } else {
+                    captchaError.style.display = 'none';
+                    event.target.submit();
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                });
+              }
+            }
+          </script>
 
           <div class="text-center flex items-center gap-6"> 
             <hr class="flex-1 border-slate-200 dark:border-slate-800"> 
