@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from demo.foxthemes.net/socialite-v3.0/form-register  by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Mar 2024 13:26:12 GMT -->
+<!-- Mirrored from demo.foxthemes.net/socialite-v3.0/register  by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Mar 2024 13:26:12 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,12 +42,12 @@
         <!-- title -->
         <div>
           <h2 class="text-2xl font-semibold mb-1.5"> Sign up to get started </h2>
-          <p class="text-sm text-gray-700 font-normal">If you already have an account, <a href="form-login " class="text-blue-700">Login here!</a></p>
+          <p class="text-sm text-gray-700 font-normal">If you already have an account, <a href="/login " class="text-blue-700">Login here!</a></p>
         </div>
  
 
         <!-- form -->
-        <form method="post" action="/form-register" id="registerForm" class="space-y-7 text-sm text-black font-medium dark:text-white"  uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
+        <form method="post" action="/register" id="registerForm" class="space-y-7 text-sm text-black font-medium dark:text-white"  uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
             
           <div class="grid grid-cols-2 gap-4 gap-y-7">
      
@@ -116,7 +116,7 @@
                   const moo = document.getElementById('captchaImg');
 
                   moo.style.pointerEvents = 'none';
-                  moo.src = '/form-login/captcha';
+                  moo.src = '/captcha';
 
                   function handler(event) {
                       event = event || window.event;
@@ -134,18 +134,18 @@
                   moo.onmousedown = handler;
                   moo.onmouseup = handler;
                 })
-
               </script>
-              <!-- Error Message -->
-              <div id="password-error" class="error-message" style="color: red; display: none; margin-top: 0.5rem;">
-                Password do not match.
-              </div>
-            </div>
 
+            </div>
+            
             <div class="flex items-center justify-center">
               <label for="email" class=""></label>
               <div class="mt-2.5">
                 <input id="captcha" name="captcha" type="text" placeholder="Enter CAPTCHA" required maxlength="4" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+                <!-- Error Message -->
+                <div id="captcha-error" class="error-message" style="color: red; display: none; margin-top: 0.5rem;">
+                  Incorrect CAPTCHA, please try again.
+                </div>
               </div>
             </div>
             
@@ -157,7 +157,6 @@
               </label>
               
             </div>
-
 
             <!-- submit button -->
             <div class="col-span-2">
@@ -177,36 +176,56 @@
                 var passwordError = document.getElementById('password-error');
                 var username = document.getElementById('username').value;
                 var usernameError = document.getElementById('username-error');
+                var captcha = document.getElementById('captcha').value;
+                var captchaError = document.getElementById('captcha-error');
           
-                if (password !== confirmPassword) {
-                  passwordError.style.display = 'block';
-                } else {
+                function noneError(){
+                  captchaError.style.display = 'none';
                   passwordError.style.display = 'none';
+                  emailError.style.display = 'none';
+                  usernameError.style.display = 'none';
                 }
-          
-                if (email && username) {
-                  fetch('/form-register/check-data', {
+
+                if (email && username && captcha) {
+                  fetch('/register/check-data', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: email, username: username })
+                    body: JSON.stringify({ email: email, username: username, captcha:captcha })
                   })
                   .then(response => response.json())
                   .then(data => {
+                    if (data.captchaExists) {
+                      captchaError.style.display = 'block';
+                      document.getElementById('captchaImg').src = '/captcha?' + new Date().getTime();
+                      return
+                    } else {
+                      noneError()
+                    }
+
+                    if (password !== confirmPassword) {
+                      passwordError.style.display = 'block';
+                      return
+                    } else {
+                      noneError()
+                    }
+
                     if (data.emailExists) {
                       emailError.style.display = 'block';
+                      return
                     } else {
-                      emailError.style.display = 'none';
+                      noneError()
                     }
 
                     if (data.usernameExists) {
                       usernameError.style.display = 'block';
+                      return
                     } else {
-                      usernameError.style.display = 'none';
+                      noneError()
                     }
 
-                    if (!data.emailExists && !data.usernameExists && password === confirmPassword) {
+                    if (!data.captchaExists && password === confirmPassword && !data.emailExists && !data.usernameExists) {
                       event.target.submit();
                     }
                   })
@@ -313,5 +332,5 @@
 
 </body>
 
-<!-- Mirrored from demo.foxthemes.net/socialite-v3.0/form-register  by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Mar 2024 13:26:12 GMT -->
+<!-- Mirrored from demo.foxthemes.net/socialite-v3.0/register  by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Mar 2024 13:26:12 GMT -->
 </html>

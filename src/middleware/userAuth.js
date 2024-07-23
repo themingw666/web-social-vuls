@@ -21,8 +21,8 @@ const userAuth = async (req,res,next) => {
       });
     }
     try{
-      if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/form-register') || req.path.includes('/forgot-password')
-        || (req.path.includes('/form-login') && (!key || !value)) ){
+      if(req.path === '/fakedata666666888888' || req.path.includes('/settings') || req.path.includes('/register') || req.path.includes('/forgot-password')
+        || req.path === '/captcha' || (req.path.includes('/login') && (!key || !value)) ){
          next()
       }
        else {
@@ -72,15 +72,15 @@ const userAuth = async (req,res,next) => {
                 username: username,
               },
           })
-          if (req.path === '/form-login')
+          if (req.path === '/login')
             return res.redirect("/")
           if (result !== null){
               next()
           }
-          else return res.clearCookie('jwt').redirect('/form-login')
+          else return res.clearCookie('jwt').redirect('/login')
       }
     } catch (error) {
-        return res.clearCookie('jwt').redirect('/form-login')
+        return res.clearCookie('jwt').redirect('/login')
     }
 }
 

@@ -146,7 +146,7 @@ const getSettingPage = async (req,res) =>{
                         res.status(500).send('An error occurred while rendering the page');
                     } else {
                         res.clearCookie('jwt')
-                        res.set('Location', '/form-login');
+                        res.set('Location', '/login');
                         res.status(302).send(html);
                     }
                 });

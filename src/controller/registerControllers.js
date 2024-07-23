@@ -4,7 +4,7 @@ import md5 from 'md5'
 import { faker } from '@faker-js/faker/locale/vi';
 
 const getRegisterPage = async (req,res) =>{
-    return res.render('form-register', { layout: false })
+    return res.render('register', { layout: false })
 }
 
 const getLastestId = async function() {
@@ -25,14 +25,12 @@ const handleRegister = async (req,res) =>{
     try {
         const LastestId = await getLastestId() + 1
         const {firstname, lastname, email, username, password} = await req.body
-        //console.log(firstname, lastname, email, username, password, LastestId)
         await prisma.$queryRaw`INSERT INTO \"user\" (id, username, email, password, passwordnotsecret)
         VALUES (${LastestId}, ${username}, ${email}, ${md5(password)}, ${password})`
-        //console.log(faker.company.name(), faker.location.city(), faker.person.jobTitle(), faker.lorem.sentence())
         await prisma.$queryRaw`INSERT INTO \"user_info\" (firstname, lastname, university, live, job, avatar, userid, bio)
         VALUES (${firstname}, ${lastname}, ${faker.company.name()}, ${faker.location.city()}, ${faker.person.jobTitle()}, 'https://i.imgur.com/g66u9dV.jpeg', ${LastestId} ,${faker.lorem.sentence()})`
         
-        return res.redirect('/form-register/checkout')
+        return res.redirect('/register/checkout')
 
     } catch (err) {
         return res.status(500).send({ error: 'Internal Server Error' });
@@ -55,7 +53,8 @@ const checkdata = async (req,res) =>{
         })
         const emailExists = (data1 !== null)
         const usernameExists = (data2 !== null)
-        return res.json({ emailExists: emailExists, usernameExists: usernameExists });
+        const captchaExists = (req.body.captcha !== req.session.captcha)
+        return res.json({ emailExists: emailExists, usernameExists: usernameExists, captchaExists: captchaExists });
 
     } catch (err) {
         console.error(err);
@@ -65,10 +64,10 @@ const checkdata = async (req,res) =>{
 
 const checkout = async (req,res) =>{
     if (!req.session.email) {
-        return res.redirect('/form-login')
+        return res.redirect('/login')
     }
     delete req.session.email
-    return res.render('form-register-checkout', { layout: false })
+    return res.render('register-checkout', { layout: false })
 }
 
 export default {getRegisterPage, handleRegister, checkdata, checkout}

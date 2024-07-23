@@ -8,7 +8,7 @@ async function mytimeline(req,res){
 
 async function logout(req,res){
     res.clearCookie('csrfToken')
-    return res.clearCookie('jwt').redirect('/form-login')
+    return res.clearCookie('jwt').redirect('/login')
 }
 
 async function pagedata(req,res){

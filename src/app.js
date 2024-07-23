@@ -13,6 +13,7 @@ import initWebsocket from "./config/websocket.js"
 import { csrfProtection } from './middleware/csrfProtection.js'
 import {PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
+import session from 'express-session'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -22,6 +23,13 @@ const port = process.env.PORT || 3000
 //config view 
 configViewEngine(app,__dirname)
 initWebsocket()
+
+//use session data
+app.use(session({
+    secret: '666666',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 //get cookie
 app.use(cookieParser());

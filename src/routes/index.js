@@ -40,6 +40,7 @@ import adminRoute from "./admin-panelRoute.js"
 import Adminmiddlware from "../middleware/isAdmin.js"
 import registerRoute from "./registerRoute.js"
 import forgotpasswordRoute from "./forgotpasswordRoute.js"
+import captchaRoute from "./captchaRoute.js"
 const Route = express.Router()
 
 Route.use("/feed",feedRoute)
@@ -57,8 +58,8 @@ Route.use("/event-2",event2Route)
 Route.use("/groups-2",group2Route)
 Route.use("/timeline",timelineRoute)
 Route.use("/setting",settingRoute)
-Route.use("/form-login",loginRoute)
-Route.use("/form-register",registerRoute)
+Route.use("/login",loginRoute)
+Route.use("/register",registerRoute)
 Route.use("/export",exportRoute)
 Route.use("/upgrade",upgradeRoute)
 Route.use("/components",componentRoute)
@@ -82,6 +83,7 @@ Route.use("/statuspost", statuspostRoute)
 Route.use("/commentpost", commentpostRoute)
 Route.use("/admin",adminRoute)
 Route.use("/forgot-password",forgotpasswordRoute)
+Route.use("/captcha",captchaRoute)
 Route.use("/", feedRoute)
 
 export default Route
