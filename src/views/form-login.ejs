@@ -56,11 +56,54 @@
                   <input id="email" name="email" type="email" autofocus=""  placeholder="Email" required="" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"> 
               </div>
           </div>
+
           <!-- password -->
           <div>
             <label for="email" class="">Password</label>
             <div class="mt-2.5">
                 <input id="password" name="password" type="password" placeholder="***"  class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+            </div>
+          </div>
+
+          <!-- CAPTCHA -->
+          <div class="flex space-x-4 mt-4">
+            <div class="flex-1">
+                <label for="captcha" class="">CAPTCHA verify</label>
+                <div class="mt-2.5">
+                  <img id="captchaImg" alt="CAPTCHA" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+                </div>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const moo = document.getElementById('captchaImg');
+    
+                    moo.style.pointerEvents = 'none';
+                    moo.src = '/form-login/captcha';
+    
+                    function handler(event) {
+                        event = event || window.event;
+    
+                        if (event.stopPropagation)
+                            event.stopPropagation();
+    
+                        event.cancelBubble = true;
+                        return false;
+                    }
+    
+                    moo.innerHTML = 'right-click here';
+    
+                    moo.onclick = handler;
+                    moo.onmousedown = handler;
+                    moo.onmouseup = handler;
+                  })
+    
+                </script>
+            </div>
+            
+            <div class="flex-1 flex items-center">
+                <label for="captcha" class=""></label>
+                <div class="mt-2.5">
+                  <input id="captcha" name="captcha" type="text" placeholder="Enter CAPTCHA" required maxlength="4" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+                </div>
             </div>
           </div>
 

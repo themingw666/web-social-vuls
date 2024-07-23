@@ -10,10 +10,21 @@ import csrf from "csrf"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const prisma = new PrismaClient()
+import svgCaptcha from 'svg-captcha';
 
-const getLoginPage =(req,res) =>{
-   return res.render('form-login', { layout: false })
+const captcha = async (req,res) =>{
+    const captcha = svgCaptcha.create({
+      background: '#ADD8E6',
+    });
+    req.session.captcha = captcha.text;
+    res.type('svg');
+    res.send(captcha.data);
+};
+
+const getLoginPage = async (req,res) =>{
+    return res.render('form-login', { layout: false })
 }
+
 const handleLogin = async (req,res) =>{
     const {email,password,rememberme} = await req.body
     try{
@@ -27,12 +38,15 @@ const handleLogin = async (req,res) =>{
        result = await prisma.$queryRaw`SELECT * FROM \"user\" where email=${email}`
       }
       //verifty 
-      if(result.length == 0 || md5(password) !== result[0].password) {
-          const error = {
-              message : "Email or Password is incorrect !"
-          }
-         return res.render('form-login', { layout: false ,error:error})
-      }else{
+      let error
+      if (req.body.captcha !== req.session.captcha) {
+        return res.render('form-login', { layout: false , error: {message : "Incorrect CAPTCHA, please try again."}})
+      }
+      else if (result.length == 0 || md5(password) !== result[0].password) {
+        return res.render('form-login', { layout: false , error: {message : "Email or Password is incorrect !"}})
+      }
+      else {
+        delete req.session.captcha
         const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='JWT'`
         let token, header
         if (setting.status === "Easy" || setting.status === "Hard") {
@@ -99,4 +113,4 @@ const handleLogin = async (req,res) =>{
     }
 }
 
-export default {getLoginPage,handleLogin}
+export default {getLoginPage, handleLogin, captcha}

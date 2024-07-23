@@ -105,6 +105,50 @@
                 </div>
             </div>
 
+            <!-- CAPTCHA -->
+            <div>
+              <label for="email" class="">CAPTCHA verify</label>
+              <div class="mt-2.5">
+                <img id="captchaImg" alt="CAPTCHA" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+              </div>
+              <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                  const moo = document.getElementById('captchaImg');
+
+                  moo.style.pointerEvents = 'none';
+                  moo.src = '/form-login/captcha';
+
+                  function handler(event) {
+                      event = event || window.event;
+
+                      if (event.stopPropagation)
+                          event.stopPropagation();
+
+                      event.cancelBubble = true;
+                      return false;
+                  }
+
+                  moo.innerHTML = 'right-click here';
+
+                  moo.onclick = handler;
+                  moo.onmousedown = handler;
+                  moo.onmouseup = handler;
+                })
+
+              </script>
+              <!-- Error Message -->
+              <div id="password-error" class="error-message" style="color: red; display: none; margin-top: 0.5rem;">
+                Password do not match.
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center">
+              <label for="email" class=""></label>
+              <div class="mt-2.5">
+                <input id="captcha" name="captcha" type="text" placeholder="Enter CAPTCHA" required maxlength="4" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5">  
+              </div>
+            </div>
+            
             <div class="col-span-2">
 
               <label class="inline-flex items-center" id="rememberme">
