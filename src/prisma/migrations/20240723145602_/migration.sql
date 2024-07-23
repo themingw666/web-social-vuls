@@ -18,6 +18,8 @@ CREATE TABLE "user_info" (
     "job" TEXT NOT NULL,
     "avatar" TEXT NOT NULL,
     "bio" TEXT NOT NULL,
+    "gender" TEXT NOT NULL,
+    "relationship" TEXT NOT NULL,
     "userid" INTEGER NOT NULL
 );
 

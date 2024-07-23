@@ -50,7 +50,7 @@
                             <ul class="uk-slider-items w-[calc(100%+10px)] !overflow-hidden" 
                                 uk-switcher="connect: #setting_tab ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                                 
-                                <li class="w-auto pr-2.5"> <a href="#"> Description </a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#"> Information </a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#"> Setting</a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#"> Avatare</a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#"> Cover Photo</a> </li>
@@ -78,7 +78,7 @@
                         <!-- tab user basic info -->
                         
                         <div>
-                        <form method="post" action="/setting">
+                        <form method="post" action="/setting/info">
     
                             <div>
                                 
@@ -109,9 +109,9 @@
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Gender </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <select class="!border-0 !rounded-md lg:w-1/2 w-full">
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
+                                            <select id="genderSelect" name="gender" class="!border-0 !rounded-md lg:w-1/2 w-full">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
                                             </select>
                                         </div>
                                     </div>
@@ -119,15 +119,22 @@
                                     <div class="md:flex items-center gap-10">
                                         <label class="md:w-32 text-right"> Relationship </label>
                                         <div class="flex-1 max-md:mt-4">
-                                            <select class="!border-0 !rounded-md lg:w-1/2 w-full">
-                                                <option value="0">None</option>
-                                                <option value="1"  >Single</option>
-                                                <option value="2"  >In a relationship</option>
-                                                <option value="3"  >Married</option>
-                                                <option value="4"  >Engaged</option>
+                                            <select id="relationshipSelect" name="relationship" class="!border-0 !rounded-md lg:w-1/2 w-full" value="2">
+                                                <option value="None">None</option>
+                                                <option value="Single">Single</option>
+                                                <option value="In a relationship">In a relationship</option>
+                                                <option value="Married">Married</option>
+                                                <option value="Engaged">Engaged</option>
                                             </select>
                                         </div>
                                     </div>
+
+                                    <script>
+                                        let data = JSON.parse('<%- JSON.stringify(data2) %>')
+                                
+                                        document.getElementById('genderSelect').value = data.gender
+                                        document.getElementById('relationshipSelect').value = data.relationship
+                                    </script>
                                     
                                     <div class="md:flex items-start gap-10 " hidden>
                                         <label class="md:w-32 text-right"> Avatar </label>
@@ -140,7 +147,7 @@
                                 </div>
       
                                 <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
-                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancel</button>
+                                    <a href="/setting" href="/profile/setting" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancel</a>
                                     <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Save <span class="ripple-overlay"></span></button>
                                 </div>
                                 
@@ -149,64 +156,49 @@
                         </form>
                         </div>
                         
-                        <!-- tab socialinks -->   
+                        <!-- tab password-->
+                        <form method="post" action="/setting/passwd">
                         <div>
     
-                            <div class="max-w-md mx-auto">
-    
-                                <div class="font-normal text-gray-400">
+                            <div>
                                 
-                                    <div>
-                                        <h4 class="text-xl font-medium text-black dark:text-white"> Social Links </h4>
-                                        <p class="mt-3 font-normal text-gray-600 dark:text-white">We may still send you important notifications about your account and content outside of you preferred notivications settings</p>
+                                <div class="space-y-6 max-w-lg mx-auto">
+    
+                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
+                                        <label class="md:w-40 text-right"> Current Password </label>
+                                        <div class="flex-1 max-md:mt-4">
+                                            <input type="password" name="currentpassword" placeholder="******" class="w-full">
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
+                                        <label class="md:w-40 text-right"> New password </label>
+                                        <div class="flex-1 max-md:mt-4">
+                                            <input type="password" name="newpassword" placeholder="******" class="w-full">
+                                        </div>
                                     </div>
     
-                                    <div class="space-y-6 mt-8">
+                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
+                                        <label class="md:w-40 text-right"> Repeat password </label>
+                                        <div class="flex-1 max-md:mt-4">
+                                            <input type="password" name="newpassword1" placeholder="******" class="w-full">
+                                        </div>
+                                    </div>
     
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-blue-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-facebook" class="text-2xl text-blue-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.facebook.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-pink-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-instagram" class="text-2xl text-pink-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.instagram.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-sky-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-twitter" class="text-2xl text-sky-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.twitter.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-red-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-youtube" class="text-2xl text-red-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.youtube.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-slate-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-github" class="text-2xl text-black"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.github.com/myname">
-                                            </div>
-                                        </div>
+                                    <hr class="border-gray-100 dark:border-gray-700">
     
-                                    </div> 
-                                   
-                                </div> 
+                                    <div class="md:flex items-center gap-16 justify-between">
+                                        <label class="md:w-40 text-right"> Two-factor authentication </label>
+                                        <div class="flex-1 max-md:mt-4">
+                                            <select class="w-full !border-0 !rounded-md">
+                                                <option value="1">Enable</option>
+                                                <option value="2">Disable</option> 
+                                            </select>
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
                                 
                                 <div class="flex items-center justify-center gap-4 mt-16">
                                     <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
@@ -214,8 +206,9 @@
                                 </div>
     
                             </div>
-    
+                            
                         </div>
+                        </form>
     
                         <!-- tab checkbox -->
                         <div>
@@ -561,49 +554,65 @@
                             </div> 
                             
                         </div>
-                        
-                        <!-- tab password-->
+
+                        <!-- tab socialinks -->   
                         <div>
     
-                            <div>
+                            <div class="max-w-md mx-auto">
+    
+                                <div class="font-normal text-gray-400">
                                 
-                                <div class="space-y-6 max-w-lg mx-auto">
-    
-                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
-                                        <label class="md:w-40 text-right"> Current Password </label>
-                                        <div class="flex-1 max-md:mt-4">
-                                            <input type="password" placeholder="******" value="<%= data1.passwordnotsecret %>" class="w-full">
-                                        </div>
-                                    </div>
-                                  
-                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
-                                        <label class="md:w-40 text-right"> New password </label>
-                                        <div class="flex-1 max-md:mt-4">
-                                            <input type="password" placeholder="******" class="w-full">
-                                        </div>
+                                    <div>
+                                        <h4 class="text-xl font-medium text-black dark:text-white"> Social Links </h4>
+                                        <p class="mt-3 font-normal text-gray-600 dark:text-white">We may still send you important notifications about your account and content outside of you preferred notivications settings</p>
                                     </div>
     
-                                    <div class="md:flex items-center gap-16 justify-between max-md:space-y-3">
-                                        <label class="md:w-40 text-right"> Repeat password </label>
-                                        <div class="flex-1 max-md:mt-4">
-                                            <input type="password" placeholder="******" class="w-full">
+                                    <div class="space-y-6 mt-8">
+    
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-blue-50 rounded-full p-2 flex ">
+                                                <ion-icon name="logo-facebook" class="text-2xl text-blue-600"></ion-icon> 
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" class="w-full" placeholder="http://www.facebook.com/myname">
+                                            </div>
                                         </div>
-                                    </div>
-    
-                                    <hr class="border-gray-100 dark:border-gray-700">
-    
-                                    <div class="md:flex items-center gap-16 justify-between">
-                                        <label class="md:w-40 text-right"> Two-factor authentication </label>
-                                        <div class="flex-1 max-md:mt-4">
-                                            <select class="w-full !border-0 !rounded-md">
-                                                <option value="1">Enable</option>
-                                                <option value="2">Disable</option> 
-                                            </select>
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-pink-50 rounded-full p-2 flex ">
+                                                <ion-icon name="logo-instagram" class="text-2xl text-pink-600"></ion-icon> 
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" class="w-full" placeholder="http://www.instagram.com/myname">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-sky-50 rounded-full p-2 flex ">
+                                                <ion-icon name="logo-twitter" class="text-2xl text-sky-600"></ion-icon> 
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" class="w-full" placeholder="http://www.twitter.com/myname">
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-red-50 rounded-full p-2 flex ">
+                                                <ion-icon name="logo-youtube" class="text-2xl text-red-600"></ion-icon> 
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" class="w-full" placeholder="http://www.youtube.com/myname">
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-slate-50 rounded-full p-2 flex ">
+                                                <ion-icon name="logo-github" class="text-2xl text-black"></ion-icon> 
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" class="w-full" placeholder="http://www.github.com/myname">
+                                            </div>
+                                        </div>
     
-    
-                                </div>
+                                    </div> 
+                                   
+                                </div> 
                                 
                                 <div class="flex items-center justify-center gap-4 mt-16">
                                     <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
@@ -611,7 +620,7 @@
                                 </div>
     
                             </div>
-                            
+    
                         </div>
     
     

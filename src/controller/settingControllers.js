@@ -66,7 +66,7 @@ const getSettingPage = async (req,res) =>{
                     maxAge: 10000 * 1000,
                 });
             }
-            return res.redirect('profile/setting');
+            return res.redirect('/profile/setting');
         }
     }
 
@@ -164,6 +164,12 @@ const getSettingPage = async (req,res) =>{
             userid: req.decoded.id,
             },
         })
+        let data2 = {}
+        if (data !== null) {
+            data2.gender = data.gender
+            data2.relationship = data.relationship
+        }
+
         const data1 = await prisma.user.findUnique({
             where: {
             id: req.decoded.id,
@@ -172,11 +178,11 @@ const getSettingPage = async (req,res) =>{
         if (data === null || data1 === null)
             next()
         
-        return res.render('setting', {data, data1,csrftoken})
+        return res.render('setting', {data, data1, data2, csrftoken})
     }
 }
 
-const postSettingPage = async (req,res) => {
+const postinfoPage = async (req,res) => {
     const [setting] = await prisma.$queryRaw`Select status from vulnerable where name='CSRF'`
     try {
         let referer = req.headers['referer']
@@ -194,7 +200,7 @@ const postSettingPage = async (req,res) => {
             }
         }
 
-        const {username, email, bio} = req.body
+        const {username, email, bio, gender, relationship} = req.body
         if (bio) {
             await prisma.user_info.update({
                 where: {
@@ -214,11 +220,11 @@ const postSettingPage = async (req,res) => {
         //os command
         exec(`echo ${email}`, (error, stderr) => {
             if (error) {
-              console.error(`Error: ${error.message}`);
+              //console.error(`Error: ${error.message}`);
               //return res.status(500).send('Internal Server Error');
             }
             if (stderr) {
-              console.error(`Stderr: ${stderr}`);
+              //console.error(`Stderr: ${stderr}`);
               //return res.status(500).send('Internal Server Error');
             }
         });
@@ -233,6 +239,30 @@ const postSettingPage = async (req,res) => {
                 },
             })
         }
+
+        if (["Male", "Female"].includes(gender))
+        {
+            await prisma.user_info.update({
+                where: {
+                    userid: req.decoded.id,
+                },
+                data: {
+                    gender: gender,
+                },
+            })
+        }
+        if (["None", "Single", "In a relationship", "Married", "Engaged"].includes(relationship))
+        {
+            await prisma.user_info.update({
+                where: {
+                    userid: req.decoded.id,
+                },
+                data: {
+                    relationship: relationship,
+                },
+            })
+        }
+
         data = await prisma.user.findUnique({
             where: {
             username: username,
@@ -264,11 +294,22 @@ const postSettingPage = async (req,res) => {
                 maxAge: 10000 * 1000,
             });
         }
-        return res.redirect('profile/setting');
+        return res.redirect('/profile/setting');
 
     } catch (error) {
         console.log(error)
     }
 }
 
-export default {getSettingPage, postSettingPage}
+const postpasswdPage = async (req,res) =>{
+    try {
+        const {currentpassword, newpassword, newpassword1} = req.body
+        return res.redirect('/profile/setting');
+  
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+    }
+}
+
+export default {getSettingPage, postinfoPage, postpasswdPage}
