@@ -30,8 +30,8 @@ const handleRegister = async (req,res) =>{
         const {firstname, lastname, email, username, password} = await req.body
         await prisma.$queryRaw`INSERT INTO \"user\" (id, username, email, password, passwordnotsecret)
         VALUES (${LastestId}, ${username}, ${email}, ${md5(password)}, ${password})`
-        await prisma.$queryRaw`INSERT INTO \"user_info\" (firstname, lastname, university, live, job, avatar, userid, bio)
-        VALUES (${firstname}, ${lastname}, ${faker.company.name()}, ${faker.location.city()}, ${faker.person.jobTitle()}, 'https://i.imgur.com/g66u9dV.jpeg', ${LastestId} ,${faker.lorem.sentence()})`
+        await prisma.$queryRaw`INSERT INTO \"user_info\" (firstname, lastname, university, live, job, avatar, userid, gender, relationship, bio)
+        VALUES (${firstname}, ${lastname}, ${faker.company.name()}, ${faker.location.city()}, ${faker.person.jobTitle()}, 'https://i.imgur.com/g66u9dV.jpeg', ${LastestId}, 'Male', 'None', ${faker.lorem.sentence()})`
         
         return res.redirect('/register/checkout')
 

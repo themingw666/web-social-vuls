@@ -15,10 +15,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "80:3000"
     entrypoint: ["/bin/sh", "./src/scripts/entrypoint.sh"]
     depends_on:
       - db
+    restart: always
   
 volumes:
   pgdata:

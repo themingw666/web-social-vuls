@@ -1,9 +1,7 @@
 ### My website: 
-- [167.71.204.247](http://167.71.204.247)
-    - Email: minhdz@gmail.com
-    - Password: admin123
+- [167.172.74.17/register](http://167.172.74.17/register)
 
-- Reset data: [167.71.204.247:80/fakedata666666888888](http:167.71.204.247:80/fakedata666666888888)
+- Reset data: [167.172.74.17:80/fakedata666666888888](http:167.172.74.17:80/fakedata666666888888)
 
 ## Installation
 
@@ -41,7 +39,7 @@ Go to: [localhost:80/settings](http:localhost:80/settings)
 ### SQL Injection
 - Easy: Search function - http://localhost:80/search?name=minh
 - Medium: Timeline page - http://localhost:80/timeline?id=666666
-- Hard: Login function - http://localhost:80/form-login
+- Hard: Login function - http://localhost:80/login
 
 ### JWT
 - Easy, Medium, Hard: Authentication function
